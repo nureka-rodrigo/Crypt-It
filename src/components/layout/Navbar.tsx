@@ -13,6 +13,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import {cn} from "@/lib/utils";
+import {Link} from "react-router-dom";
 
 const navItems = [
   {label: 'Home', href: '/'},
@@ -142,11 +143,11 @@ const Navbar: React.FC = () => {
                     </NavigationMenuContent>
                   </>
                 ) : (
-                  <a href={item.href}>
+                  <Link to={item.href}>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                       {item.label}
                     </NavigationMenuLink>
-                  </a>
+                  </Link>
                 )}
               </NavigationMenuItem>
             ))}
@@ -173,22 +174,22 @@ const Navbar: React.FC = () => {
           <ul className="flex flex-col space-y-4 py-4 px-8">
             {navItems.map((item) => (
               <li key={item.href}>
-                <a
-                  href={item.href}
+                <Link
+                  to={item.href}
                   className="font-semibold text-neutral-950 dark:text-neutral-50 hover:text-white"
                 >
                   {item.label}
-                </a>
+                </Link>
                 {item.subItems && (
                   <ul className="flex flex-col space-y-2 pl-4 pt-2">
                     {item.subItems.map((subItem) => (
                       <li key={subItem.href}>
-                        <a
-                          href={subItem.href}
+                        <Link
+                          to={subItem.href}
                           className="text-neutral-950 dark:text-neutral-50 hover:text-neutral-50"
                         >
                           {subItem.label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
