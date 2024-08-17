@@ -109,7 +109,7 @@ export const Monoalphabetic = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-7xl mx-auto">
+      <section className="max-w-7xl py-8 space-y-8 mx-auto">
         <div className="container mx-auto">
           <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
             Monoalphabetic Cipher
@@ -176,7 +176,7 @@ export const Monoalphabetic = () => {
           </p>
         </div>
 
-        <div className="flex items-center justify-center py-8 px-8 max-w-7xl">
+        <div className="flex items-center justify-center px-8 max-w-7xl">
           <Tabs
             defaultValue="encode"
             className="w-full"
