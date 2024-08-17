@@ -103,8 +103,8 @@ export const Caesar: React.FC = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-7xl mx-auto">
-        <div className="container mx-auto py-8">
+      <section className="max-w-7xl py-8 space-y-8 mx-auto">
+        <div className="container mx-auto">
           <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
             Caesar Cipher
           </h1>
@@ -152,7 +152,7 @@ export const Caesar: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center justify-center py-8 px-8 max-w-7xl">
+        <div className="flex items-center justify-center px-8 max-w-7xl">
           <Tabs
             defaultValue="encode"
             className="w-full"
@@ -182,9 +182,11 @@ export const Caesar: React.FC = () => {
                       <Textarea
                         id="plainText"
                         placeholder="Enter text to encode..."
+                        className="uppercase"
                         defaultValue={
-                          "The quick brown fox jumps over the lazy dog."
+                          "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG."
                         }
+                        rows={6}
                         {...registerEncode("plainText")}
                       />
                       {encodeErrors.plainText && (
@@ -233,9 +235,11 @@ export const Caesar: React.FC = () => {
                       <Textarea
                         id="encodedText"
                         placeholder="Enter text to decode..."
+                        className="uppercase"
                         defaultValue={
-                          "Uif rvjdl cspxo gpy kvnqt pwfs uif mbaz eph."
+                          "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH."
                         }
+                        rows={6}
                         {...registerDecode("encodedText")}
                       />
                       {decodeErrors.encodedText && (
@@ -276,13 +280,13 @@ export const Caesar: React.FC = () => {
             {encodedText && (
               <div className="space-y-4">
                 <Label>Encoded Text</Label>
-                <Textarea readOnly value={encodedText} />
+                <Textarea readOnly rows={8} value={encodedText} />
               </div>
             )}
             {decodedText && (
               <div className="space-y-4">
                 <Label>Decoded Text</Label>
-                <Textarea readOnly value={decodedText} />
+                <Textarea readOnly rows={8} value={decodedText} />
               </div>
             )}
           </DialogDescription>
