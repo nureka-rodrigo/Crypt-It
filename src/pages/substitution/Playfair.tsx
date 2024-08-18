@@ -180,7 +180,7 @@ export const Playfair = () => {
     return (
       <div>
         <h2 className="font-semibold text-sm text-neutral-950 dark:text-neutral-50 mb-4">
-          Playfair Square
+          Playfair Matrix
         </h2>
         <div className="grid grid-cols-5 gap-2 mt-2">
           {playfairMatrix.map((char, index) => (
