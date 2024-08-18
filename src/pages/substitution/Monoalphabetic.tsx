@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {Navbar} from "@/components/layout/Navbar.tsx";
+import { Navbar } from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
@@ -307,13 +307,13 @@ export const Monoalphabetic = () => {
             {encodedText && (
               <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText}/>
+                <Textarea readOnly rows={8} value={encodedText} />
               </>
             )}
             {decodedText && (
               <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText}/>
+                <Textarea readOnly rows={8} value={decodedText} />
               </>
             )}
           </DialogDescription>

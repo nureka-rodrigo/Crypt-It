@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Navbar} from "@/components/layout/Navbar.tsx";
+import { Navbar } from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {

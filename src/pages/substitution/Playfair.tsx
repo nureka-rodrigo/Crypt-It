@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {Navbar} from "@/components/layout/Navbar.tsx";
+import { Navbar } from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
@@ -238,20 +238,20 @@ export const Playfair = () => {
           <ul className="list-disc pl-6">
             <li>
               <strong>Same Row:</strong> If both letters are in the same row,
-              each letter is replaced by the letter immediately to its right.
-              If a letter is the last one in the row, it wraps around to the
+              each letter is replaced by the letter immediately to its right. If
+              a letter is the last one in the row, it wraps around to the
               beginning of the row.
             </li>
             <li>
               <strong>Same Column:</strong> If both letters are in the same
               column, each letter is replaced by the letter immediately below
-              it. If a letter is at the bottom of the column, it wraps around
-              to the top.
+              it. If a letter is at the bottom of the column, it wraps around to
+              the top.
             </li>
             <li>
-              <strong>Rectangle:</strong> If the letters form a rectangle,
-              each letter is replaced by the letter in its own row but in the
-              column of the other letter of the pair.
+              <strong>Rectangle:</strong> If the letters form a rectangle, each
+              letter is replaced by the letter in its own row but in the column
+              of the other letter of the pair.
             </li>
           </ul>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">

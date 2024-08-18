@@ -47,7 +47,7 @@ const navItems = [
         label: "Vigenère Cipher",
       },
       {
-        title: "Vernam Cipher",
+        title: "Vernam Cipher (One-Time Pad)",
         href: "/substitution/vernam",
         description:
           "A polyalphabetic cipher that XORs plaintext with a random key.",

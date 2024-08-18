@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {Navbar} from "@/components/layout/Navbar.tsx";
+import { Navbar } from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
@@ -42,6 +42,7 @@ type EncodeFormData = z.infer<typeof encodeSchema>;
 type DecodeFormData = z.infer<typeof decodeSchema>;
 
 const formatText = (text: string) => text.toUpperCase().replace(/[^A-Z]/g, "");
+
 const formatKey = (key: string, length: number) => {
   key = formatText(key);
   let repeatedKey = key;
@@ -319,13 +320,13 @@ export const Vigenere = () => {
             {encodedText && (
               <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText}/>
+                <Textarea readOnly rows={8} value={encodedText} />
               </>
             )}
             {decodedText && (
               <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText}/>
+                <Textarea readOnly rows={8} value={decodedText} />
               </>
             )}
           </DialogDescription>

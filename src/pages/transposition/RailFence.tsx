@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {Navbar} from "@/components/layout/Navbar";
+import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import {
@@ -323,13 +323,13 @@ export const RailFence: React.FC = () => {
             {encodedText && (
               <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText}/>
+                <Textarea readOnly rows={8} value={encodedText} />
               </>
             )}
             {decodedText && (
               <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText}/>
+                <Textarea readOnly rows={8} value={decodedText} />
               </>
             )}
           </DialogDescription>
