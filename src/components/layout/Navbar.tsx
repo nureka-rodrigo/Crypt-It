@@ -123,7 +123,7 @@ const navItems = [
   },
 ];
 
-const Navbar: React.FC = () => {
+export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -159,11 +159,11 @@ const Navbar: React.FC = () => {
                   </>
                 ) : (
                   <Link to={item.href}>
-                    <NavigationMenuLink
+                    <div
                       className={navigationMenuTriggerStyle()}
                     >
                       {item.label}
-                    </NavigationMenuLink>
+                    </div>
                   </Link>
                 )}
               </NavigationMenuItem>
@@ -185,7 +185,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden">
-          <ul className="flex flex-col space-y-4 py-4 px-8">
+          <ul className="flex flex-col space-y-4 p-8">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
@@ -242,5 +242,3 @@ const ListItem = React.forwardRef<
   );
 });
 ListItem.displayName = "ListItem";
-
-export default Navbar;
