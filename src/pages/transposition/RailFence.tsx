@@ -165,26 +165,39 @@ export const RailFence: React.FC = () => {
             Rail Fence Cipher
           </h1>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Rail Fence Cipher is a classic transposition cipher used to encrypt messages by rearranging the
-            characters in a zigzag pattern. It is named for its visual resemblance to a fence with rails. The cipher
-            operates by writing the plaintext in a zigzag pattern across a specified number of "rails" or lines. Once
-            the plaintext is written, the ciphertext is produced by reading the text off each rail line by line.
+            The Rail Fence Cipher is a classic transposition cipher that
+            encrypts messages by rearranging characters in a zigzag pattern. Its
+            name derives from its resemblance to a fence with horizontal rails
+            when the plaintext is written out. The encryption process involves
+            writing the message diagonally down across a specified number of
+            "rails" or lines, then reading the text off each rail line by line
+            to produce the ciphertext.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To encode a message, start by writing the message diagonally downwards across the rails. When you reach the
-            bottom rail, reverse direction and move upwards diagonally. This zigzag pattern is continued until the
-            entire plaintext is written. Afterward, read the characters off each rail line by line and concatenate them
-            to form the final encoded message.
+            To encode a message using the Rail Fence Cipher, begin by writing
+            the plaintext diagonally downwards across the number of rails
+            specified. When the bottom rail is reached, the direction reverses,
+            and you move diagonally upwards until you reach the top rail. This
+            zigzag pattern is continued until the entire plaintext is written.
+            After completing the pattern, the ciphertext is obtained by reading
+            the characters from each rail sequentially and concatenating them to
+            form the final encrypted message.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Decoding the message involves reconstructing the zigzag pattern by filling in the characters from the
-            ciphertext into the corresponding rail lines. Once the rails are filled, read the message in the same zigzag
-            pattern as during encoding. This process reveals the original plaintext.
+            Decoding a message encrypted with the Rail Fence Cipher involves
+            reconstructing the zigzag pattern. Start by filling in the
+            characters from the ciphertext into their respective rail lines
+            according to the original pattern used during encoding. Once the
+            rails are completely filled, read the message in the same zigzag
+            manner to retrieve the original plaintext.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Although the Rail Fence Cipher is a simple encryption method and can provide a basic level of security, it
-            is vulnerable to frequency analysis and other cryptographic attacks. Therefore, it is better suited for
-            educational purposes or simple use cases rather than for serious cryptographic applications.
+            While the Rail Fence Cipher provides a basic level of encryption and
+            serves as an excellent educational tool for understanding
+            transposition ciphers, it is relatively simple and vulnerable to
+            frequency analysis and other cryptographic attacks. As such, it is
+            more suitable for introductory learning and simple use cases rather
+            than for serious or high-security applications.
           </p>
         </div>
 

@@ -228,20 +228,43 @@ export const Columnar = () => {
             Columnar Cipher
           </h1>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Columnar Cipher is a transposition cipher that arranges the
-            plaintext into columns based on a keyword or key number and then
-            reads the columns in a specified order to produce the ciphertext.
+            The Columnar Cipher is a classical transposition cipher that
+            transforms plaintext into ciphertext by rearranging the characters
+            based on a keyword or numerical key. Unlike substitution ciphers
+            that replace characters, transposition ciphers like the Columnar
+            Cipher work by permuting the order of characters. The security of
+            this cipher lies in the key used to determine the order of the
+            columns during encryption and decryption processes.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To encode a message using the Columnar Cipher, you first write the
-            plaintext into a matrix with columns determined by the length of the
-            key. The key, represented by a series of numbers, specifies the
-            order in which columns are read to create the ciphertext.
+            To encode a message using the Columnar Cipher, you first organize
+            the plaintext into a grid or matrix with a number of columns equal
+            to the length of the key. Each column of this matrix is filled with
+            characters of the plaintext in a left-to-right fashion. Once the
+            matrix is complete, the key determines the order in which the
+            columns are read to produce the ciphertext. For instance, if the key
+            is a series of numbers like '3 1 4 2', the columns are read in the
+            sequence of the numbers provided, i.e., third column first, then
+            first column, and so on.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To decode the message, you reconstruct the matrix using the same key
-            and then read the text column by column according to the original
-            order of the key to reveal the plaintext.
+            Decoding the message involves reversing this process. You first
+            reconstruct the matrix using the same key, ensuring that the columns
+            are ordered according to the key. After filling the matrix with the
+            ciphertext in the specified column order, you then read the text row
+            by row to reveal the original plaintext. This reverse procedure
+            restores the original message by adhering to the columnar order
+            dictated by the key.
+          </p>
+          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            The Columnar Cipher's strength lies in its ability to obscure the
+            plaintext through columnar transposition, making it harder to
+            decipher without knowledge of the key. However, it is essential to
+            note that while it adds complexity, the cipher can be vulnerable to
+            various cryptographic attacks if used without proper precautions.
+            Modern encryption methods have largely replaced classical ciphers
+            like the Columnar Cipher in favor of more secure and complex
+            algorithms.
           </p>
         </div>
 

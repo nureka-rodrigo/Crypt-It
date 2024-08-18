@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {ThemeButton} from '@/components/other/ThemeButton';
-import {HiOutlineMenuAlt3} from "@react-icons/all-files/hi/HiOutlineMenuAlt3";
-import {IoMdClose} from "@react-icons/all-files/io/IoMdClose";
+import React, { useState } from "react";
+import { ThemeButton } from "@/components/other/ThemeButton";
+import { HiOutlineMenuAlt3 } from "@react-icons/all-files/hi/HiOutlineMenuAlt3";
+import { IoMdClose } from "@react-icons/all-files/io/IoMdClose";
 import Logo from "/vite.svg";
 import {
   NavigationMenu,
@@ -12,87 +12,106 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {cn} from "@/lib/utils";
-import {Link} from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const navItems = [
-  {label: 'Home', href: '/'},
+  { label: "Home", href: "/" },
   {
-    label: 'Substitution', href: '/substitution', subItems: [
+    label: "Substitution",
+    href: "/substitution",
+    subItems: [
       {
-        title: 'Caesar Cipher',
-        href: '/substitution/caesar',
-        description: 'A simple cipher that shifts letters by a fixed amount.',
-        label: 'Caesar Cipher'
+        title: "Caesar Cipher",
+        href: "/substitution/caesar",
+        description: "A simple cipher that shifts letters by a fixed amount.",
+        label: "Caesar Cipher",
       },
       {
-        title: 'Monoalphabetic Cipher',
-        href: '/substitution/monoalphabetic',
-        description: 'A cipher using a single substitution alphabet.',
-        label: 'Monoalphabetic Cipher'
+        title: "Monoalphabetic Cipher",
+        href: "/substitution/monoalphabetic",
+        description: "A cipher using a single substitution alphabet.",
+        label: "Monoalphabetic Cipher",
       },
       {
-        title: 'Playfair Cipher',
-        href: '/substitution/playfair',
-        description: 'A cipher that encrypts pairs of letters in a 5x5 grid.',
-        label: 'Playfair Cipher'
+        title: "Playfair Cipher",
+        href: "/substitution/playfair",
+        description: "A cipher that encrypts pairs of letters in a 5x5 grid.",
+        label: "Playfair Cipher",
       },
       {
-        title: 'Vigenère Cipher',
-        href: '/substitution/vigenere',
-        description: 'A polyalphabetic cipher using a keyword to shift letters.',
-        label: 'Vigenère Cipher'
+        title: "Vigenère Cipher",
+        href: "/substitution/vigenere",
+        description:
+          "A polyalphabetic cipher using a keyword to shift letters.",
+        label: "Vigenère Cipher",
       },
       {
-        title: 'Vernam Cipher',
-        href: '/substitution/vernam',
-        description: 'A polyalphabetic cipher that XORs plaintext with a random key.',
-        label: 'Vernam Cipher',
+        title: "Vernam Cipher",
+        href: "/substitution/vernam",
+        description:
+          "A polyalphabetic cipher that XORs plaintext with a random key.",
+        label: "Vernam Cipher",
       },
-    ]
+    ],
   },
   {
-    label: 'Transposition', href: '/transposition', subItems: [
+    label: "Transposition",
+    href: "/transposition",
+    subItems: [
       {
-        title: 'Rail Fence Cipher',
-        href: '/transposition/rail-fence',
-        description: 'A transposition cipher that writes text in a zigzag pattern.',
-        label: 'Rail Fence Cipher'
+        title: "Rail Fence Cipher",
+        href: "/transposition/rail-fence",
+        description:
+          "A transposition cipher that writes text in a zigzag pattern.",
+        label: "Rail Fence Cipher",
       },
       {
-        title: 'Columnar Transposition',
-        href: '/transposition/columnar',
-        description: 'A cipher that arranges text into columns and reads them in a different order.',
-        label: 'Columnar Transposition'
+        title: "Columnar Transposition",
+        href: "/transposition/columnar",
+        description:
+          "A cipher that arranges text into columns and reads them in a different order.",
+        label: "Columnar Transposition",
       },
-    ]
+    ],
   },
   {
-    label: 'Symmetric', href: '/symmetric', subItems: [
-      {title: 'DES', href: '/symmetric/des', description: 'A widely used block cipher for encryption.', label: 'DES'},
+    label: "Symmetric",
+    href: "/symmetric",
+    subItems: [
       {
-        title: 'AES',
-        href: '/symmetric/aes',
-        description: 'A modern block cipher used for secure encryption.',
-        label: 'AES'
+        title: "DES",
+        href: "/symmetric/des",
+        description: "A widely used block cipher for encryption.",
+        label: "DES",
       },
-    ]
+      {
+        title: "AES",
+        href: "/symmetric/aes",
+        description: "A modern block cipher used for secure encryption.",
+        label: "AES",
+      },
+    ],
   },
   {
-    label: 'Asymmetric', href: '/asymmetric', subItems: [
+    label: "Asymmetric",
+    href: "/asymmetric",
+    subItems: [
       {
-        title: 'RSA',
-        href: '/asymmetric/rsa',
-        description: 'A cipher using different keys for encryption and decryption.',
-        label: 'RSA'
+        title: "RSA",
+        href: "/asymmetric/rsa",
+        description:
+          "A cipher using different keys for encryption and decryption.",
+        label: "RSA",
       },
       {
-        title: 'ElGamal',
-        href: '/asymmetric/elgamal',
-        description: 'A public key encryption algorithm based on the Diffie-Hellman key exchange.',
-        label: 'ElGamal'
+        title: "ElGamal",
+        href: "/asymmetric/elgamal",
+        description:
+          "A public key encryption algorithm based on the Diffie-Hellman key exchange.",
+        label: "ElGamal",
       },
-    ]
+    ],
   },
 ];
 
@@ -107,7 +126,7 @@ const Navbar: React.FC = () => {
     <nav className="py-4 max-w-7xl mx-auto">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-neutral-950 dark:text-neutral-50 text-lg font-bold">
-          <img src={Logo} alt="Logo" className="w-8 h-8"/>
+          <img src={Logo} alt="Logo" className="w-8 h-8" />
         </div>
         <NavigationMenu>
           <NavigationMenuList className="hidden md:flex space-x-4">
@@ -132,7 +151,9 @@ const Navbar: React.FC = () => {
                   </>
                 ) : (
                   <Link to={item.href}>
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
                       {item.label}
                     </NavigationMenuLink>
                   </Link>
@@ -142,16 +163,13 @@ const Navbar: React.FC = () => {
           </NavigationMenuList>
         </NavigationMenu>
         <div className="flex items-center space-x-4">
-          <ThemeButton/>
+          <ThemeButton />
           {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMobileMenu}
-            className="md:hidden text-white"
-          >
+          <button onClick={toggleMobileMenu} className="md:hidden text-white">
             {isMobileMenuOpen ? (
-              <IoMdClose className="w-6 h-6 text-neutral-950 dark:text-neutral-50"/>
+              <IoMdClose className="w-6 h-6 text-neutral-950 dark:text-neutral-50" />
             ) : (
-              <HiOutlineMenuAlt3 className="w-6 h-6 text-neutral-950 dark:text-neutral-50"/>
+              <HiOutlineMenuAlt3 className="w-6 h-6 text-neutral-950 dark:text-neutral-50" />
             )}
           </button>
         </div>
@@ -194,7 +212,7 @@ const Navbar: React.FC = () => {
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a">
->(({className, title, children, ...props}, ref) => {
+>(({ className, title, children, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -213,8 +231,8 @@ const ListItem = React.forwardRef<
         </a>
       </NavigationMenuLink>
     </li>
-  )
-})
-ListItem.displayName = "ListItem"
+  );
+});
+ListItem.displayName = "ListItem";
 
 export default Navbar;

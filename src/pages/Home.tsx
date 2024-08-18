@@ -6,9 +6,7 @@ export const Home: React.FC = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-7xl mx-auto py-12">
-      {/* Content */}
-      </section>
+      <section className="max-w-7xl mx-auto py-12">{/* Content */}</section>
       <Footer />
     </>
   );

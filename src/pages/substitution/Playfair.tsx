@@ -11,7 +11,12 @@ import {
 } from "@/components/ui/card.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs.tsx";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs.tsx";
 import { Textarea } from "@/components/ui/textarea.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -296,9 +301,7 @@ export const Playfair = () => {
                         id="plainText"
                         placeholder="Enter text to encode..."
                         className="uppercase"
-                        defaultValue={
-                          "ATTACK AT DAWN"
-                        }
+                        defaultValue={"ATTACK AT DAWN"}
                         rows={6}
                         {...registerEncode("plainText")}
                       />
