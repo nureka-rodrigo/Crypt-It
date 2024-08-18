@@ -208,7 +208,7 @@ export const Monoalphabetic = () => {
                         placeholder="Enter text to encode..."
                         className="uppercase"
                         defaultValue={
-                          "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"
+                          "ATTACK AT DAWN"
                         }
                         rows={6}
                         {...registerEncode("plainText")}
@@ -262,7 +262,7 @@ export const Monoalphabetic = () => {
                         placeholder="Enter text to decode..."
                         className="uppercase"
                         defaultValue={
-                          "HQD CZJON MTYXP IYF GZVWA YUDT HQD SBLE RYK."
+                          "BHHBON BH RBXP"
                         }
                         rows={6}
                         {...registerDecode("encodedText")}

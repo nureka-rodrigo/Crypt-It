@@ -297,7 +297,7 @@ export const Playfair = () => {
                         placeholder="Enter text to encode..."
                         className="uppercase"
                         defaultValue={
-                          "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"
+                          "ATTACK AT DAWN"
                         }
                         rows={6}
                         {...registerEncode("plainText")}
@@ -315,7 +315,7 @@ export const Playfair = () => {
                         type="text"
                         placeholder="Enter key..."
                         className="uppercase"
-                        defaultValue={"KEYWORD"}
+                        defaultValue={"LEMON"}
                         {...registerEncode("encodeKey")}
                       />
                       {encodeErrors.encodeKey && (
@@ -350,7 +350,7 @@ export const Playfair = () => {
                         id="cipherText"
                         placeholder="Enter text to decode..."
                         className="uppercase"
-                        defaultValue={"PDGLXEDEDANVOGAVEXOLPAUFDZCFSMWDHRIW"}
+                        defaultValue={"DQQDDIDQFBZE"}
                         rows={6}
                         {...registerDecode("cipherText")}
                       />
@@ -367,7 +367,7 @@ export const Playfair = () => {
                         type="text"
                         placeholder="Enter key..."
                         className="uppercase"
-                        defaultValue={"KEYWORD"}
+                        defaultValue={"LEMON"}
                         {...registerDecode("decodeKey")}
                       />
                       {decodeErrors.decodeKey && (

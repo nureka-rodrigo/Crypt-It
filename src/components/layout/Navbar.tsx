@@ -55,12 +55,6 @@ const navItems = [
         description: 'A polyalphabetic cipher that XORs plaintext with a random key.',
         label: 'Vernam Cipher',
       },
-      {
-        title: 'One-Time Pad',
-        href: '/substitution/one-time-pad',
-        description: 'A cipher that uses a random key that is as long as the message.',
-        label: 'One-Time Pad',
-      }
     ]
   },
   {

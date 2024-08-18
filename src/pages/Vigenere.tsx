@@ -200,7 +200,7 @@ export const Vigenere = () => {
                         id="plainText"
                         placeholder="Enter text to encode..."
                         className="uppercase"
-                        defaultValue={"THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"}
+                        defaultValue={"ATTACK AT DAWN"}
                         rows={6}
                         {...registerEncode("plainText")}
                       />
@@ -217,7 +217,7 @@ export const Vigenere = () => {
                         type="text"
                         placeholder="Enter key..."
                         className="uppercase"
-                        defaultValue={"KEYWORD"}
+                        defaultValue={"LEMON"}
                         {...registerEncode("encodeKey")}
                       />
                       {encodeErrors.encodeKey && (
@@ -252,7 +252,7 @@ export const Vigenere = () => {
                         id="cipherText"
                         placeholder="Enter text to decode..."
                         className="uppercase"
-                        defaultValue={"DLCMIZFUFPKKEIYBHQAGVYZCNHYHVEXURFJ"}
+                        defaultValue={"LXFOPVEFRNHR"}
                         rows={6}
                         {...registerDecode("cipherText")}
                       />
@@ -269,7 +269,7 @@ export const Vigenere = () => {
                         type="text"
                         placeholder="Enter key..."
                         className="uppercase"
-                        defaultValue={"KEYWORD"}
+                        defaultValue={"LEMON"}
                         {...registerDecode("decodeKey")}
                       />
                       {decodeErrors.decodeKey && (

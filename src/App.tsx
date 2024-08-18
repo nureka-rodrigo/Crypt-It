@@ -5,6 +5,7 @@ import {Caesar} from "@/pages/Caesar.tsx";
 import {Monoalphabetic} from "@/pages/Monoalphabetic.tsx";
 import {Playfair} from "@/pages/Playfair.tsx";
 import {Vigenere} from "@/pages/Vigenere.tsx";
+import Vernam from "@/pages/Vernam.tsx";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/substitution/monoalphabetic" element={<Monoalphabetic/>}/>
         <Route path="/substitution/playfair" element={<Playfair/>}/>
         <Route path="/substitution/vigenere" element={<Vigenere/>}/>
+        <Route path="/substitution/vernam" element={<Vernam/>}/>
       </Routes>
     </div>
   )
