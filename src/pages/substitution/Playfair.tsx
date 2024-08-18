@@ -183,7 +183,7 @@ export const Playfair = () => {
   const renderMatrix = () => {
     if (playfairMatrix.length === 0) return null;
     return (
-      <div>
+      <div className="pb-4">
         <h2 className="font-semibold text-sm text-neutral-950 dark:text-neutral-50 mb-4">
           Playfair Matrix
         </h2>
@@ -234,26 +234,26 @@ export const Playfair = () => {
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
             Each pair of letters is then encrypted according to the following
             rules:
-            <ul className="list-disc pl-6">
-              <li>
-                <strong>Same Row:</strong> If both letters are in the same row,
-                each letter is replaced by the letter immediately to its right.
-                If a letter is the last one in the row, it wraps around to the
-                beginning of the row.
-              </li>
-              <li>
-                <strong>Same Column:</strong> If both letters are in the same
-                column, each letter is replaced by the letter immediately below
-                it. If a letter is at the bottom of the column, it wraps around
-                to the top.
-              </li>
-              <li>
-                <strong>Rectangle:</strong> If the letters form a rectangle,
-                each letter is replaced by the letter in its own row but in the
-                column of the other letter of the pair.
-              </li>
-            </ul>
           </p>
+          <ul className="list-disc pl-6">
+            <li>
+              <strong>Same Row:</strong> If both letters are in the same row,
+              each letter is replaced by the letter immediately to its right.
+              If a letter is the last one in the row, it wraps around to the
+              beginning of the row.
+            </li>
+            <li>
+              <strong>Same Column:</strong> If both letters are in the same
+              column, each letter is replaced by the letter immediately below
+              it. If a letter is at the bottom of the column, it wraps around
+              to the top.
+            </li>
+            <li>
+              <strong>Rectangle:</strong> If the letters form a rectangle,
+              each letter is replaced by the letter in its own row but in the
+              column of the other letter of the pair.
+            </li>
+          </ul>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
             Decryption with the Playfair Cipher is a straightforward reversal of
             the encryption process. The digraphs are decrypted using the same
@@ -394,18 +394,17 @@ export const Playfair = () => {
           <DialogTitle className="mb-2">Result</DialogTitle>
           <DialogDescription className="space-y-4">
             {renderMatrix()}
-
             {encodedText && (
-              <div className="space-y-4">
+              <>
                 <Label>Encoded Text</Label>
                 <Textarea readOnly rows={8} value={encodedText} />
-              </div>
+              </>
             )}
             {decodedText && (
-              <div className="space-y-4">
+              <>
                 <Label>Decoded Text</Label>
                 <Textarea readOnly rows={8} value={decodedText} />
-              </div>
+              </>
             )}
           </DialogDescription>
         </DialogContent>

@@ -132,10 +132,10 @@ export const SHA256 = () => {
           <DialogTitle className="mb-2">Hash Result</DialogTitle>
           <DialogDescription className="space-y-4">
             {hashedText && (
-              <div className="space-y-4">
-                <Label>SHA-256 Hash</Label>
+              <>
+                <Label>Hashed Text</Label>
                 <Textarea readOnly rows={8} value={hashedText} />
-              </div>
+              </>
             )}
           </DialogDescription>
         </DialogContent>

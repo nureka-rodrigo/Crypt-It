@@ -279,16 +279,16 @@ export const Caesar: React.FC = () => {
           <DialogTitle className="mb-2">Result</DialogTitle>
           <DialogDescription className="space-y-4">
             {encodedText && (
-              <div className="space-y-4">
+              <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText} />
-              </div>
+                <Textarea readOnly rows={8} value={encodedText}/>
+              </>
             )}
             {decodedText && (
-              <div className="space-y-4">
+              <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText} />
-              </div>
+                <Textarea readOnly rows={8} value={decodedText}/>
+              </>
             )}
           </DialogDescription>
         </DialogContent>

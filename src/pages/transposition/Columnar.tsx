@@ -197,7 +197,7 @@ export const Columnar = () => {
   const renderMatrix = () => {
     if (columnarMatrix.length === 0) return null;
     return (
-      <div>
+      <div className="pb-4">
         <h2 className="font-semibold text-sm text-neutral-950 dark:text-neutral-50 mb-4">
           Columnar Matrix
         </h2>
@@ -393,16 +393,16 @@ export const Columnar = () => {
           <DialogDescription className="space-y-4">
             {renderMatrix()}
             {encodedText && (
-              <div className="space-y-4">
+              <>
                 <Label>Encoded Text</Label>
                 <Textarea readOnly rows={8} value={encodedText} />
-              </div>
+              </>
             )}
             {decodedText && (
-              <div className="space-y-4">
+              <>
                 <Label>Decoded Text</Label>
                 <Textarea readOnly rows={8} value={decodedText} />
-              </div>
+              </>
             )}
           </DialogDescription>
         </DialogContent>
