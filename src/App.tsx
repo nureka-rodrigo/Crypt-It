@@ -20,10 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/substitution/caesar" element={<Caesar />} />
-        <Route
-          path="/substitution/monoalphabetic"
-          element={<Monoalphabetic />}
-        />
+        <Route path="/substitution/monoalphabetic" element={<Monoalphabetic /> }/>
         <Route path="/substitution/playfair" element={<Playfair />} />
         <Route path="/substitution/vigenere" element={<Vigenere />} />
         <Route path="/substitution/vernam" element={<Vernam />} />

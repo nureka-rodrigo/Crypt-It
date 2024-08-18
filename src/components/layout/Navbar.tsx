@@ -42,15 +42,13 @@ const navItems = [
       {
         title: "Vigenère Cipher",
         href: "/substitution/vigenere",
-        description:
-          "A polyalphabetic cipher using a keyword to shift letters.",
+        description: "A polyalphabetic cipher using a keyword to shift letters.",
         label: "Vigenère Cipher",
       },
       {
         title: "Vernam Cipher (One-Time Pad)",
         href: "/substitution/vernam",
-        description:
-          "A polyalphabetic cipher that XORs plaintext with a random key.",
+        description: "A polyalphabetic cipher that XORs plaintext with a random key.",
         label: "Vernam Cipher",
       },
     ],
@@ -62,15 +60,13 @@ const navItems = [
       {
         title: "Rail Fence Cipher",
         href: "/transposition/rail-fence",
-        description:
-          "A transposition cipher that writes text in a zigzag pattern.",
+        description: "A transposition cipher that writes text in a zigzag pattern.",
         label: "Rail Fence Cipher",
       },
       {
         title: "Columnar Transposition",
         href: "/transposition/columnar",
-        description:
-          "A cipher that arranges text into columns and reads them in a different order.",
+        description: "A cipher that arranges text into columns and reads them in a different order.",
         label: "Columnar Transposition",
       },
     ],
@@ -94,29 +90,25 @@ const navItems = [
       {
         title: "SHA1",
         href: "/hash/sha1",
-        description:
-          "A cryptographic hash function that produces a 160-bit hash value.",
+        description: "A cryptographic hash function that produces a 160-bit hash value.",
         label: "SHA1",
       },
       {
         title: "SHA256",
         href: "/hash/sha256",
-        description:
-          "A cryptographic hash function that produces a 256-bit hash value.",
+        description: "A cryptographic hash function that produces a 256-bit hash value.",
         label: "SHA256",
       },
       {
         title: "SHA384",
         href: "/hash/sha384",
-        description:
-          "A cryptographic hash function that produces a 384-bit hash value.",
+        description: "A cryptographic hash function that produces a 384-bit hash value.",
         label: "SHA384",
       },
       {
         title: "SHA512",
         href: "/hash/sha512",
-        description:
-          "A cryptographic hash function that produces a 512-bit hash value.",
+        description: "A cryptographic hash function that produces a 512-bit hash value.",
         label: "SHA512",
       },
     ],
