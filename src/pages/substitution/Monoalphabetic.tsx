@@ -1,42 +1,44 @@
 import { z } from "zod";
 import Navbar from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button.tsx";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/components/ui/card.tsx";
+import { Input } from "@/components/ui/input.tsx";
+import { Label } from "@/components/ui/label.tsx";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs.tsx";
+import { Textarea } from "@/components/ui/textarea.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog.tsx";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
-  shift: z.string().regex(/^\d+$/, "Shift value must be a positive integer"),
+  encodeKey: z.string().length(26, "Key must be exactly 26 characters"),
 });
 
 const decodeSchema = z.object({
   encodedText: z.string().min(1, "Cipher text is required"),
-  shift: z.string().regex(/^\d+$/, "Shift value must be a positive integer"),
+  decodeKey: z.string().length(26, "Key must be exactly 26 characters"),
 });
 
 type EncodeFormData = z.infer<typeof encodeSchema>;
 type DecodeFormData = z.infer<typeof decodeSchema>;
 
-export const Caesar: React.FC = () => {
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+export const Monoalphabetic = () => {
   const [encodedText, setEncodedText] = useState("");
   const [decodedText, setDecodedText] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -59,45 +61,49 @@ export const Caesar: React.FC = () => {
   });
 
   const onEncode = (data: EncodeFormData) => {
-    const shift = parseInt(data.shift, 10);
-    const encoded = caesarCipherEncode(data.plainText, shift);
+    const encoded = monoalphabeticEncode(
+      data.plainText.toUpperCase(),
+      data.encodeKey.toUpperCase()
+    );
     setEncodedText(encoded);
     setIsDialogOpen(true);
   };
 
   const onDecode = (data: DecodeFormData) => {
-    const shift = parseInt(data.shift, 10);
-    const decoded = caesarCipherDecode(data.encodedText, shift);
+    const decoded = monoalphabeticDecode(
+      data.encodedText.toUpperCase(),
+      data.decodeKey.toUpperCase()
+    );
     setDecodedText(decoded);
     setIsDialogOpen(true);
   };
 
-  const caesarCipherEncode = (text: string, shift: number) => {
+  const monoalphabeticEncode = (text: string, key: string) => {
     return text
       .split("")
       .map((char) => {
-        const code = char.charCodeAt(0);
-
-        if (code >= 65 && code <= 90) {
-          return String.fromCharCode(((code - 65 + shift) % 26) + 65);
-        }
-
-        if (code >= 97 && code <= 122) {
-          return String.fromCharCode(((code - 97 + shift) % 26) + 97);
-        }
-
-        return char;
+        const index = ALPHABET.indexOf(char);
+        return index !== -1 ? key[index] : char;
       })
       .join("");
   };
 
-  const caesarCipherDecode = (text: string, shift: number) => {
-    return caesarCipherEncode(text, 26 - shift);
+  const monoalphabeticDecode = (text: string, key: string) => {
+    return text
+      .split("")
+      .map((char) => {
+        const index = key.indexOf(char);
+        return index !== -1 ? ALPHABET[index] : char;
+      })
+      .join("");
   };
 
   useEffect(() => {
-    setEncodedText("");
-    setDecodedText("");
+    if (activeTab === "encode") {
+      setDecodedText("");
+    } else {
+      setEncodedText("");
+    }
   }, [activeTab]);
 
   return (
@@ -106,49 +112,67 @@ export const Caesar: React.FC = () => {
       <section className="max-w-7xl py-8 space-y-8 mx-auto">
         <div className="container mx-auto">
           <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            Caesar Cipher
+            Monoalphabetic Cipher
           </h1>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Caesar Cipher, named after the renowned Roman general Julius
-            Caesar, is one of the earliest and most straightforward methods of
-            encryption. It is a type of substitution cipher, where each letter
-            in the plaintext is shifted a fixed number of places down or up the
-            alphabet. This method, though simple, laid the foundation for modern
-            cryptography and is still a popular teaching tool in understanding
-            the basics of encryption.
+            The Monoalphabetic Cipher is a type of substitution cipher in which
+            each letter of the plaintext is replaced with a corresponding letter
+            from a fixed, scrambled version of the alphabet. Unlike the Caesar
+            Cipher, which shifts the alphabet uniformly by a fixed number of
+            positions, the Monoalphabetic Cipher allows any permutation of the
+            alphabet, leading to a significantly larger number of possible keys.
+            This makes it more resistant to brute-force attacks, but it remains
+            vulnerable to frequency analysis.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The concept is easy to grasp: imagine the alphabet as a circle where
-            after 'Z', it loops back to 'A'. The Caesar Cipher operates by
-            shifting the position of each letter in the plaintext by a fixed
-            number, known as the 'shift' or 'key'. For example, with a shift of
-            3, the letter 'A' would be replaced by 'D', 'B' by 'E', and so
-            forth. This shift applies uniformly across the entire message.
+            To understand the Monoalphabetic Cipher, imagine the standard
+            alphabet as a key and a scrambled version of the alphabet as the
+            cipher key. For example, if the standard alphabet is
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" and the cipher key is
+            "QWERTYUIOPASDFGHJKLZXCVBNM", then the letter "A" in the plaintext
+            would be replaced by "Q", "B" by "W", "C" by "E", and so on. Each
+            letter in the plaintext is substituted with its corresponding letter
+            from the cipher key, resulting in the encrypted text.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To decrypt the message, the process is simply reversed. If the
-            recipient knows the key (which is the number of positions each
-            letter was shifted), they can shift the letters back to their
-            original positions. Without the key, decrypting the message becomes
-            a trial-and-error process, though due to the limited number of
-            possible shifts (25 possible shifts for the English alphabet), the
-            Caesar Cipher is easily broken with modern computational power.
+            Decryption with a Monoalphabetic Cipher is straightforward if the
+            cipher key is known. The process is simply reversed: the encrypted
+            text is substituted with the original letters from the standard
+            alphabet using the cipher key. Without the cipher key, however,
+            decrypting the message becomes much more challenging. Since there
+            are 26! (26 factorial) possible permutations of the alphabet, which
+            equals approximately 4x10<sup>26</sup> possible keys, the
+            brute-force approach is impractical.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Historically, Julius Caesar used this cipher with a shift of three
-            to protect his military communications. Although the Caesar Cipher
-            is no longer considered secure for serious purposes, it remains a
-            fundamental example of encryption techniques and is often the first
-            cipher taught to students studying cryptography.
+            However, the Monoalphabetic Cipher's simplicity is also its
+            weakness. Because each letter in the plaintext is consistently
+            replaced by the same letter in the ciphertext, patterns in the text,
+            such as letter frequency, are preserved. This makes the cipher
+            vulnerable to frequency analysis, a method where the frequency of
+            letters in the ciphertext is compared to known frequency
+            distributions in the language of the plaintext. By analyzing the
+            most common letters, digraphs, and trigraphs in the ciphertext, an
+            attacker can often deduce the cipher key and decrypt the message
+            without knowing it directly.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Caesar Cipher’s simplicity is both its strength and its
-            weakness. It is an excellent example to introduce the concepts of
-            encryption and decryption, demonstrating how information can be
-            obfuscated from unintended recipients. However, its predictability
-            and vulnerability to frequency analysis make it unsuitable for
-            modern-day encryption needs, which require much more complex
-            algorithms to secure data effectively.
+            Historically, the Monoalphabetic Cipher was widely used before the
+            advent of more complex encryption techniques. It represents a
+            significant step in the evolution of cryptography, as it
+            demonstrates the power of substitution ciphers while also
+            highlighting their limitations. Despite its vulnerabilities, the
+            Monoalphabetic Cipher remains a valuable educational tool for
+            introducing concepts such as key permutation, encryption, and
+            decryption.
+          </p>
+          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            In modern cryptography, the Monoalphabetic Cipher is largely
+            obsolete, having been replaced by more secure algorithms that avoid
+            the pitfalls of simple substitution. Nevertheless, it provides an
+            essential foundation for understanding the development of
+            cryptographic methods and the ongoing quest to secure communication
+            in an increasingly interconnected world.
           </p>
         </div>
 
@@ -169,7 +193,7 @@ export const Caesar: React.FC = () => {
                 <CardHeader>
                   <CardTitle>Encode Text</CardTitle>
                   <CardDescription>
-                    Enter the plain text and the shift value to encode it.
+                    Enter the plain text and the key to encode it.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -196,17 +220,18 @@ export const Caesar: React.FC = () => {
                       )}
                     </div>
                     <div className="space-y-2 pb-2">
-                      <Label htmlFor="encodeShift">Shift Value</Label>
+                      <Label htmlFor="encodeKey">Key (26 unique letters)</Label>
                       <Input
-                        id="encodeShift"
-                        type="number"
-                        placeholder="Enter shift value..."
-                        defaultValue={1}
-                        {...registerEncode("shift")}
+                        id="encodeKey"
+                        type="text"
+                        placeholder="Enter 26-letter key..."
+                        className="uppercase"
+                        defaultValue={"BMORDIKQJGNSVPYWCTAHZUXFEL"}
+                        {...registerEncode("encodeKey")}
                       />
-                      {encodeErrors.shift && (
+                      {encodeErrors.encodeKey && (
                         <p className="text-red-500">
-                          {encodeErrors.shift.message}
+                          {encodeErrors.encodeKey.message}
                         </p>
                       )}
                     </div>
@@ -222,7 +247,7 @@ export const Caesar: React.FC = () => {
                 <CardHeader>
                   <CardTitle>Decode Text</CardTitle>
                   <CardDescription>
-                    Enter the cipher text and the shift value to decode it.
+                    Enter the cipher text and the key to decode it.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -237,7 +262,7 @@ export const Caesar: React.FC = () => {
                         placeholder="Enter text to decode..."
                         className="uppercase"
                         defaultValue={
-                          "BUUBDL BU EBXO"
+                          "BHHBON BH RBXP"
                         }
                         rows={6}
                         {...registerDecode("encodedText")}
@@ -249,17 +274,18 @@ export const Caesar: React.FC = () => {
                       )}
                     </div>
                     <div className="space-y-2 pb-2">
-                      <Label htmlFor="decodeShift">Shift Value</Label>
+                      <Label htmlFor="decodeKey">Key (26 unique letters)</Label>
                       <Input
-                        id="decodeShift"
-                        type="number"
-                        placeholder="Enter shift value..."
-                        defaultValue={1}
-                        {...registerDecode("shift")}
+                        id="decodeKey"
+                        type="text"
+                        placeholder="Enter 26-letter key..."
+                        className="uppercase"
+                        defaultValue={"BMORDIKQJGNSVPYWCTAHZUXFEL"}
+                        {...registerDecode("decodeKey")}
                       />
-                      {decodeErrors.shift && (
+                      {decodeErrors.decodeKey && (
                         <p className="text-red-500">
-                          {decodeErrors.shift.message}
+                          {decodeErrors.decodeKey.message}
                         </p>
                       )}
                     </div>

@@ -1,16 +1,32 @@
 import { z } from "zod";
 import Navbar from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button.tsx";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card.tsx";
+import { Input } from "@/components/ui/input.tsx";
+import { Label } from "@/components/ui/label.tsx";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs.tsx";
+import { Textarea } from "@/components/ui/textarea.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog.tsx";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
@@ -58,7 +74,9 @@ const vigenereDecode = (text: string, key: string) => {
   for (let i = 0; i < formattedText.length; i++) {
     const textChar = formattedText.charCodeAt(i) - 65; // 'A' = 65
     const keyChar = formattedKey.charCodeAt(i) - 65;
-    const decodedChar = String.fromCharCode(((textChar - keyChar + 26) % 26) + 65);
+    const decodedChar = String.fromCharCode(
+      ((textChar - keyChar + 26) % 26) + 65
+    );
     decodedText += decodedChar;
   }
 
@@ -116,56 +134,62 @@ export const Vigenere = () => {
             Vigenère Cipher
           </h1>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Vigenère Cipher, named after the French diplomat Blaise de Vigenère, is
-            a method of encrypting text by using a series of different Caesar ciphers
-            based on the letters of a keyword. Unlike the Caesar cipher, which uses a
-            single shift value, the Vigenère cipher employs a polyalphabetic approach,
-            where the shift for each letter in the plaintext is determined by the
-            corresponding letter of the keyword.
+            The Vigenère Cipher, named after the French diplomat Blaise de
+            Vigenère, is a method of encrypting text by using a series of
+            different Caesar ciphers based on the letters of a keyword. Unlike
+            the Caesar cipher, which uses a single shift value, the Vigenère
+            cipher employs a polyalphabetic approach, where the shift for each
+            letter in the plaintext is determined by the corresponding letter of
+            the keyword.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To understand how the Vigenère cipher works, imagine the alphabet written
-            out in a 26x26 grid, where each row is a Caesar cipher with a different
-            shift value, starting from 0 for 'A' up to 25 for 'Z'. The first letter of
-            the plaintext is encrypted using the Caesar cipher row corresponding to the
-            first letter of the keyword, the second letter of the plaintext is
-            encrypted using the Caesar cipher row corresponding to the second letter of
-            the keyword, and so on. If the keyword is shorter than the plaintext, it is
-            repeated as many times as necessary to match the length of the plaintext.
+            To understand how the Vigenère cipher works, imagine the alphabet
+            written out in a 26x26 grid, where each row is a Caesar cipher with
+            a different shift value, starting from 0 for 'A' up to 25 for 'Z'.
+            The first letter of the plaintext is encrypted using the Caesar
+            cipher row corresponding to the first letter of the keyword, the
+            second letter of the plaintext is encrypted using the Caesar cipher
+            row corresponding to the second letter of the keyword, and so on. If
+            the keyword is shorter than the plaintext, it is repeated as many
+            times as necessary to match the length of the plaintext.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
             For example, if the plaintext is "ATTACKATDAWN" and the keyword is
-            "LEMON", the first letter 'A' would be shifted by the position of 'L'
-            (which is 11 positions down the alphabet), 'T' would be shifted by the
-            position of 'E' (which is 4 positions down), and so forth. The resulting
-            ciphertext would be a seemingly random string of letters that is much more
-            resistant to frequency analysis compared to the Caesar cipher.
+            "LEMON", the first letter 'A' would be shifted by the position of
+            'L' (which is 11 positions down the alphabet), 'T' would be shifted
+            by the position of 'E' (which is 4 positions down), and so forth.
+            The resulting ciphertext would be a seemingly random string of
+            letters that is much more resistant to frequency analysis compared
+            to the Caesar cipher.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Decrypting the Vigenère cipher involves reversing the process. If the
-            recipient knows the keyword, they can apply the reverse shifts to the
-            ciphertext, using the corresponding Caesar cipher for each letter of the
-            keyword, to recover the original plaintext. Without the keyword, however,
-            breaking the Vigenère cipher is much more challenging than breaking a
-            Caesar cipher, particularly when longer and more complex keywords are used.
+            Decrypting the Vigenère cipher involves reversing the process. If
+            the recipient knows the keyword, they can apply the reverse shifts
+            to the ciphertext, using the corresponding Caesar cipher for each
+            letter of the keyword, to recover the original plaintext. Without
+            the keyword, however, breaking the Vigenère cipher is much more
+            challenging than breaking a Caesar cipher, particularly when longer
+            and more complex keywords are used.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Vigenère cipher was once considered virtually unbreakable, earning it
-            the nickname "le chiffre indéchiffrable" (French for "the indecipherable
-            cipher"). It was not until the 19th century that the German cryptanalyst
-            Friedrich Kasiski developed a method for breaking it by identifying the
-            length of the keyword and using frequency analysis on the individual Caesar
-            ciphers within it. This breakthrough marked the beginning of the decline in
-            the cipher's practical use for secure communications.
+            The Vigenère cipher was once considered virtually unbreakable,
+            earning it the nickname "le chiffre indéchiffrable" (French for "the
+            indecipherable cipher"). It was not until the 19th century that the
+            German cryptanalyst Friedrich Kasiski developed a method for
+            breaking it by identifying the length of the keyword and using
+            frequency analysis on the individual Caesar ciphers within it. This
+            breakthrough marked the beginning of the decline in the cipher's
+            practical use for secure communications.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Despite its historical significance, the Vigenère cipher is no longer
-            considered secure for modern applications. However, it remains an important
-            educational tool in the study of cryptography, illustrating the principles
-            of polyalphabetic substitution and the evolution of encryption techniques.
-            Understanding the Vigenère cipher provides a foundation for grasping more
-            advanced encryption methods that build on its concepts to achieve greater
-            security in the digital age.
+            Despite its historical significance, the Vigenère cipher is no
+            longer considered secure for modern applications. However, it
+            remains an important educational tool in the study of cryptography,
+            illustrating the principles of polyalphabetic substitution and the
+            evolution of encryption techniques. Understanding the Vigenère
+            cipher provides a foundation for grasping more advanced encryption
+            methods that build on its concepts to achieve greater security in
+            the digital age.
           </p>
         </div>
 

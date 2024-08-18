@@ -1,44 +1,51 @@
 import { z } from "zod";
 import Navbar from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button.tsx";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/components/ui/card.tsx";
+import { Input } from "@/components/ui/input.tsx";
+import { Label } from "@/components/ui/label.tsx";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs.tsx";
+import { Textarea } from "@/components/ui/textarea.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog.tsx";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
-  encodeKey: z.string().length(26, "Key must be exactly 26 characters"),
+  key: z
+    .string()
+    .min(1, "Key is required and must match the length of the plain text"),
 });
 
 const decodeSchema = z.object({
   encodedText: z.string().min(1, "Cipher text is required"),
-  decodeKey: z.string().length(26, "Key must be exactly 26 characters"),
+  key: z
+    .string()
+    .min(1, "Key is required and must match the length of the cipher text"),
 });
 
 type EncodeFormData = z.infer<typeof encodeSchema>;
 type DecodeFormData = z.infer<typeof decodeSchema>;
 
-const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-export const Monoalphabetic = () => {
+export const Vernam: React.FC = () => {
   const [encodedText, setEncodedText] = useState("");
   const [decodedText, setDecodedText] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -60,50 +67,37 @@ export const Monoalphabetic = () => {
     resolver: zodResolver(decodeSchema),
   });
 
+  const vernamCipher = (text: string, key: string): string => {
+    if (text.length !== key.length) {
+      throw new Error("Text and key must be of the same length");
+    }
+
+    return text
+      .split("")
+      .map((char, index) => {
+        const textChar = char.charCodeAt(0);
+        const keyChar = key.charCodeAt(index);
+        const cipherChar = textChar ^ keyChar;
+        return String.fromCharCode(cipherChar);
+      })
+      .join("");
+  };
+
   const onEncode = (data: EncodeFormData) => {
-    const encoded = monoalphabeticEncode(
-      data.plainText.toUpperCase(),
-      data.encodeKey.toUpperCase()
-    );
+    const encoded = vernamCipher(data.plainText, data.key);
     setEncodedText(encoded);
     setIsDialogOpen(true);
   };
 
   const onDecode = (data: DecodeFormData) => {
-    const decoded = monoalphabeticDecode(
-      data.encodedText.toUpperCase(),
-      data.decodeKey.toUpperCase()
-    );
+    const decoded = vernamCipher(data.encodedText, data.key);
     setDecodedText(decoded);
     setIsDialogOpen(true);
   };
 
-  const monoalphabeticEncode = (text: string, key: string) => {
-    return text
-      .split("")
-      .map((char) => {
-        const index = ALPHABET.indexOf(char);
-        return index !== -1 ? key[index] : char;
-      })
-      .join("");
-  };
-
-  const monoalphabeticDecode = (text: string, key: string) => {
-    return text
-      .split("")
-      .map((char) => {
-        const index = key.indexOf(char);
-        return index !== -1 ? ALPHABET[index] : char;
-      })
-      .join("");
-  };
-
   useEffect(() => {
-    if (activeTab === "encode") {
-      setDecodedText("");
-    } else {
-      setEncodedText("");
-    }
+    setEncodedText("");
+    setDecodedText("");
   }, [activeTab]);
 
   return (
@@ -112,67 +106,68 @@ export const Monoalphabetic = () => {
       <section className="max-w-7xl py-8 space-y-8 mx-auto">
         <div className="container mx-auto">
           <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            Monoalphabetic Cipher
+            Vernam Cipher
           </h1>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Monoalphabetic Cipher is a type of substitution cipher in which
-            each letter of the plaintext is replaced with a corresponding letter
-            from a fixed, scrambled version of the alphabet. Unlike the Caesar
-            Cipher, which shifts the alphabet uniformly by a fixed number of
-            positions, the Monoalphabetic Cipher allows any permutation of the
-            alphabet, leading to a significantly larger number of possible keys.
-            This makes it more resistant to brute-force attacks, but it remains
-            vulnerable to frequency analysis.
+            The Vernam Cipher, also known as the One-Time Pad, is a
+            groundbreaking encryption technique introduced by Gilbert Vernam in
+            1917. This cipher is recognized as one of the only theoretically
+            unbreakable encryption methods, provided certain strict conditions
+            are met. It operates on the principle of combining a plaintext
+            message with a random secret key, or "pad," that is as long as the
+            message itself. The strength of the Vernam Cipher lies in its
+            randomness and the uniqueness of its key, making it a cornerstone in
+            the history of cryptography.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To understand the Monoalphabetic Cipher, imagine the standard
-            alphabet as a key and a scrambled version of the alphabet as the
-            cipher key. For example, if the standard alphabet is
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" and the cipher key is
-            "QWERTYUIOPASDFGHJKLZXCVBNM", then the letter "A" in the plaintext
-            would be replaced by "Q", "B" by "W", "C" by "E", and so on. Each
-            letter in the plaintext is substituted with its corresponding letter
-            from the cipher key, resulting in the encrypted text.
+            At its core, the Vernam Cipher is a type of substitution cipher that
+            uses the XOR (exclusive or) operation to combine the binary
+            representation of each character in the plaintext with the
+            corresponding character in the key. Each bit of the plaintext is
+            transformed based on the key, resulting in ciphertext that is
+            completely unintelligible without the exact key. If the key is truly
+            random, kept secret, and used only once, the ciphertext cannot be
+            decrypted by any means other than using the original key, making the
+            Vernam Cipher theoretically secure.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Decryption with a Monoalphabetic Cipher is straightforward if the
-            cipher key is known. The process is simply reversed: the encrypted
-            text is substituted with the original letters from the standard
-            alphabet using the cipher key. Without the cipher key, however,
-            decrypting the message becomes much more challenging. Since there
-            are 26! (26 factorial) possible permutations of the alphabet, which
-            equals approximately 4x10<sup>26</sup> possible keys, the
-            brute-force approach is impractical.
+            The encryption process is straightforward but powerful. Imagine the
+            plaintext and key as two sequences of binary digits. By applying the
+            XOR operation to each corresponding pair of bits, the plaintext is
+            transformed into ciphertext. For example, if a bit in the plaintext
+            is 1 and the corresponding bit in the key is 0, the resulting bit in
+            the ciphertext is 1. If both bits are the same, the resulting bit is
+            0. This binary operation ensures that the ciphertext bears no
+            resemblance to the original message, thus securing the information.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            However, the Monoalphabetic Cipher's simplicity is also its
-            weakness. Because each letter in the plaintext is consistently
-            replaced by the same letter in the ciphertext, patterns in the text,
-            such as letter frequency, are preserved. This makes the cipher
-            vulnerable to frequency analysis, a method where the frequency of
-            letters in the ciphertext is compared to known frequency
-            distributions in the language of the plaintext. By analyzing the
-            most common letters, digraphs, and trigraphs in the ciphertext, an
-            attacker can often deduce the cipher key and decrypt the message
-            without knowing it directly.
+            Decrypting the message is as simple as the encryption process: the
+            same key is applied to the ciphertext using the XOR operation, which
+            reverses the process and reveals the original plaintext. The
+            security of the Vernam Cipher is absolute under the condition that
+            the key is as long as the message, is completely random, and is used
+            only once. If these conditions are met, even with the advent of
+            modern computational power, the Vernam Cipher remains unbreakable.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Historically, the Monoalphabetic Cipher was widely used before the
-            advent of more complex encryption techniques. It represents a
-            significant step in the evolution of cryptography, as it
-            demonstrates the power of substitution ciphers while also
-            highlighting their limitations. Despite its vulnerabilities, the
-            Monoalphabetic Cipher remains a valuable educational tool for
-            introducing concepts such as key permutation, encryption, and
-            decryption.
+            Historically, the Vernam Cipher has been used in highly sensitive
+            communications, particularly during wartime, where the utmost
+            security was required. However, the practical challenges of
+            generating and securely distributing truly random keys that match
+            the length of the message have limited its widespread adoption. In
+            modern cryptography, the principles of the Vernam Cipher inspire
+            more complex encryption systems, but the original concept remains a
+            gold standard for unbreakable encryption.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            In modern cryptography, the Monoalphabetic Cipher is largely
-            obsolete, having been replaced by more secure algorithms that avoid
-            the pitfalls of simple substitution. Nevertheless, it provides an
-            essential foundation for understanding the development of
-            cryptographic methods and the ongoing quest to secure communication
-            in an increasingly interconnected world.
+            The Vernam Cipher’s simplicity, when paired with its requirement for
+            a perfect key, exemplifies the balance between theoretical security
+            and practical implementation. It serves as a fundamental lesson in
+            the study of cryptography, illustrating how the strength of
+            encryption is tied directly to the quality and secrecy of the key.
+            While the Vernam Cipher may not be practical for everyday use, its
+            role in the evolution of secure communication continues to influence
+            modern cryptographic techniques.
           </p>
         </div>
 
@@ -193,7 +188,8 @@ export const Monoalphabetic = () => {
                 <CardHeader>
                   <CardTitle>Encode Text</CardTitle>
                   <CardDescription>
-                    Enter the plain text and the key to encode it.
+                    Enter the plain text and the key to encode it. The key must
+                    be the same length as the plain text.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -207,9 +203,7 @@ export const Monoalphabetic = () => {
                         id="plainText"
                         placeholder="Enter text to encode..."
                         className="uppercase"
-                        defaultValue={
-                          "ATTACK AT DAWN"
-                        }
+                        defaultValue="ATTACK AT DAWN"
                         rows={6}
                         {...registerEncode("plainText")}
                       />
@@ -220,18 +214,16 @@ export const Monoalphabetic = () => {
                       )}
                     </div>
                     <div className="space-y-2 pb-2">
-                      <Label htmlFor="encodeKey">Key (26 unique letters)</Label>
+                      <Label htmlFor="key">Key</Label>
                       <Input
-                        id="encodeKey"
-                        type="text"
-                        placeholder="Enter 26-letter key..."
-                        className="uppercase"
-                        defaultValue={"BMORDIKQJGNSVPYWCTAHZUXFEL"}
-                        {...registerEncode("encodeKey")}
+                        id="key"
+                        placeholder="Enter key..."
+                        defaultValue="LEMON LEMON LE"
+                        {...registerEncode("key")}
                       />
-                      {encodeErrors.encodeKey && (
+                      {encodeErrors.key && (
                         <p className="text-red-500">
-                          {encodeErrors.encodeKey.message}
+                          {encodeErrors.key.message}
                         </p>
                       )}
                     </div>
@@ -247,7 +239,8 @@ export const Monoalphabetic = () => {
                 <CardHeader>
                   <CardTitle>Decode Text</CardTitle>
                   <CardDescription>
-                    Enter the cipher text and the key to decode it.
+                    Enter the cipher text and the key to decode it. The key must
+                    be the same length as the cipher text.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -261,9 +254,7 @@ export const Monoalphabetic = () => {
                         id="encodedText"
                         placeholder="Enter text to decode..."
                         className="uppercase"
-                        defaultValue={
-                          "BHHBON BH RBXP"
-                        }
+                        defaultValue="LXFOPVEFRNHR"
                         rows={6}
                         {...registerDecode("encodedText")}
                       />
@@ -274,18 +265,16 @@ export const Monoalphabetic = () => {
                       )}
                     </div>
                     <div className="space-y-2 pb-2">
-                      <Label htmlFor="decodeKey">Key (26 unique letters)</Label>
+                      <Label htmlFor="key">Key</Label>
                       <Input
-                        id="decodeKey"
-                        type="text"
-                        placeholder="Enter 26-letter key..."
-                        className="uppercase"
-                        defaultValue={"BMORDIKQJGNSVPYWCTAHZUXFEL"}
-                        {...registerDecode("decodeKey")}
+                        id="key"
+                        placeholder="Enter key..."
+                        defaultValue="LEMON LEMON LE"
+                        {...registerDecode("key")}
                       />
-                      {decodeErrors.decodeKey && (
+                      {decodeErrors.key && (
                         <p className="text-red-500">
-                          {decodeErrors.decodeKey.message}
+                          {decodeErrors.key.message}
                         </p>
                       )}
                     </div>
@@ -321,3 +310,5 @@ export const Monoalphabetic = () => {
     </>
   );
 };
+
+export default Vernam;

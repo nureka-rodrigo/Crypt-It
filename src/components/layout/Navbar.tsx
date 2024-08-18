@@ -38,12 +38,6 @@ const navItems = [
         label: 'Playfair Cipher'
       },
       {
-        title: 'Hill Cipher',
-        href: '/substitution/hill',
-        description: 'A cipher that encrypts blocks of text using matrix multiplication.',
-        label: 'Hill Cipher'
-      },
-      {
         title: 'Vigenère Cipher',
         href: '/substitution/vigenere',
         description: 'A polyalphabetic cipher using a keyword to shift letters.',
