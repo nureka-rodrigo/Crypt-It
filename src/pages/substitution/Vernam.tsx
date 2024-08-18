@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {Navbar} from "@/components/layout/Navbar.tsx";
+import { Navbar } from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
@@ -20,7 +20,7 @@ import {
 import { Textarea } from "@/components/ui/textarea.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -30,22 +30,61 @@ import {
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
-  key: z
-    .string()
-    .min(1, "Key is required and must match the length of the plain text"),
+  key: z.string().min(1, "Key is required"),
 });
 
 const decodeSchema = z.object({
-  encodedText: z.string().min(1, "Cipher text is required"),
-  key: z
-    .string()
-    .min(1, "Key is required and must match the length of the cipher text"),
+  cipherText: z.string().min(1, "Cipher text is required"),
+  key: z.string().min(1, "Key is required"),
 });
 
 type EncodeFormData = z.infer<typeof encodeSchema>;
 type DecodeFormData = z.infer<typeof decodeSchema>;
 
-export const Vernam: React.FC = () => {
+const formatText = (text: string) => text.toUpperCase().replace(/[^A-Z]/g, "");
+
+const formatKey = (key: string, length: number) => {
+  key = formatText(key);
+  let repeatedKey = key;
+  while (repeatedKey.length < length) {
+    repeatedKey += key;
+  }
+  return repeatedKey.slice(0, length);
+};
+
+const vigenereEncode = (text: string, key: string) => {
+  const formattedText = formatText(text);
+  const formattedKey = formatKey(key, formattedText.length);
+  let encodedText = "";
+
+  for (let i = 0; i < formattedText.length; i++) {
+    const textChar = formattedText.charCodeAt(i) - 65; // 'A' = 65
+    const keyChar = formattedKey.charCodeAt(i) - 65;
+    const encodedChar = String.fromCharCode(((textChar + keyChar) % 26) + 65);
+    encodedText += encodedChar;
+  }
+
+  return encodedText;
+};
+
+const vigenereDecode = (text: string, key: string) => {
+  const formattedText = formatText(text);
+  const formattedKey = formatKey(key, formattedText.length);
+  let decodedText = "";
+
+  for (let i = 0; i < formattedText.length; i++) {
+    const textChar = formattedText.charCodeAt(i) - 65; // 'A' = 65
+    const keyChar = formattedKey.charCodeAt(i) - 65;
+    const decodedChar = String.fromCharCode(
+      ((textChar - keyChar + 26) % 26) + 65
+    );
+    decodedText += decodedChar;
+  }
+
+  return decodedText;
+};
+
+export const Vernam = () => {
   const [encodedText, setEncodedText] = useState("");
   const [decodedText, setDecodedText] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -67,37 +106,24 @@ export const Vernam: React.FC = () => {
     resolver: zodResolver(decodeSchema),
   });
 
-  const vernamCipher = (text: string, key: string): string => {
-    if (text.length !== key.length) {
-      throw new Error("Text and key must be of the same length");
-    }
-
-    return text
-      .split("")
-      .map((char, index) => {
-        const textChar = char.charCodeAt(0);
-        const keyChar = key.charCodeAt(index);
-        const cipherChar = textChar ^ keyChar;
-        return String.fromCharCode(cipherChar);
-      })
-      .join("");
-  };
-
   const onEncode = (data: EncodeFormData) => {
-    const encoded = vernamCipher(data.plainText, data.key);
+    const encoded = vigenereEncode(data.plainText, data.key);
     setEncodedText(encoded);
     setIsDialogOpen(true);
   };
 
   const onDecode = (data: DecodeFormData) => {
-    const decoded = vernamCipher(data.encodedText, data.key);
+    const decoded = vigenereDecode(data.cipherText, data.key);
     setDecodedText(decoded);
     setIsDialogOpen(true);
   };
 
   useEffect(() => {
-    setEncodedText("");
-    setDecodedText("");
+    if (activeTab === "encode") {
+      setDecodedText("");
+    } else {
+      setEncodedText("");
+    }
   }, [activeTab]);
 
   return (
@@ -106,68 +132,39 @@ export const Vernam: React.FC = () => {
       <section className="max-w-7xl py-8 space-y-8 mx-auto">
         <div className="container mx-auto">
           <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            Vernam Cipher
+            Vernam Cipher (One-Time Pad)
           </h1>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Vernam Cipher, also known as the One-Time Pad, is a
-            groundbreaking encryption technique introduced by Gilbert Vernam in
-            1917. This cipher is recognized as one of the only theoretically
-            unbreakable encryption methods, provided certain strict conditions
-            are met. It operates on the principle of combining a plaintext
-            message with a random secret key, or "pad," that is as long as the
-            message itself. The strength of the Vernam Cipher lies in its
-            randomness and the uniqueness of its key, making it a cornerstone in
-            the history of cryptography.
+            The Vernam Cipher, also known as the one-time pad, is a form of
+            symmetric-key encryption that is renowned for its theoretical
+            security. This cipher operates by combining each character of the
+            plaintext with a corresponding character from a key of the same
+            length using the XOR (exclusive OR) operation. This process
+            transforms the plaintext into ciphertext, which appears as random
+            data to anyone who intercepts it. For the Vernam Cipher to achieve
+            perfect secrecy, the key must be as long as the plaintext and must
+            be truly random, ensuring that each key is used only once.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            At its core, the Vernam Cipher is a type of substitution cipher that
-            uses the XOR (exclusive or) operation to combine the binary
-            representation of each character in the plaintext with the
-            corresponding character in the key. Each bit of the plaintext is
-            transformed based on the key, resulting in ciphertext that is
-            completely unintelligible without the exact key. If the key is truly
-            random, kept secret, and used only once, the ciphertext cannot be
-            decrypted by any means other than using the original key, making the
-            Vernam Cipher theoretically secure.
+            Encoding with the Vernam Cipher involves the XOR operation between
+            each character of the plaintext and the key. The result of this XOR
+            operation is a ciphertext character. Since XOR is a reversible
+            operation, the same procedure is used to decode the ciphertext back
+            into the plaintext. This means that the decryption process is
+            identical to encryption: XORing the ciphertext with the same key
+            yields the original plaintext. This property makes the Vernam Cipher
+            an example of a cipher where encryption and decryption are
+            essentially the same process.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The encryption process is straightforward but powerful. Imagine the
-            plaintext and key as two sequences of binary digits. By applying the
-            XOR operation to each corresponding pair of bits, the plaintext is
-            transformed into ciphertext. For example, if a bit in the plaintext
-            is 1 and the corresponding bit in the key is 0, the resulting bit in
-            the ciphertext is 1. If both bits are the same, the resulting bit is
-            0. This binary operation ensures that the ciphertext bears no
-            resemblance to the original message, thus securing the information.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Decrypting the message is as simple as the encryption process: the
-            same key is applied to the ciphertext using the XOR operation, which
-            reverses the process and reveals the original plaintext. The
-            security of the Vernam Cipher is absolute under the condition that
-            the key is as long as the message, is completely random, and is used
-            only once. If these conditions are met, even with the advent of
-            modern computational power, the Vernam Cipher remains unbreakable.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Historically, the Vernam Cipher has been used in highly sensitive
-            communications, particularly during wartime, where the utmost
-            security was required. However, the practical challenges of
-            generating and securely distributing truly random keys that match
-            the length of the message have limited its widespread adoption. In
-            modern cryptography, the principles of the Vernam Cipher inspire
-            more complex encryption systems, but the original concept remains a
-            gold standard for unbreakable encryption.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Vernam Cipher’s simplicity, when paired with its requirement for
-            a perfect key, exemplifies the balance between theoretical security
-            and practical implementation. It serves as a fundamental lesson in
-            the study of cryptography, illustrating how the strength of
-            encryption is tied directly to the quality and secrecy of the key.
-            While the Vernam Cipher may not be practical for everyday use, its
-            role in the evolution of secure communication continues to influence
-            modern cryptographic techniques.
+            The primary challenge with the Vernam Cipher is the generation and
+            distribution of the key. Since the key must be as long as the
+            message and completely random, managing and securely distributing
+            such keys can be impractical for many real-world applications.
+            However, when used correctly, the Vernam Cipher provides an
+            unbreakable encryption method, as long as the key is kept secret and
+            used only once. This cipher’s security is mathematically proven,
+            making it a cornerstone in the study of cryptographic systems.
           </p>
         </div>
 
@@ -203,7 +200,7 @@ export const Vernam: React.FC = () => {
                         id="plainText"
                         placeholder="Enter text to encode..."
                         className="uppercase"
-                        defaultValue="ATTACK AT DAWN"
+                        defaultValue={"ATTACKATDAWN"}
                         rows={6}
                         {...registerEncode("plainText")}
                       />
@@ -217,8 +214,10 @@ export const Vernam: React.FC = () => {
                       <Label htmlFor="key">Key</Label>
                       <Input
                         id="key"
+                        type="text"
                         placeholder="Enter key..."
-                        defaultValue="LEMON LEMON LE"
+                        className="uppercase"
+                        defaultValue={"LEMONLEMONLE"}
                         {...registerEncode("key")}
                       />
                       {encodeErrors.key && (
@@ -249,18 +248,18 @@ export const Vernam: React.FC = () => {
                     onSubmit={handleSubmitDecode(onDecode)}
                   >
                     <div className="space-y-2">
-                      <Label htmlFor="encodedText">Cipher Text</Label>
+                      <Label htmlFor="cipherText">Cipher Text</Label>
                       <Textarea
-                        id="encodedText"
+                        id="cipherText"
                         placeholder="Enter text to decode..."
                         className="uppercase"
-                        defaultValue="LXFOPVEFRNHR"
+                        defaultValue={"LXFOPVEFRNHR"}
                         rows={6}
-                        {...registerDecode("encodedText")}
+                        {...registerDecode("cipherText")}
                       />
-                      {decodeErrors.encodedText && (
+                      {decodeErrors.cipherText && (
                         <p className="text-red-500">
-                          {decodeErrors.encodedText.message}
+                          {decodeErrors.cipherText.message}
                         </p>
                       )}
                     </div>
@@ -268,8 +267,10 @@ export const Vernam: React.FC = () => {
                       <Label htmlFor="key">Key</Label>
                       <Input
                         id="key"
+                        type="text"
                         placeholder="Enter key..."
-                        defaultValue="LEMON LEMON LE"
+                        className="uppercase"
+                        defaultValue={"LEMONLEMONLE"}
                         {...registerDecode("key")}
                       />
                       {decodeErrors.key && (
@@ -293,16 +294,16 @@ export const Vernam: React.FC = () => {
           <DialogTitle className="mb-2">Result</DialogTitle>
           <DialogDescription className="space-y-4">
             {encodedText && (
-              <div className="space-y-4">
+              <>
                 <Label>Encoded Text</Label>
                 <Textarea readOnly rows={8} value={encodedText} />
-              </div>
+              </>
             )}
             {decodedText && (
-              <div className="space-y-4">
+              <>
                 <Label>Decoded Text</Label>
                 <Textarea readOnly rows={8} value={decodedText} />
-              </div>
+              </>
             )}
           </DialogDescription>
         </DialogContent>
