@@ -235,7 +235,7 @@ export const Playfair = () => {
             Each pair of letters is then encrypted according to the following
             rules:
           </p>
-          <ul className="list-disc pl-6">
+          <ul className="list-disc pl-6 mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
             <li>
               <strong>Same Row:</strong> If both letters are in the same row,
               each letter is replaced by the letter immediately to its right. If
