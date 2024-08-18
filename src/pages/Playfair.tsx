@@ -297,7 +297,7 @@ export const Playfair = () => {
                         placeholder="Enter text to encode..."
                         className="uppercase"
                         defaultValue={
-                          "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG."
+                          "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"
                         }
                         rows={6}
                         {...registerEncode("plainText")}

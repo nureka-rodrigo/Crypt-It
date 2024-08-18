@@ -184,7 +184,7 @@ export const Caesar: React.FC = () => {
                         placeholder="Enter text to encode..."
                         className="uppercase"
                         defaultValue={
-                          "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG."
+                          "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"
                         }
                         rows={6}
                         {...registerEncode("plainText")}
@@ -237,7 +237,7 @@ export const Caesar: React.FC = () => {
                         placeholder="Enter text to decode..."
                         className="uppercase"
                         defaultValue={
-                          "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH."
+                          "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH"
                         }
                         rows={6}
                         {...registerDecode("encodedText")}
