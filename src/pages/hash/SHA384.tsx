@@ -31,7 +31,7 @@ type HashFormData = {
   inputText: string;
 };
 
-export const Sha384Cipher = () => {
+export const SHA384 = () => {
   const [hashedText, setHashedText] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -130,7 +130,7 @@ export const Sha384Cipher = () => {
           <DialogDescription className="space-y-4">
             {hashedText && (
               <div className="space-y-4">
-                <Label>SHA-256 Hash</Label>
+                <Label>SHA-384 Hash</Label>
                 <Textarea readOnly rows={8} value={hashedText} />
               </div>
             )}

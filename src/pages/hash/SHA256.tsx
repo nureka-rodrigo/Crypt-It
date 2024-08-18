@@ -31,7 +31,7 @@ type HashFormData = {
   inputText: string;
 };
 
-export const Sha256Cipher = () => {
+export const SHA256 = () => {
   const [hashedText, setHashedText] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
