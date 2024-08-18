@@ -165,16 +165,26 @@ export const RailFence: React.FC = () => {
             Rail Fence Cipher
           </h1>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Rail Fence Cipher is a type of transposition cipher that gets
-            its name from the way the plaintext is written in a zigzag pattern
-            across multiple "rails" or lines. The ciphertext is then created by
-            reading the text off each rail in turn.
+            The Rail Fence Cipher is a classic transposition cipher used to encrypt messages by rearranging the
+            characters in a zigzag pattern. It is named for its visual resemblance to a fence with rails. The cipher
+            operates by writing the plaintext in a zigzag pattern across a specified number of "rails" or lines. Once
+            the plaintext is written, the ciphertext is produced by reading the text off each rail line by line.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To encode a message, you write it in a zigzag pattern across
-            multiple lines (rails) and then concatenate the lines to form the
-            ciphertext. To decode, you reconstruct the zigzag pattern and read
-            the message line by line.
+            To encode a message, start by writing the message diagonally downwards across the rails. When you reach the
+            bottom rail, reverse direction and move upwards diagonally. This zigzag pattern is continued until the
+            entire plaintext is written. Afterward, read the characters off each rail line by line and concatenate them
+            to form the final encoded message.
+          </p>
+          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            Decoding the message involves reconstructing the zigzag pattern by filling in the characters from the
+            ciphertext into the corresponding rail lines. Once the rails are filled, read the message in the same zigzag
+            pattern as during encoding. This process reveals the original plaintext.
+          </p>
+          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            Although the Rail Fence Cipher is a simple encryption method and can provide a basic level of security, it
+            is vulnerable to frequency analysis and other cryptographic attacks. Therefore, it is better suited for
+            educational purposes or simple use cases rather than for serious cryptographic applications.
           </p>
         </div>
 

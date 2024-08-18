@@ -5,7 +5,7 @@ import {Caesar} from "@/pages/substitution/Caesar.tsx";
 import {Monoalphabetic} from "@/pages/substitution/Monoalphabetic.tsx";
 import {Playfair} from "@/pages/substitution/Playfair.tsx";
 import {Vigenere} from "@/pages/substitution/Vigenere.tsx";
-import Vernam from "@/pages/substitution/Vernam.tsx";
+import {Vernam} from "@/pages/substitution/Vernam.tsx";
 import {RailFence} from "@/pages/transposition/RailFence.tsx";
 
 function App() {

@@ -310,5 +310,3 @@ export const Vernam: React.FC = () => {
     </>
   );
 };
-
-export default Vernam;
