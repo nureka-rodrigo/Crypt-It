@@ -31,11 +31,17 @@ import {
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
   key: z.string().min(1, "Key is required"),
+}).refine((data) => data.key.length >= data.plainText.length, {
+  message: "Key must be at least as long as the plain text",
+  path: ["key"],
 });
 
 const decodeSchema = z.object({
   cipherText: z.string().min(1, "Cipher text is required"),
   key: z.string().min(1, "Key is required"),
+}).refine((data) => data.key.length >= data.cipherText.length, {
+  message: "Key must be at least as long as the cipher text",
+  path: ["key"],
 });
 
 type EncodeFormData = z.infer<typeof encodeSchema>;
