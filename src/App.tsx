@@ -4,6 +4,7 @@ import {Home} from "@/pages/Home.tsx";
 import {Caesar} from "@/pages/Caesar.tsx";
 import {Monoalphabetic} from "@/pages/Monoalphabetic.tsx";
 import {Playfair} from "@/pages/Playfair.tsx";
+import {Vigenere} from "@/pages/Vigenere.tsx";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/substitution/caesar" element={<Caesar/>}/>
         <Route path="/substitution/monoalphabetic" element={<Monoalphabetic/>}/>
         <Route path="/substitution/playfair" element={<Playfair/>}/>
+        <Route path="/substitution/vigenere" element={<Vigenere/>}/>
       </Routes>
     </div>
   )
