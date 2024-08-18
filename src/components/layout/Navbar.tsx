@@ -80,12 +80,6 @@ const navItems = [
     href: "/symmetric",
     subItems: [
       {
-        title: "DES",
-        href: "/symmetric/des",
-        description: "A widely used block cipher for encryption.",
-        label: "DES",
-      },
-      {
         title: "AES",
         href: "/symmetric/aes",
         description: "A modern block cipher used for secure encryption.",
@@ -94,22 +88,36 @@ const navItems = [
     ],
   },
   {
-    label: "Asymmetric",
-    href: "/asymmetric",
+    label: "Hash",
+    href: "/hash-functions",
     subItems: [
       {
-        title: "RSA",
-        href: "/asymmetric/rsa",
+        title: "SHA1",
+        href: "/hash/sha1",
         description:
-          "A cipher using different keys for encryption and decryption.",
-        label: "RSA",
+          "A cryptographic hash function that produces a 160-bit hash value.",
+        label: "SHA1",
       },
       {
-        title: "ElGamal",
-        href: "/asymmetric/elgamal",
+        title: "SHA256",
+        href: "/hash/sha256",
         description:
-          "A public key encryption algorithm based on the Diffie-Hellman key exchange.",
-        label: "ElGamal",
+          "A cryptographic hash function that produces a 256-bit hash value.",
+        label: "SHA256",
+      },
+      {
+        title: "SHA384",
+        href: "/hash/sha384",
+        description:
+          "A cryptographic hash function that produces a 384-bit hash value.",
+        label: "SHA384",
+      },
+      {
+        title: "SHA512",
+        href: "/hash/sha512",
+        description:
+          "A cryptographic hash function that produces a 512-bit hash value.",
+        label: "SHA512",
       },
     ],
   },

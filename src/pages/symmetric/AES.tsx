@@ -170,8 +170,9 @@ export const AesCipher = () => {
                   >
                     <div className="space-y-2">
                       <Label htmlFor="plainText">Plain Text</Label>
-                      <Input
+                      <Textarea
                         id="plainText"
+                        rows={6}
                         placeholder="Enter text to encode..."
                         defaultValue="ATTACK AT DAWN"
                         {...registerEncode("plainText")}
@@ -219,8 +220,9 @@ export const AesCipher = () => {
                   >
                     <div className="space-y-2">
                       <Label htmlFor="encodedText">Cipher Text</Label>
-                      <Input
+                      <Textarea
                         id="encodedText"
+                        rows={6}
                         placeholder="Enter text to decode..."
                         defaultValue="U2FsdGVkX19mq14NXZGk7LD8XZIoUMFT4xIoFhGMf0k="
                         {...registerDecode("encodedText")}
