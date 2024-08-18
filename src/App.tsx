@@ -8,7 +8,7 @@ import {Vigenere} from "@/pages/substitution/Vigenere.tsx";
 import {Vernam} from "@/pages/substitution/Vernam.tsx";
 import {RailFence} from "@/pages/transposition/RailFence.tsx";
 import {Columnar} from "@/pages/transposition/Columnar.tsx";
-
+import {AesCipher} from "@/pages/symmetric/AES.tsx";
 
 function App() {
 
@@ -24,6 +24,8 @@ function App() {
 
         <Route path="/transposition/rail-fence" element={<RailFence/>}/>
         <Route path="/transposition/columnar" element={<Columnar/>}/>
+
+        <Route path="/symmetric/aes" element={<AesCipher/>}/>
       </Routes>
     </div>
   )
