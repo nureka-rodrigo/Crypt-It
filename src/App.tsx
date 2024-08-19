@@ -35,10 +35,10 @@ function App() {
         <Route path="/symmetric/aes-ctr" element={<AESCTR />} />
         <Route path="/symmetric/aes-cbc" element={<AESCBC />} />
 
-        <Route path="/hash/sha1" element={<SHA1 />} />
-        <Route path="/hash/sha256" element={<SHA256 />} />
-        <Route path="/hash/sha384" element={<SHA384 />} />
-        <Route path="/hash/sha512" element={<SHA512 />} />
+        <Route path="/hash/sha-1" element={<SHA1 />} />
+        <Route path="/hash/sha-256" element={<SHA256 />} />
+        <Route path="/hash/sha-384" element={<SHA384 />} />
+        <Route path="/hash/sha-512" element={<SHA512 />} />
       </Routes>
     </div>
   );

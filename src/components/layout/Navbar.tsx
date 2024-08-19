@@ -101,25 +101,25 @@ const navItems = [
     subItems: [
       {
         title: "SHA1",
-        href: "/hash/sha1",
+        href: "/hash/sha-1",
         description: "A cryptographic hash function that produces a 160-bit hash value.",
         label: "SHA1",
       },
       {
         title: "SHA256",
-        href: "/hash/sha256",
+        href: "/hash/sha-256",
         description: "A cryptographic hash function that produces a 256-bit hash value.",
         label: "SHA256",
       },
       {
         title: "SHA384",
-        href: "/hash/sha384",
+        href: "/hash/sha-384",
         description: "A cryptographic hash function that produces a 384-bit hash value.",
         label: "SHA384",
       },
       {
         title: "SHA512",
-        href: "/hash/sha512",
+        href: "/hash/sha-512",
         description: "A cryptographic hash function that produces a 512-bit hash value.",
         label: "SHA512",
       },
