@@ -2,30 +2,48 @@ import { z } from "zod";
 import { Navbar } from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
 import { Button } from "@/components/ui/button.tsx";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs.tsx";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs.tsx";
 import { Textarea } from "@/components/ui/textarea.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog.tsx";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog.tsx";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
-  encodeKey: z.string()
+  encodeKey: z
+    .string()
     .min(1, "Key is required")
-    .refine(key => key.length === 16, {
+    .refine((key) => key.length === 16, {
       message: "Key must be 16 characters long",
     }),
 });
 
 const decodeSchema = z.object({
   encodedText: z.string().min(1, "Cipher text is required"),
-  decodeKey: z.string()
+  decodeKey: z
+    .string()
     .min(1, "Key is required")
-    .refine(key => key.length === 16, {
+    .refine((key) => key.length === 16, {
       message: "Key must be 16 characters long",
     }),
 });
@@ -81,15 +99,23 @@ export const AESCBC = () => {
     );
 
     return {
-      cipherText: btoa(String.fromCharCode(...new Uint8Array(encryptedContent))),
+      cipherText: btoa(
+        String.fromCharCode(...new Uint8Array(encryptedContent))
+      ),
       iv: btoa(String.fromCharCode(...iv)),
     };
   };
 
-  const AESDecode = async (cipherText: string, keyStr: string, ivStr: string) => {
+  const AESDecode = async (
+    cipherText: string,
+    keyStr: string,
+    ivStr: string
+  ) => {
     const key = await importKey(keyStr);
-    const iv = Uint8Array.from(atob(ivStr), c => c.charCodeAt(0));
-    const encryptedContent = Uint8Array.from(atob(cipherText), c => c.charCodeAt(0));
+    const iv = Uint8Array.from(atob(ivStr), (c) => c.charCodeAt(0));
+    const encryptedContent = Uint8Array.from(atob(cipherText), (c) =>
+      c.charCodeAt(0)
+    );
 
     const decryptedContent = await window.crypto.subtle.decrypt(
       {
@@ -137,19 +163,24 @@ export const AESCBC = () => {
             AES-CBC Cipher
           </h1>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Advanced Encryption Standard in Cipher Block Chaining mode (AES-CBC) is a widely used encryption method
-            that provides a high level of security. Unlike AES-CTR, which transforms AES into a stream cipher, AES-CBC
-            operates on fixed-size blocks of data. Each block of plaintext is XORed with the previous ciphertext block
+            The Advanced Encryption Standard in Cipher Block Chaining mode
+            (AES-CBC) is a widely used encryption method that provides a high
+            level of security. Unlike AES-CTR, which transforms AES into a
+            stream cipher, AES-CBC operates on fixed-size blocks of data. Each
+            block of plaintext is XORed with the previous ciphertext block
             before being encrypted, creating a strong dependency between blocks.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            In AES-CBC, an initialization vector (IV) is used in the first block to ensure that even identical plaintexts
-            result in different ciphertexts, enhancing security. The IV must be unique for each encryption operation but
-            does not need to be secret.
+            In AES-CBC, an initialization vector (IV) is used in the first block
+            to ensure that even identical plaintexts result in different
+            ciphertexts, enhancing security. The IV must be unique for each
+            encryption operation but does not need to be secret.
           </p>
           <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            AES-CBC is highly secure and is used in various applications, from securing communication channels to encrypting
-            files. However, it is crucial to manage the IV correctly, as reusing an IV with the same key can compromise security.
+            AES-CBC is highly secure and is used in various applications, from
+            securing communication channels to encrypting files. However, it is
+            crucial to manage the IV correctly, as reusing an IV with the same
+            key can compromise security.
           </p>
         </div>
 
@@ -266,19 +297,18 @@ export const AESCBC = () => {
           </Tabs>
         </div>
       </section>
-      <Footer/>
+      <Footer />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
           <DialogTitle className="mb-2">Result</DialogTitle>
           <DialogDescription className="space-y-4">
-            {encodedText && (
+            {activeTab === "encode" ? (
               <>
                 <Label>Encoded Text</Label>
                 <Textarea readOnly rows={8} value={encodedText} />
               </>
-            )}
-            {decodedText && (
+            ) : (
               <>
                 <Label>Decoded Text</Label>
                 <Textarea readOnly rows={8} value={decodedText} />

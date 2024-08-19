@@ -12,8 +12,8 @@ import { SHA256 } from "@/pages/hash/SHA-256.tsx";
 import { SHA1 } from "@/pages/hash/SHA-1.tsx";
 import { SHA384 } from "@/pages/hash/SHA-384.tsx";
 import { SHA512 } from "@/pages/hash/SHA-512.tsx";
-import {AESCTR} from "@/pages/symmetric/AES-CTR.tsx";
-import {AESCBC} from "@/pages/symmetric/AESCBC.tsx";
+import { AESCTR } from "@/pages/symmetric/AES-CTR.tsx";
+import { AESCBC } from "@/pages/symmetric/AES-CBC.tsx";
 
 function App() {
   return (
@@ -21,7 +21,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/substitution/caesar" element={<Caesar />} />
-        <Route path="/substitution/monoalphabetic" element={<Monoalphabetic /> }/>
+        <Route
+          path="/substitution/monoalphabetic"
+          element={<Monoalphabetic />}
+        />
         <Route path="/substitution/playfair" element={<Playfair />} />
         <Route path="/substitution/vigenere" element={<Vigenere />} />
         <Route path="/substitution/vernam" element={<Vernam />} />
