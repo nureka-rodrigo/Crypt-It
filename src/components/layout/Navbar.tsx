@@ -76,10 +76,22 @@ const navItems = [
     href: "/symmetric",
     subItems: [
       {
-        title: "AES",
-        href: "/symmetric/aes",
-        description: "A modern block cipher used for secure encryption.",
+        title: "AES-CTR",
+        href: "/symmetric/aes-ctr",
+        description: "A symmetric encryption algorithm that encrypts data in blocks.",
         label: "AES",
+      },
+      {
+        title: "AES-CBC",
+        href: "/symmetric/aes-cbc",
+        description: "A symmetric encryption algorithm that encrypts data in blocks.",
+        label: "AES-CBC",
+      },
+      {
+        title: "AES-GCM",
+        href: "/symmetric/aes-gcm",
+        description: "A symmetric encryption algorithm that encrypts data in blocks.",
+        label: "AES-GCM",
       },
     ],
   },
