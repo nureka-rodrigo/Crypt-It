@@ -15,6 +15,7 @@ import { SHA512 } from "@/pages/hash/SHA-512.tsx";
 import { AESCTR } from "@/pages/symmetric/AES-CTR.tsx";
 import { AESCBC } from "@/pages/symmetric/AES-CBC.tsx";
 import { AESGCM } from "@/pages/symmetric/AES-GCM.tsx";
+import { RSAOAEP } from "@/pages/asymmetric/RSA-OAEP.tsx";
 
 function App() {
   return (
@@ -36,6 +37,8 @@ function App() {
         <Route path="/symmetric/aes-ctr" element={<AESCTR />} />
         <Route path="/symmetric/aes-cbc" element={<AESCBC />} />
         <Route path="/symmetric/aes-gcm" element={<AESGCM />} />
+
+        <Route path="/asymmetric/rsa-oaep" element={<RSAOAEP />} />
 
         <Route path="/hash/sha-1" element={<SHA1 />} />
         <Route path="/hash/sha-256" element={<SHA256 />} />

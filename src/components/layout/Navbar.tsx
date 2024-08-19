@@ -96,6 +96,18 @@ const navItems = [
     ],
   },
   {
+    label: "Asymmetric",
+    href: "/asymmetric",
+    subItems: [
+      {
+        title: "RSA-OAEP",
+        href: "/asymmetric/rsa-oaep",
+        description: "An asymmetric encryption algorithm that encrypts data using public and private keys.",
+        label: "RSA-OAEP",
+      },
+    ],
+  },
+  {
     label: "Hash",
     href: "/hash-functions",
     subItems: [
