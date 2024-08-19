@@ -153,7 +153,7 @@ export const Navbar: React.FC = () => {
           <img src={Logo} alt="Logo" className="w-8 h-8" />
         </div>
         <NavigationMenu>
-          <NavigationMenuList className="hidden md:flex space-x-4">
+          <NavigationMenuList className="hidden lg:flex space-x-4">
             {navItems.map((item) => (
               <NavigationMenuItem key={item.href}>
                 {item.subItems ? (
@@ -189,7 +189,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center space-x-4">
           <ThemeButton />
           {/* Mobile Menu Button */}
-          <button onClick={toggleMobileMenu} className="md:hidden text-white">
+          <button onClick={toggleMobileMenu} className="lg:hidden text-white">
             {isMobileMenuOpen ? (
               <IoMdClose className="w-6 h-6 text-neutral-950 dark:text-neutral-50" />
             ) : (
@@ -200,7 +200,7 @@ export const Navbar: React.FC = () => {
       </div>
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <ul className="flex flex-col space-y-4 p-8">
             {navItems.map((item) => (
               <li key={item.href}>
