@@ -8,11 +8,12 @@ import { Vigenere } from "@/pages/substitution/Vigenere.tsx";
 import { Vernam } from "@/pages/substitution/Vernam.tsx";
 import { RailFence } from "@/pages/transposition/RailFence.tsx";
 import { Columnar } from "@/pages/transposition/Columnar.tsx";
-import { SHA256 } from "@/pages/hash/SHA256.tsx";
-import { SHA1 } from "@/pages/hash/SHA1.tsx";
-import { SHA384 } from "@/pages/hash/SHA384.tsx";
-import { SHA512 } from "@/pages/hash/SHA512.tsx";
-import {AESCTR} from "@/pages/symmetric/AES.tsx";
+import { SHA256 } from "@/pages/hash/SHA-256.tsx";
+import { SHA1 } from "@/pages/hash/SHA-1.tsx";
+import { SHA384 } from "@/pages/hash/SHA-384.tsx";
+import { SHA512 } from "@/pages/hash/SHA-512.tsx";
+import {AESCTR} from "@/pages/symmetric/AES-CTR.tsx";
+import {AESCBC} from "@/pages/symmetric/AESCBC.tsx";
 
 function App() {
   return (
@@ -29,13 +30,12 @@ function App() {
         <Route path="/transposition/columnar" element={<Columnar />} />
 
         <Route path="/symmetric/aes-ctr" element={<AESCTR />} />
+        <Route path="/symmetric/aes-cbc" element={<AESCBC />} />
 
         <Route path="/hash/sha1" element={<SHA1 />} />
         <Route path="/hash/sha256" element={<SHA256 />} />
         <Route path="/hash/sha384" element={<SHA384 />} />
         <Route path="/hash/sha512" element={<SHA512 />} />
-
-        <Route path="/test" element={<AESCTR />} />
       </Routes>
     </div>
   );
