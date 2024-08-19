@@ -24,19 +24,19 @@ const navItems = [
       {
         title: "Caesar Cipher",
         href: "/substitution/caesar",
-        description: "A simple cipher that shifts letters by a fixed amount.",
+        description: "A simple substitution cipher that shifts letters by a fixed amount.",
         label: "Caesar Cipher",
       },
       {
         title: "Monoalphabetic Cipher",
         href: "/substitution/monoalphabetic",
-        description: "A cipher using a single substitution alphabet.",
+        description: "A monoalphabetic cipher using a single substitution alphabet.",
         label: "Monoalphabetic Cipher",
       },
       {
         title: "Playfair Cipher",
         href: "/substitution/playfair",
-        description: "A cipher that encrypts pairs of letters in a 5x5 grid.",
+        description: "A monoalphabetic cipher that encrypts pairs of letters in a 5x5 grid.",
         label: "Playfair Cipher",
       },
       {
@@ -66,7 +66,7 @@ const navItems = [
       {
         title: "Columnar Transposition",
         href: "/transposition/columnar",
-        description: "A cipher that arranges text into columns and reads them in a different order.",
+        description: "A transposition cipher that arranges text into columns and reads them in a different order.",
         label: "Columnar Transposition",
       },
     ],
@@ -78,19 +78,19 @@ const navItems = [
       {
         title: "AES-CTR",
         href: "/symmetric/aes-ctr",
-        description: "A symmetric encryption algorithm that encrypts data in blocks.",
-        label: "AES",
+        description: "A symmetric encryption algorithm that turns a block cipher into a stream cipher.",
+        label: "AES-CTR",
       },
       {
         title: "AES-CBC",
         href: "/symmetric/aes-cbc",
-        description: "A symmetric encryption algorithm that encrypts data in blocks.",
+        description: "A symmetric encryption algorithm that provides confidentiality by chaining blocks.",
         label: "AES-CBC",
       },
       {
         title: "AES-GCM",
         href: "/symmetric/aes-gcm",
-        description: "A symmetric encryption algorithm that encrypts data in blocks.",
+        description: "A symmetric encryption algorithm that provides both confidentiality and data integrity.",
         label: "AES-GCM",
       },
     ],
