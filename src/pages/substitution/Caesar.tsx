@@ -27,6 +27,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
@@ -64,17 +65,27 @@ export const Caesar: React.FC = () => {
   });
 
   const onEncode = (data: EncodeFormData) => {
-    const shift = parseInt(data.shift, 10);
-    const encoded = caesarCipherEncode(data.plainText, shift);
-    setEncodedText(encoded);
-    setIsDialogOpen(true);
+    try {
+      const shift = parseInt(data.shift, 10);
+      const encoded = caesarCipherEncode(data.plainText, shift);
+      setEncodedText(encoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error encoding text.");
+      throw error;
+    }
   };
 
   const onDecode = (data: DecodeFormData) => {
-    const shift = parseInt(data.shift, 10);
-    const decoded = caesarCipherDecode(data.encodedText, shift);
-    setDecodedText(decoded);
-    setIsDialogOpen(true);
+    try {
+      const shift = parseInt(data.shift, 10);
+      const decoded = caesarCipherDecode(data.encodedText, shift);
+      setDecodedText(decoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error decoding text.");
+      throw error;
+    }
   };
 
   const caesarCipherEncode = (text: string, shift: number) => {
@@ -281,12 +292,12 @@ export const Caesar: React.FC = () => {
             {activeTab === "encode" ? (
               <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText}/>
+                <Textarea readOnly rows={8} value={encodedText} />
               </>
             ) : (
               <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText}/>
+                <Textarea readOnly rows={8} value={decodedText} />
               </>
             )}
           </DialogDescription>

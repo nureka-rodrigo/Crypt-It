@@ -27,6 +27,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
@@ -85,25 +86,30 @@ export const AESCBC = () => {
   };
 
   const AESEncode = async (plainText: string, keyStr: string) => {
-    const key = await importKey(keyStr);
-    const iv = window.crypto.getRandomValues(new Uint8Array(16));
-    const encodedMessage = new TextEncoder().encode(plainText);
+    try {
+      const key = await importKey(keyStr);
+      const iv = window.crypto.getRandomValues(new Uint8Array(16));
+      const encodedMessage = new TextEncoder().encode(plainText);
 
-    const encryptedContent = await window.crypto.subtle.encrypt(
-      {
-        name: "AES-CBC",
-        iv,
-      },
-      key,
-      encodedMessage
-    );
+      const encryptedContent = await window.crypto.subtle.encrypt(
+        {
+          name: "AES-CBC",
+          iv,
+        },
+        key,
+        encodedMessage
+      );
 
-    return {
-      cipherText: btoa(
-        String.fromCharCode(...new Uint8Array(encryptedContent))
-      ),
-      iv: btoa(String.fromCharCode(...iv)),
-    };
+      return {
+        cipherText: btoa(
+          String.fromCharCode(...new Uint8Array(encryptedContent))
+        ),
+        iv: btoa(String.fromCharCode(...iv)),
+      };
+    } catch (error) {
+      toast.error("Encoding failed.");
+      throw error;
+    }
   };
 
   const AESDecode = async (
@@ -111,39 +117,57 @@ export const AESCBC = () => {
     keyStr: string,
     ivStr: string
   ) => {
-    const key = await importKey(keyStr);
-    const iv = Uint8Array.from(atob(ivStr), (c) => c.charCodeAt(0));
-    const encryptedContent = Uint8Array.from(atob(cipherText), (c) =>
-      c.charCodeAt(0)
-    );
+    try {
+      const key = await importKey(keyStr);
+      const iv = Uint8Array.from(atob(ivStr), (c) => c.charCodeAt(0));
+      const encryptedContent = Uint8Array.from(atob(cipherText), (c) =>
+        c.charCodeAt(0)
+      );
 
-    const decryptedContent = await window.crypto.subtle.decrypt(
-      {
-        name: "AES-CBC",
-        iv,
-      },
-      key,
-      encryptedContent
-    );
+      const decryptedContent = await window.crypto.subtle.decrypt(
+        {
+          name: "AES-CBC",
+          iv,
+        },
+        key,
+        encryptedContent
+      );
 
-    return new TextDecoder().decode(decryptedContent);
+      return new TextDecoder().decode(decryptedContent);
+    } catch (error) {
+      toast.error("Decoding failed.");
+      throw error;
+    }
   };
 
   const onEncode = async (data: EncodeFormData) => {
-    const { cipherText, iv } = await AESEncode(data.plainText, data.encodeKey);
-    setEncodedText(`${cipherText}::${iv}`);
-    setIsDialogOpen(true);
+    try {
+      const { cipherText, iv } = await AESEncode(
+        data.plainText,
+        data.encodeKey
+      );
+      setEncodedText(`${cipherText}::${iv}`);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Encoding failed.");
+      throw error;
+    }
   };
 
   const onDecode = async (data: DecodeFormData) => {
-    const [cipherText, iv] = data.encodedText.split("::");
-    if (!cipherText || !iv) {
-      alert("Invalid cipher text format.");
-      return;
+    try {
+      const [cipherText, iv] = data.encodedText.split("::");
+      if (!cipherText || !iv) {
+        alert("Invalid cipher text format.");
+        return;
+      }
+      const decoded = await AESDecode(cipherText, data.decodeKey, iv);
+      setDecodedText(decoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Decoding failed.");
+      throw error;
     }
-    const decoded = await AESDecode(cipherText, data.decodeKey, iv);
-    setDecodedText(decoded);
-    setIsDialogOpen(true);
   };
 
   useEffect(() => {

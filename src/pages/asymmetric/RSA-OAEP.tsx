@@ -26,6 +26,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
@@ -66,94 +67,119 @@ export const RSAOAEP = () => {
 
   useEffect(() => {
     const generateKeyPair = async () => {
-      const keyPair = await window.crypto.subtle.generateKey(
-        {
-          name: "RSA-OAEP",
-          modulusLength: 2048,
-          publicExponent: new Uint8Array([1, 0, 1]),
-          hash: "SHA-256",
-        },
-        true,
-        ["encrypt", "decrypt"]
-      );
-      setPublicKey(keyPair.publicKey);
+      try {
+        const keyPair = await window.crypto.subtle.generateKey(
+          {
+            name: "RSA-OAEP",
+            modulusLength: 2048,
+            publicExponent: new Uint8Array([1, 0, 1]),
+            hash: "SHA-256",
+          },
+          true,
+          ["encrypt", "decrypt"]
+        );
+        setPublicKey(keyPair.publicKey);
 
-      const publicKeyString = await window.crypto.subtle.exportKey(
-        "spki",
-        keyPair.publicKey
-      );
-      const privateKeyString = await window.crypto.subtle.exportKey(
-        "pkcs8",
-        keyPair.privateKey
-      );
+        const publicKeyString = await window.crypto.subtle.exportKey(
+          "spki",
+          keyPair.publicKey
+        );
+        const privateKeyString = await window.crypto.subtle.exportKey(
+          "pkcs8",
+          keyPair.privateKey
+        );
 
-      setPublicKeyString(
-        btoa(String.fromCharCode(...new Uint8Array(publicKeyString)))
-      );
-      setPrivateKeyString(
-        btoa(String.fromCharCode(...new Uint8Array(privateKeyString)))
-      );
+        setPublicKeyString(
+          btoa(String.fromCharCode(...new Uint8Array(publicKeyString)))
+        );
+        setPrivateKeyString(
+          btoa(String.fromCharCode(...new Uint8Array(privateKeyString)))
+        );
+      } catch (error) {
+        toast.error("Failed to generate key pair.");
+        throw error;
+      }
     };
 
     generateKeyPair().then((r) => r);
   }, []);
 
   const RSAEncrypt = async (plainText: string, publicKey: CryptoKey) => {
-    const encodedMessage = new TextEncoder().encode(plainText);
+    try {
+      const encodedMessage = new TextEncoder().encode(plainText);
 
-    const encryptedContent = await window.crypto.subtle.encrypt(
-      {
-        name: "RSA-OAEP",
-      },
-      publicKey,
-      encodedMessage
-    );
+      const encryptedContent = await window.crypto.subtle.encrypt(
+        {
+          name: "RSA-OAEP",
+        },
+        publicKey,
+        encodedMessage
+      );
 
-    return btoa(String.fromCharCode(...new Uint8Array(encryptedContent)));
+      return btoa(String.fromCharCode(...new Uint8Array(encryptedContent)));
+    } catch (error) {
+      toast.error("Encryption failed.");
+      throw error;
+    }
   };
 
   const RSADecrypt = async (cipherText: string, privateKeyString: string) => {
-    const privateKeyBuffer = Uint8Array.from(atob(privateKeyString), (c) =>
-      c.charCodeAt(0)
-    );
-    const privateKey = await window.crypto.subtle.importKey(
-      "pkcs8",
-      privateKeyBuffer,
-      {
-        name: "RSA-OAEP",
-        hash: "SHA-256",
-      },
-      true,
-      ["decrypt"]
-    );
+    try {
+      const privateKeyBuffer = Uint8Array.from(atob(privateKeyString), (c) =>
+        c.charCodeAt(0)
+      );
+      const privateKey = await window.crypto.subtle.importKey(
+        "pkcs8",
+        privateKeyBuffer,
+        {
+          name: "RSA-OAEP",
+          hash: "SHA-256",
+        },
+        true,
+        ["decrypt"]
+      );
 
-    const encryptedContent = Uint8Array.from(atob(cipherText), (c) =>
-      c.charCodeAt(0)
-    );
+      const encryptedContent = Uint8Array.from(atob(cipherText), (c) =>
+        c.charCodeAt(0)
+      );
 
-    const decryptedContent = await window.crypto.subtle.decrypt(
-      {
-        name: "RSA-OAEP",
-      },
-      privateKey,
-      encryptedContent.buffer
-    );
+      const decryptedContent = await window.crypto.subtle.decrypt(
+        {
+          name: "RSA-OAEP",
+        },
+        privateKey,
+        encryptedContent.buffer
+      );
 
-    return new TextDecoder().decode(decryptedContent);
+      return new TextDecoder().decode(decryptedContent);
+    } catch (error) {
+      toast.error("Decryption failed.");
+      throw error;
+    }
   };
 
   const onEncode = async (data: EncodeFormData) => {
-    if (publicKey) {
-      const cipherText = await RSAEncrypt(data.plainText, publicKey);
-      setEncodedText(cipherText);
-      setIsDialogOpen(true);
+    try {
+      if (publicKey) {
+        const cipherText = await RSAEncrypt(data.plainText, publicKey);
+        setEncodedText(cipherText);
+        setIsDialogOpen(true);
+      }
+    } catch (error) {
+      toast.error("Encoding failed.");
+      throw error;
     }
   };
 
   const onDecode = async (data: DecodeFormData) => {
-    const decoded = await RSADecrypt(data.encodedText, data.privateKey);
-    setDecodedText(decoded);
-    setIsDialogOpen(true);
+    try {
+      const decoded = await RSADecrypt(data.encodedText, data.privateKey);
+      setDecodedText(decoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Decoding failed.");
+      throw error;
+    }
   };
 
   useEffect(() => {

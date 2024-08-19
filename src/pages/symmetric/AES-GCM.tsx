@@ -27,6 +27,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
@@ -130,20 +131,33 @@ export const AESGCM = () => {
   };
 
   const onEncode = async (data: EncodeFormData) => {
-    const { cipherText, iv } = await AESEncode(data.plainText, data.encodeKey);
-    setEncodedText(`${cipherText}::${iv}`);
-    setIsDialogOpen(true);
+    try {
+      const { cipherText, iv } = await AESEncode(
+        data.plainText,
+        data.encodeKey
+      );
+      setEncodedText(`${cipherText}::${iv}`);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error encoding text.");
+      throw error;
+    }
   };
 
   const onDecode = async (data: DecodeFormData) => {
-    const [cipherText, iv] = data.encodedText.split("::");
-    if (!cipherText || !iv) {
-      alert("Invalid cipher text format.");
-      return;
+    try {
+      const [cipherText, iv] = data.encodedText.split("::");
+      if (!cipherText || !iv) {
+        toast.error("Invalid cipher text format.");
+        return;
+      }
+      const decoded = await AESDecode(cipherText, data.decodeKey, iv);
+      setDecodedText(decoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error decoding text.");
+      throw error;
     }
-    const decoded = await AESDecode(cipherText, data.decodeKey, iv);
-    setDecodedText(decoded);
-    setIsDialogOpen(true);
   };
 
   useEffect(() => {

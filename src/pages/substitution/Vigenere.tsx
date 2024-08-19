@@ -20,13 +20,14 @@ import {
 import { Textarea } from "@/components/ui/textarea.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
@@ -107,15 +108,25 @@ export const Vigenere = () => {
   });
 
   const onEncode = (data: EncodeFormData) => {
-    const encoded = vigenereEncode(data.plainText, data.encodeKey);
-    setEncodedText(encoded);
-    setIsDialogOpen(true);
+    try {
+      const encoded = vigenereEncode(data.plainText, data.encodeKey);
+      setEncodedText(encoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error encoding text.");
+      throw error;
+    }
   };
 
   const onDecode = (data: DecodeFormData) => {
-    const decoded = vigenereDecode(data.cipherText, data.decodeKey);
-    setDecodedText(decoded);
-    setIsDialogOpen(true);
+    try {
+      const decoded = vigenereDecode(data.cipherText, data.decodeKey);
+      setDecodedText(decoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error decoding text.");
+      throw error;
+    }
   };
 
   useEffect(() => {
@@ -320,12 +331,12 @@ export const Vigenere = () => {
             {activeTab === "encode" ? (
               <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText}/>
+                <Textarea readOnly rows={8} value={encodedText} />
               </>
             ) : (
               <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText}/>
+                <Textarea readOnly rows={8} value={decodedText} />
               </>
             )}
           </DialogDescription>

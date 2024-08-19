@@ -27,6 +27,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
@@ -157,19 +158,29 @@ export const Playfair = () => {
   });
 
   const onEncode = (data: EncodeFormData) => {
-    const matrix = prepareMatrix(data.encodeKey);
-    setPlayfairMatrix(matrix);
-    const encoded = playfairEncode(data.plainText, data.encodeKey);
-    setEncodedText(encoded);
-    setIsDialogOpen(true);
+    try {
+      const matrix = prepareMatrix(data.encodeKey);
+      setPlayfairMatrix(matrix);
+      const encoded = playfairEncode(data.plainText, data.encodeKey);
+      setEncodedText(encoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error encoding text.");
+      throw error;
+    }
   };
 
   const onDecode = (data: DecodeFormData) => {
-    const matrix = prepareMatrix(data.decodeKey);
-    setPlayfairMatrix(matrix);
-    const decoded = playfairDecode(data.cipherText, data.decodeKey);
-    setDecodedText(decoded);
-    setIsDialogOpen(true);
+    try {
+      const matrix = prepareMatrix(data.decodeKey);
+      setPlayfairMatrix(matrix);
+      const decoded = playfairDecode(data.cipherText, data.decodeKey);
+      setDecodedText(decoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error decoding text.");
+      throw error;
+    }
   };
 
   useEffect(() => {
@@ -397,12 +408,12 @@ export const Playfair = () => {
             {activeTab === "encode" ? (
               <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText}/>
+                <Textarea readOnly rows={8} value={encodedText} />
               </>
             ) : (
               <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText}/>
+                <Textarea readOnly rows={8} value={decodedText} />
               </>
             )}
           </DialogDescription>

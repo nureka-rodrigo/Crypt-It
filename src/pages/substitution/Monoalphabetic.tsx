@@ -27,6 +27,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
@@ -66,21 +67,31 @@ export const Monoalphabetic = () => {
   });
 
   const onEncode = (data: EncodeFormData) => {
-    const encoded = monoalphabeticEncode(
-      data.plainText.toUpperCase(),
-      data.encodeKey.toUpperCase()
-    );
-    setEncodedText(encoded);
-    setIsDialogOpen(true);
+    try {
+      const encoded = monoalphabeticEncode(
+        data.plainText.toUpperCase(),
+        data.encodeKey.toUpperCase()
+      );
+      setEncodedText(encoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error encoding text.");
+      throw error;
+    }
   };
 
   const onDecode = (data: DecodeFormData) => {
-    const decoded = monoalphabeticDecode(
-      data.encodedText.toUpperCase(),
-      data.decodeKey.toUpperCase()
-    );
-    setDecodedText(decoded);
-    setIsDialogOpen(true);
+    try {
+      const decoded = monoalphabeticDecode(
+        data.encodedText.toUpperCase(),
+        data.decodeKey.toUpperCase()
+      );
+      setDecodedText(decoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error decoding text.");
+      throw error;
+    }
   };
 
   const monoalphabeticEncode = (text: string, key: string) => {
@@ -307,12 +318,12 @@ export const Monoalphabetic = () => {
             {activeTab === "encode" ? (
               <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText}/>
+                <Textarea readOnly rows={8} value={encodedText} />
               </>
             ) : (
               <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText}/>
+                <Textarea readOnly rows={8} value={decodedText} />
               </>
             )}
           </DialogDescription>

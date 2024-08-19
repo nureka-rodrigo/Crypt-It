@@ -27,22 +27,27 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
-const encodeSchema = z.object({
-  plainText: z.string().min(1, "Plain text is required"),
-  key: z.string().min(1, "Key is required"),
-}).refine((data) => data.key.length >= data.plainText.length, {
-  message: "Key must be at least as long as the plain text",
-  path: ["key"],
-});
+const encodeSchema = z
+  .object({
+    plainText: z.string().min(1, "Plain text is required"),
+    key: z.string().min(1, "Key is required"),
+  })
+  .refine((data) => data.key.length >= data.plainText.length, {
+    message: "Key must be at least as long as the plain text",
+    path: ["key"],
+  });
 
-const decodeSchema = z.object({
-  cipherText: z.string().min(1, "Cipher text is required"),
-  key: z.string().min(1, "Key is required"),
-}).refine((data) => data.key.length >= data.cipherText.length, {
-  message: "Key must be at least as long as the cipher text",
-  path: ["key"],
-});
+const decodeSchema = z
+  .object({
+    cipherText: z.string().min(1, "Cipher text is required"),
+    key: z.string().min(1, "Key is required"),
+  })
+  .refine((data) => data.key.length >= data.cipherText.length, {
+    message: "Key must be at least as long as the cipher text",
+    path: ["key"],
+  });
 
 type EncodeFormData = z.infer<typeof encodeSchema>;
 type DecodeFormData = z.infer<typeof decodeSchema>;
@@ -113,15 +118,25 @@ export const Vernam = () => {
   });
 
   const onEncode = (data: EncodeFormData) => {
-    const encoded = vigenereEncode(data.plainText, data.key);
-    setEncodedText(encoded);
-    setIsDialogOpen(true);
+    try {
+      const encoded = vigenereEncode(data.plainText, data.key);
+      setEncodedText(encoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error encoding text.");
+      throw error;
+    }
   };
 
   const onDecode = (data: DecodeFormData) => {
-    const decoded = vigenereDecode(data.cipherText, data.key);
-    setDecodedText(decoded);
-    setIsDialogOpen(true);
+    try {
+      const decoded = vigenereDecode(data.cipherText, data.key);
+      setDecodedText(decoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error decoding text.");
+      throw error;
+    }
   };
 
   useEffect(() => {
@@ -302,12 +317,12 @@ export const Vernam = () => {
             {activeTab === "encode" ? (
               <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText}/>
+                <Textarea readOnly rows={8} value={encodedText} />
               </>
             ) : (
               <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText}/>
+                <Textarea readOnly rows={8} value={decodedText} />
               </>
             )}
           </DialogDescription>

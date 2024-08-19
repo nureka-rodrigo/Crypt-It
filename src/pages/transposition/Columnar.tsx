@@ -27,6 +27,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
 const encodeSchema = z.object({
   plainText: z.string().min(1, "Plain text is required"),
@@ -162,28 +163,38 @@ export const Columnar = () => {
   });
 
   const onEncode = (data: EncodeFormData) => {
-    const matrix = createEncodeMatrix(
-      formatText(data.plainText),
-      parseInt(data.encodeKey)
-    );
-    const encoded = encodeColumnar(
-      formatText(data.plainText),
-      parseInt(data.encodeKey)
-    );
-    setColumnarMatrix(matrix);
-    setEncodedText(encoded);
-    setIsDialogOpen(true);
+    try {
+      const matrix = createEncodeMatrix(
+        formatText(data.plainText),
+        parseInt(data.encodeKey)
+      );
+      const encoded = encodeColumnar(
+        formatText(data.plainText),
+        parseInt(data.encodeKey)
+      );
+      setColumnarMatrix(matrix);
+      setEncodedText(encoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error encoding text.");
+      throw error;
+    }
   };
 
   const onDecode = (data: DecodeFormData) => {
-    const matrix = createDecodeMatrix(
-      formatText(data.cipherText),
-      parseInt(data.decodeKey)
-    );
-    const decoded = decodeColumnar(data.cipherText, parseInt(data.decodeKey));
-    setColumnarMatrix(matrix);
-    setDecodedText(decoded);
-    setIsDialogOpen(true);
+    try {
+      const matrix = createDecodeMatrix(
+        formatText(data.cipherText),
+        parseInt(data.decodeKey)
+      );
+      const decoded = decodeColumnar(data.cipherText, parseInt(data.decodeKey));
+      setColumnarMatrix(matrix);
+      setDecodedText(decoded);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Error decoding text.");
+      throw error;
+    }
   };
 
   useEffect(() => {
@@ -395,12 +406,12 @@ export const Columnar = () => {
             {activeTab === "encode" ? (
               <>
                 <Label>Encoded Text</Label>
-                <Textarea readOnly rows={8} value={encodedText}/>
+                <Textarea readOnly rows={8} value={encodedText} />
               </>
             ) : (
               <>
                 <Label>Decoded Text</Label>
-                <Textarea readOnly rows={8} value={decodedText}/>
+                <Textarea readOnly rows={8} value={decodedText} />
               </>
             )}
           </DialogDescription>

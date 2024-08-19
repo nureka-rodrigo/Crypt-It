@@ -18,13 +18,19 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog.tsx";
+import { toast } from "sonner";
 
 const hashText = async (text: string): Promise<string> => {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(text);
-  const hashBuffer = await crypto.subtle.digest("SHA-384", data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  try {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(text);
+    const hashBuffer = await crypto.subtle.digest("SHA-384", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  } catch (error) {
+    toast.error("Hashing failed.");
+    throw error;
+  }
 };
 
 type HashFormData = {
@@ -42,9 +48,14 @@ export const SHA384 = () => {
   } = useForm<HashFormData>();
 
   const onHash = async (data: HashFormData) => {
-    const hashed = await hashText(data.inputText);
-    setHashedText(hashed);
-    setIsDialogOpen(true);
+    try {
+      const hashed = await hashText(data.inputText);
+      setHashedText(hashed);
+      setIsDialogOpen(true);
+    } catch (error) {
+      toast.error("Hashing failed.");
+      throw error;
+    }
   };
 
   return (
