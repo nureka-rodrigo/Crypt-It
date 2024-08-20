@@ -19,14 +19,11 @@ import { RSAOAEP } from "@/pages/asymmetric/RSA-OAEP.tsx";
 
 function App() {
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 pattern">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/substitution/caesar" element={<Caesar />} />
-        <Route
-          path="/substitution/monoalphabetic"
-          element={<Monoalphabetic />}
-        />
+        <Route path="/substitution/monoalphabetic" element={<Monoalphabetic />} />
         <Route path="/substitution/playfair" element={<Playfair />} />
         <Route path="/substitution/vigenere" element={<Vigenere />} />
         <Route path="/substitution/vernam" element={<Vernam />} />
