@@ -7,25 +7,25 @@ This project aims to provide a simple and intuitive interface for cryptographic 
 ## Features
 
 - **Substitution Ciphers:**: Substitution ciphers replace plaintext characters with other characters.
-  - Caesar Cipher: A simple substitution cipher that shifts letters by a fixed amount.
-  - Monoalphabetic Cipher: A monoalphabetic cipher using a single substitution alphabet.
-  - Playfair Cipher: A monoalphabetic cipher that encrypts pairs of letters in a 5x5 grid.
-  - Vigenère Cipher: A polyalphabetic cipher using a keyword to shift letters.
-  - Vernam Cipher (One-Time Pad): A polyalphabetic cipher that XORs plaintext with a random key.
+  - `Caesar Cipher`: A simple substitution cipher that shifts letters by a fixed amount.
+  - `Monoalphabetic Cipher`: A monoalphabetic cipher using a single substitution alphabet.
+  - `Playfair Cipher`: A monoalphabetic cipher that encrypts pairs of letters in a 5x5 grid.
+  - `Vigenère Cipher`: A polyalphabetic cipher using a keyword to shift letters.
+  - `Vernam Cipher (One-Time Pad)`: A polyalphabetic cipher that XORs plaintext with a random key.
 - **Transposition Ciphers:**: Transposition ciphers rearrange the order of plaintext characters.
-  - Rail Fence Cipher: A transposition cipher that writes text in a zigzag pattern.
-  - Columnar Transposition: A transposition cipher that arranges text into columns and reads them in a different order.
+  - `Rail Fence Cipher`: A transposition cipher that writes text in a zigzag pattern.
+  - `Columnar Cipher`: A transposition cipher that arranges text into columns and reads them in a different order.
 - **Symmetric Encryption:**: Symmetric encryption uses the same key for both encryption and decryption.
-  - AES-CTR: A symmetric encryption algorithm that turns a block cipher into a stream cipher.
-  - AES-CBC: A symmetric encryption algorithm that provides confidentiality by chaining blocks.
-  - AES-GCM: A symmetric encryption algorithm that provides authentication and integrity.
+  - `AES-CTR`: A symmetric encryption algorithm that turns a block cipher into a stream cipher.
+  - `AES-CBC`: A symmetric encryption algorithm that provides confidentiality by chaining blocks.
+  - `AES-GCM`: A symmetric encryption algorithm that provides authentication and integrity.
 - **Asymmetric Encryption:**: Asymmetric encryption uses a pair of public and private keys.
-  - RSA-OAEP: An asymmetric encryption algorithm that encrypts data using public and private keys.
+  - `RSA-OAEP`: An asymmetric encryption algorithm that encrypts data using public and private keys.
 - **Hash Functions:**: Hash functions map data of arbitrary size to fixed-size values.
-  - SHA1: A cryptographic hash function that produces a 160-bit hash value.
-  - SHA256: A cryptographic hash function that produces a 256-bit hash value. 
-  - SHA384: A cryptographic hash function that produces a 384-bit hash value. 
-  - SHA512: A cryptographic hash function that produces a 512-bit hash value.
+  - `SHA-1`: A cryptographic hash function that produces a 160-bit hash value.
+  - `SHA-256`: A cryptographic hash function that produces a 256-bit hash value. 
+  - `SHA-384`: A cryptographic hash function that produces a 384-bit hash value. 
+  - `SHA-512`: A cryptographic hash function that produces a 512-bit hash value.
 
 ## Technologies Used
 
