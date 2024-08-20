@@ -34,7 +34,26 @@ const encodeSchema = z.object({
   encodeKey: z
     .string()
     .regex(/^\d+$/, "Key must be an integer")
-    .min(1, "Key is required"),
+    .min(1, "Key is required")
+    .refine((key) => key.includes("1"), "Key must contain the digit 1")
+    .refine((key) => {
+      const digits = key.split("").map(Number);
+      const minDigit = Math.min(...digits);
+      const maxDigit = Math.max(...digits);
+      const digitSet = new Set(digits);
+
+      for (let i = minDigit; i <= maxDigit; i++) {
+        if (!digitSet.has(i)) {
+          return false;
+        }
+      }
+
+      return true;
+    }, "Key must contain all numbers between the minimum and maximum digits")
+    .refine((key) => {
+      const digitSet = new Set(key.split(""));
+      return digitSet.size === key.length;
+    }, "Key must have unique digits"),
 });
 
 const decodeSchema = z.object({
@@ -42,7 +61,26 @@ const decodeSchema = z.object({
   decodeKey: z
     .string()
     .regex(/^\d+$/, "Key must be an integer")
-    .min(1, "Key is required"),
+    .min(1, "Key is required")
+    .refine((key) => key.includes("1"), "Key must contain the digit 1")
+    .refine((key) => {
+      const digits = key.split("").map(Number);
+      const minDigit = Math.min(...digits);
+      const maxDigit = Math.max(...digits);
+      const digitSet = new Set(digits);
+
+      for (let i = minDigit; i <= maxDigit; i++) {
+        if (!digitSet.has(i)) {
+          return false;
+        }
+      }
+
+      return true;
+    }, "Key must contain all numbers between the minimum and maximum digits")
+    .refine((key) => {
+      const digitSet = new Set(key.split(""));
+      return digitSet.size === key.length;
+    }, "Key must have unique digits"),
 });
 
 type EncodeFormData = z.infer<typeof encodeSchema>;
@@ -218,7 +256,7 @@ export const Columnar = () => {
               {row.map((char, colIndex) => (
                 <div
                   key={colIndex}
-                  className="p-3 md:p-4 min-w-12 md:min-w-16 border border-neutral-300 dark:border-neutral-700 text-neutral-950 dark:text-neutral-50 flex items-center justify-center font-mono text-lg"
+                  className="p-3 md:p-4 min-h-12 min-w-12 md:min-h-16 md:min-w-16 border border-neutral-300 dark:border-neutral-700 text-neutral-950 dark:text-neutral-50 flex items-center justify-center font-mono text-lg"
                 >
                   {char}
                 </div>
