@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer.tsx";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Link } from "react-router-dom";
-import Logo from "/vite.svg";
+import Logo from "/lock.svg";
 
 const cardData = [
   {
@@ -57,8 +57,8 @@ export const Home: React.FC = () => {
               <div className="flex justify-center lg:justify-end col-span-4 lg:col-span-5">
                 <img
                   src={Logo}
-                  alt="Vite Logo"
-                  className="w-72 h-auto transform hover:scale-105 transition-transform duration-300"
+                  alt="Lock"
+                  className="w-full h-auto transform hover:scale-105 transition-transform duration-300"
                 />
               </div>
             </div>

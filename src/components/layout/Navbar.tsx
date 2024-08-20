@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ThemeButton } from "@/components/other/ThemeButton";
 import { HiOutlineMenuAlt3 } from "@react-icons/all-files/hi/HiOutlineMenuAlt3";
 import { IoMdClose } from "@react-icons/all-files/io/IoMdClose";
-import Logo from "/vite.svg";
+import Logo from "/logo.svg";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -150,7 +150,7 @@ export const Navbar: React.FC = () => {
     <nav className="py-4 max-w-7xl mx-auto">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-neutral-950 dark:text-neutral-50 text-lg font-bold">
-          <img src={Logo} alt="Logo" className="w-8 h-8" />
+          <img src={Logo} alt="Logo" className="w-8 h-auto dark:invert" />
         </div>
         <NavigationMenu>
           <NavigationMenuList className="hidden lg:flex space-x-4">
