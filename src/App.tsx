@@ -16,7 +16,7 @@ import { AESCTR } from "@/pages/symmetric/AES-CTR.tsx";
 import { AESCBC } from "@/pages/symmetric/AES-CBC.tsx";
 import { AESGCM } from "@/pages/symmetric/AES-GCM.tsx";
 import { RSAOAEP } from "@/pages/asymmetric/RSA-OAEP.tsx";
-import {NotFound} from "@/pages/error/NotFound.tsx";
+import { NotFound } from "@/pages/error/NotFound.tsx";
 
 function App() {
   return (
