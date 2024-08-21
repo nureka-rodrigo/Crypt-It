@@ -171,147 +171,152 @@ export const AESGCM = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-7xl py-8 space-y-8 mx-auto">
-        <div className="container mx-auto">
-          <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            AES-GCM Cipher
-          </h1>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Advanced Encryption Standard in Galois/Counter Mode (AES-GCM) is
-            a highly secure and efficient encryption method that combines the
-            AES block cipher with Galois field multiplication for message
-            authentication. AES-GCM is widely used in modern cryptographic
-            applications due to its strong security guarantees and performance.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            In AES-GCM, the encryption and authentication processes are combined
-            into a single operation, which ensures data confidentiality and
-            integrity. The mode generates a unique authentication tag for each
-            message, providing additional security against tampering.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            AES-GCM is highly efficient and can be parallelized, making it
-            suitable for high-performance applications such as secure
-            communications and data storage. The initialization vector (IV) used
-            in AES-GCM must be unique for each encryption operation to ensure
-            security.
-          </p>
+      <section className="min-h-screen flex flex-col justify-between">
+        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+          <div className="container mx-auto">
+            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+              AES-GCM Cipher
+            </h1>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              The Advanced Encryption Standard in Galois/Counter Mode (AES-GCM)
+              is a highly secure and efficient encryption method that combines
+              the AES block cipher with Galois field multiplication for message
+              authentication. AES-GCM is widely used in modern cryptographic
+              applications due to its strong security guarantees and
+              performance.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              In AES-GCM, the encryption and authentication processes are
+              combined into a single operation, which ensures data
+              confidentiality and integrity. The mode generates a unique
+              authentication tag for each message, providing additional security
+              against tampering.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              AES-GCM is highly efficient and can be parallelized, making it
+              suitable for high-performance applications such as secure
+              communications and data storage. The initialization vector (IV)
+              used in AES-GCM must be unique for each encryption operation to
+              ensure security.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center px-8 max-w-7xl">
+            <Tabs
+              defaultValue="encode"
+              className="w-full"
+              onValueChange={setActiveTab}
+            >
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="encode">Encode</TabsTrigger>
+                <TabsTrigger value="decode">Decode</TabsTrigger>
+              </TabsList>
+
+              {/* Encode Tab Content */}
+              <TabsContent value="encode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Encode Text</CardTitle>
+                    <CardDescription>
+                      Enter the plain text and the key to encode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitEncode(onEncode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="plainText">Plain Text</Label>
+                        <Textarea
+                          id="plainText"
+                          rows={6}
+                          placeholder="Enter text to encode..."
+                          defaultValue="ATTACK AT DAWN"
+                          {...registerEncode("plainText")}
+                        />
+                        {encodeErrors.plainText && (
+                          <p className="text-red-500">
+                            {encodeErrors.plainText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="encodeKey">Key</Label>
+                        <Input
+                          id="encodeKey"
+                          type="text"
+                          placeholder="Enter 32-character key..."
+                          defaultValue="LEMONLEMONLEMONL"
+                          {...registerEncode("encodeKey")}
+                        />
+                        {encodeErrors.encodeKey && (
+                          <p className="text-red-500">
+                            {encodeErrors.encodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Encode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Decode Tab Content */}
+              <TabsContent value="decode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Decode Text</CardTitle>
+                    <CardDescription>
+                      Enter the cipher text and the key to decode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitDecode(onDecode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="encodedText">Cipher Text</Label>
+                        <Textarea
+                          id="encodedText"
+                          rows={6}
+                          placeholder="Enter text to decode..."
+                          defaultValue="fPLz0EjgWb2UxhBh1haZUp5+inGPgyaScUIdk+9u::eTqPEWXv+uiYK7Tt"
+                          {...registerDecode("encodedText")}
+                        />
+                        {decodeErrors.encodedText && (
+                          <p className="text-red-500">
+                            {decodeErrors.encodedText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="decodeKey">Key</Label>
+                        <Input
+                          id="decodeKey"
+                          type="text"
+                          placeholder="Enter 32-character key..."
+                          defaultValue="LEMONLEMONLEMONL"
+                          {...registerDecode("decodeKey")}
+                        />
+                        {decodeErrors.decodeKey && (
+                          <p className="text-red-500">
+                            {decodeErrors.decodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Decode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
 
-        <div className="flex items-center justify-center px-8 max-w-7xl">
-          <Tabs
-            defaultValue="encode"
-            className="w-full"
-            onValueChange={setActiveTab}
-          >
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="encode">Encode</TabsTrigger>
-              <TabsTrigger value="decode">Decode</TabsTrigger>
-            </TabsList>
-
-            {/* Encode Tab Content */}
-            <TabsContent value="encode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Encode Text</CardTitle>
-                  <CardDescription>
-                    Enter the plain text and the key to encode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitEncode(onEncode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="plainText">Plain Text</Label>
-                      <Textarea
-                        id="plainText"
-                        rows={6}
-                        placeholder="Enter text to encode..."
-                        defaultValue="ATTACK AT DAWN"
-                        {...registerEncode("plainText")}
-                      />
-                      {encodeErrors.plainText && (
-                        <p className="text-red-500">
-                          {encodeErrors.plainText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="encodeKey">Key</Label>
-                      <Input
-                        id="encodeKey"
-                        type="text"
-                        placeholder="Enter 32-character key..."
-                        defaultValue="LEMONLEMONLEMONL"
-                        {...registerEncode("encodeKey")}
-                      />
-                      {encodeErrors.encodeKey && (
-                        <p className="text-red-500">
-                          {encodeErrors.encodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Encode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Decode Tab Content */}
-            <TabsContent value="decode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Decode Text</CardTitle>
-                  <CardDescription>
-                    Enter the cipher text and the key to decode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitDecode(onDecode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="encodedText">Cipher Text</Label>
-                      <Textarea
-                        id="encodedText"
-                        rows={6}
-                        placeholder="Enter text to decode..."
-                        defaultValue="fPLz0EjgWb2UxhBh1haZUp5+inGPgyaScUIdk+9u::eTqPEWXv+uiYK7Tt"
-                        {...registerDecode("encodedText")}
-                      />
-                      {decodeErrors.encodedText && (
-                        <p className="text-red-500">
-                          {decodeErrors.encodedText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="decodeKey">Key</Label>
-                      <Input
-                        id="decodeKey"
-                        type="text"
-                        placeholder="Enter 32-character key..."
-                        defaultValue="LEMONLEMONLEMONL"
-                        {...registerDecode("decodeKey")}
-                      />
-                      {decodeErrors.decodeKey && (
-                        <p className="text-red-500">
-                          {decodeErrors.decodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Decode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
+        <Footer />
       </section>
-      <Footer />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>

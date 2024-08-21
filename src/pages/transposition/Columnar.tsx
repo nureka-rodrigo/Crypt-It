@@ -271,170 +271,173 @@ export const Columnar = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-7xl py-8 space-y-8 mx-auto">
-        <div className="container mx-auto">
-          <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            Columnar Cipher
-          </h1>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Columnar Cipher is a classical transposition cipher that
-            transforms plaintext into ciphertext by rearranging the characters
-            based on a keyword or numerical key. Unlike substitution ciphers
-            that replace characters, transposition ciphers like the Columnar
-            Cipher work by permuting the order of characters. The security of
-            this cipher lies in the key used to determine the order of the
-            columns during encryption and decryption processes.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To encode a message using the Columnar Cipher, you first organize
-            the plaintext into a grid or matrix with a number of columns equal
-            to the length of the key. Each column of this matrix is filled with
-            characters of the plaintext in a left-to-right fashion. Once the
-            matrix is complete, the key determines the order in which the
-            columns are read to produce the ciphertext. For instance, if the key
-            is a series of numbers like '3 1 4 2', the columns are read in the
-            sequence of the numbers provided, i.e., third column first, then
-            first column, and so on.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Decoding the message involves reversing this process. You first
-            reconstruct the matrix using the same key, ensuring that the columns
-            are ordered according to the key. After filling the matrix with the
-            ciphertext in the specified column order, you then read the text row
-            by row to reveal the original plaintext. This reverse procedure
-            restores the original message by adhering to the columnar order
-            dictated by the key.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Columnar Cipher's strength lies in its ability to obscure the
-            plaintext through columnar transposition, making it harder to
-            decipher without knowledge of the key. However, it is essential to
-            note that while it adds complexity, the cipher can be vulnerable to
-            various cryptographic attacks if used without proper precautions.
-            Modern encryption methods have largely replaced classical ciphers
-            like the Columnar Cipher in favor of more secure and complex
-            algorithms.
-          </p>
+      <section className="min-h-screen flex flex-col justify-between">
+        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+          <div className="container mx-auto">
+            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+              Columnar Cipher
+            </h1>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              The Columnar Cipher is a classical transposition cipher that
+              transforms plaintext into ciphertext by rearranging the characters
+              based on a keyword or numerical key. Unlike substitution ciphers
+              that replace characters, transposition ciphers like the Columnar
+              Cipher work by permuting the order of characters. The security of
+              this cipher lies in the key used to determine the order of the
+              columns during encryption and decryption processes.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              To encode a message using the Columnar Cipher, you first organize
+              the plaintext into a grid or matrix with a number of columns equal
+              to the length of the key. Each column of this matrix is filled
+              with characters of the plaintext in a left-to-right fashion. Once
+              the matrix is complete, the key determines the order in which the
+              columns are read to produce the ciphertext. For instance, if the
+              key is a series of numbers like '3 1 4 2', the columns are read in
+              the sequence of the numbers provided, i.e., third column first,
+              then first column, and so on.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              Decoding the message involves reversing this process. You first
+              reconstruct the matrix using the same key, ensuring that the
+              columns are ordered according to the key. After filling the matrix
+              with the ciphertext in the specified column order, you then read
+              the text row by row to reveal the original plaintext. This reverse
+              procedure restores the original message by adhering to the
+              columnar order dictated by the key.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              The Columnar Cipher's strength lies in its ability to obscure the
+              plaintext through columnar transposition, making it harder to
+              decipher without knowledge of the key. However, it is essential to
+              note that while it adds complexity, the cipher can be vulnerable
+              to various cryptographic attacks if used without proper
+              precautions. Modern encryption methods have largely replaced
+              classical ciphers like the Columnar Cipher in favor of more secure
+              and complex algorithms.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center px-8 max-w-7xl">
+            <Tabs
+              defaultValue="encode"
+              className="w-full"
+              onValueChange={setActiveTab}
+            >
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="encode">Encode</TabsTrigger>
+                <TabsTrigger value="decode">Decode</TabsTrigger>
+              </TabsList>
+
+              {/* Encode Tab Content */}
+              <TabsContent value="encode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Encode Text</CardTitle>
+                    <CardDescription>
+                      Enter the plain text and the key to encode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitEncode(onEncode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="plainText">Plain Text</Label>
+                        <Textarea
+                          id="plainText"
+                          placeholder="Enter text to encode..."
+                          className="uppercase"
+                          defaultValue={"ATTACK AT DAWN"}
+                          rows={6}
+                          {...registerEncode("plainText")}
+                        />
+                        {encodeErrors.plainText && (
+                          <p className="text-red-500">
+                            {encodeErrors.plainText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="encodeKey">Key</Label>
+                        <Input
+                          id="encodeKey"
+                          type="text"
+                          placeholder="Enter integer key..."
+                          className="uppercase"
+                          defaultValue={"25431"}
+                          {...registerEncode("encodeKey")}
+                        />
+                        {encodeErrors.encodeKey && (
+                          <p className="text-red-500">
+                            {encodeErrors.encodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Encode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Decode Tab Content */}
+              <TabsContent value="decode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Decode Text</CardTitle>
+                    <CardDescription>
+                      Enter the cipher text and the key to decode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitDecode(onDecode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="cipherText">Cipher Text</Label>
+                        <Textarea
+                          id="cipherText"
+                          placeholder="Enter text to decode..."
+                          className="uppercase"
+                          defaultValue={"C  AKDATNTAWT A"}
+                          rows={6}
+                          {...registerDecode("cipherText")}
+                        />
+                        {decodeErrors.cipherText && (
+                          <p className="text-red-500">
+                            {decodeErrors.cipherText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="decodeKey">Key</Label>
+                        <Input
+                          id="decodeKey"
+                          type="text"
+                          placeholder="Enter integer key..."
+                          className="uppercase"
+                          defaultValue={"25431"}
+                          {...registerDecode("decodeKey")}
+                        />
+                        {decodeErrors.decodeKey && (
+                          <p className="text-red-500">
+                            {decodeErrors.decodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Decode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
 
-        <div className="flex items-center justify-center px-8 max-w-7xl">
-          <Tabs
-            defaultValue="encode"
-            className="w-full"
-            onValueChange={setActiveTab}
-          >
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="encode">Encode</TabsTrigger>
-              <TabsTrigger value="decode">Decode</TabsTrigger>
-            </TabsList>
-
-            {/* Encode Tab Content */}
-            <TabsContent value="encode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Encode Text</CardTitle>
-                  <CardDescription>
-                    Enter the plain text and the key to encode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitEncode(onEncode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="plainText">Plain Text</Label>
-                      <Textarea
-                        id="plainText"
-                        placeholder="Enter text to encode..."
-                        className="uppercase"
-                        defaultValue={"ATTACK AT DAWN"}
-                        rows={6}
-                        {...registerEncode("plainText")}
-                      />
-                      {encodeErrors.plainText && (
-                        <p className="text-red-500">
-                          {encodeErrors.plainText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="encodeKey">Key</Label>
-                      <Input
-                        id="encodeKey"
-                        type="text"
-                        placeholder="Enter integer key..."
-                        className="uppercase"
-                        defaultValue={"25431"}
-                        {...registerEncode("encodeKey")}
-                      />
-                      {encodeErrors.encodeKey && (
-                        <p className="text-red-500">
-                          {encodeErrors.encodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Encode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Decode Tab Content */}
-            <TabsContent value="decode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Decode Text</CardTitle>
-                  <CardDescription>
-                    Enter the cipher text and the key to decode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitDecode(onDecode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="cipherText">Cipher Text</Label>
-                      <Textarea
-                        id="cipherText"
-                        placeholder="Enter text to decode..."
-                        className="uppercase"
-                        defaultValue={"C  AKDATNTAWT A"}
-                        rows={6}
-                        {...registerDecode("cipherText")}
-                      />
-                      {decodeErrors.cipherText && (
-                        <p className="text-red-500">
-                          {decodeErrors.cipherText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="decodeKey">Key</Label>
-                      <Input
-                        id="decodeKey"
-                        type="text"
-                        placeholder="Enter integer key..."
-                        className="uppercase"
-                        defaultValue={"25431"}
-                        {...registerDecode("decodeKey")}
-                      />
-                      {decodeErrors.decodeKey && (
-                        <p className="text-red-500">
-                          {decodeErrors.decodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Decode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
+        <Footer />
       </section>
-      <Footer />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>

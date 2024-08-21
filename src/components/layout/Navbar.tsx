@@ -151,7 +151,7 @@ export const Navbar: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/">
           <div className="text-neutral-950 dark:text-neutral-50 text-lg font-bold">
-            <img src={Logo} alt="Logo" className="w-8 h-auto dark:invert"/>
+            <img src={Logo} alt="Logo" className="w-8 h-auto dark:invert" />
           </div>
         </Link>
         <NavigationMenu>
@@ -177,9 +177,7 @@ export const Navbar: React.FC = () => {
                   </>
                 ) : (
                   <Link to={item.href}>
-                    <div
-                      className={navigationMenuTriggerStyle()}
-                    >
+                    <div className={navigationMenuTriggerStyle()}>
                       {item.label}
                     </div>
                   </Link>

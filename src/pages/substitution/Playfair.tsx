@@ -215,190 +215,193 @@ export const Playfair = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-7xl py-8 space-y-8 mx-auto">
-        <div className="container mx-auto">
-          <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            Playfair Cipher
-          </h1>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Playfair Cipher is a digraph substitution cipher, which means
-            that it encrypts pairs of letters (bigrams) rather than individual
-            letters. Developed by Charles Wheatstone in 1854 and named after
-            Lord Playfair, the cipher is designed to improve upon simple
-            substitution ciphers by reducing the frequency of letter repetition,
-            which makes it more resistant to frequency analysis.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To use the Playfair Cipher, you first need to prepare a 5x5 matrix
-            of letters based on a keyword. This matrix excludes duplicate
-            letters and often combines 'I' and 'J' into a single letter to fit
-            the 25-letter constraint.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Once the matrix is prepared, the encryption process begins by
-            splitting the plaintext into digraphs (pairs of letters). If there
-            are duplicate letters within a pair, they are separated by adding an
-            extra letter (commonly 'X'). If the plaintext length is odd, it is
-            padded with an extra letter. For example, "HELLO WORLD" becomes "HE
-            LX LO WO RL DX" for encoding.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Each pair of letters is then encrypted according to the following
-            rules:
-          </p>
-          <ul className="list-disc pl-6 mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            <li>
-              <strong>Same Row:</strong> If both letters are in the same row,
-              each letter is replaced by the letter immediately to its right. If
-              a letter is the last one in the row, it wraps around to the
-              beginning of the row.
-            </li>
-            <li>
-              <strong>Same Column:</strong> If both letters are in the same
-              column, each letter is replaced by the letter immediately below
-              it. If a letter is at the bottom of the column, it wraps around to
-              the top.
-            </li>
-            <li>
-              <strong>Rectangle:</strong> If the letters form a rectangle, each
-              letter is replaced by the letter in its own row but in the column
-              of the other letter of the pair.
-            </li>
-          </ul>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Decryption with the Playfair Cipher is a straightforward reversal of
-            the encryption process. The digraphs are decrypted using the same
-            rules but in reverse.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            While the Playfair Cipher improves upon simple substitution ciphers
-            by encrypting pairs of letters and reducing the frequency of letter
-            repetition, it is still vulnerable to more advanced cryptanalytic
-            techniques. Modern cryptographic methods have largely replaced the
-            Playfair Cipher with more secure algorithms, but it remains an
-            important historical cipher and a valuable educational tool for
-            understanding the evolution of encryption methods.
-          </p>
+      <section className="min-h-screen flex flex-col justify-between">
+        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+          <div className="container mx-auto">
+            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+              Playfair Cipher
+            </h1>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              The Playfair Cipher is a digraph substitution cipher, which means
+              that it encrypts pairs of letters (bigrams) rather than individual
+              letters. Developed by Charles Wheatstone in 1854 and named after
+              Lord Playfair, the cipher is designed to improve upon simple
+              substitution ciphers by reducing the frequency of letter
+              repetition, which makes it more resistant to frequency analysis.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              To use the Playfair Cipher, you first need to prepare a 5x5 matrix
+              of letters based on a keyword. This matrix excludes duplicate
+              letters and often combines 'I' and 'J' into a single letter to fit
+              the 25-letter constraint.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              Once the matrix is prepared, the encryption process begins by
+              splitting the plaintext into digraphs (pairs of letters). If there
+              are duplicate letters within a pair, they are separated by adding
+              an extra letter (commonly 'X'). If the plaintext length is odd, it
+              is padded with an extra letter. For example, "HELLO WORLD" becomes
+              "HE LX LO WO RL DX" for encoding.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              Each pair of letters is then encrypted according to the following
+              rules:
+            </p>
+            <ul className="list-disc pl-6 mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              <li>
+                <strong>Same Row:</strong> If both letters are in the same row,
+                each letter is replaced by the letter immediately to its right.
+                If a letter is the last one in the row, it wraps around to the
+                beginning of the row.
+              </li>
+              <li>
+                <strong>Same Column:</strong> If both letters are in the same
+                column, each letter is replaced by the letter immediately below
+                it. If a letter is at the bottom of the column, it wraps around
+                to the top.
+              </li>
+              <li>
+                <strong>Rectangle:</strong> If the letters form a rectangle,
+                each letter is replaced by the letter in its own row but in the
+                column of the other letter of the pair.
+              </li>
+            </ul>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              Decryption with the Playfair Cipher is a straightforward reversal
+              of the encryption process. The digraphs are decrypted using the
+              same rules but in reverse.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              While the Playfair Cipher improves upon simple substitution
+              ciphers by encrypting pairs of letters and reducing the frequency
+              of letter repetition, it is still vulnerable to more advanced
+              cryptanalytic techniques. Modern cryptographic methods have
+              largely replaced the Playfair Cipher with more secure algorithms,
+              but it remains an important historical cipher and a valuable
+              educational tool for understanding the evolution of encryption
+              methods.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center px-8 max-w-7xl">
+            <Tabs
+              defaultValue="encode"
+              className="w-full"
+              onValueChange={setActiveTab}
+            >
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="encode">Encode</TabsTrigger>
+                <TabsTrigger value="decode">Decode</TabsTrigger>
+              </TabsList>
+
+              {/* Encode Tab Content */}
+              <TabsContent value="encode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Encode Text</CardTitle>
+                    <CardDescription>
+                      Enter the plain text and the key to encode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitEncode(onEncode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="plainText">Plain Text</Label>
+                        <Textarea
+                          id="plainText"
+                          placeholder="Enter text to encode..."
+                          className="uppercase"
+                          defaultValue={"ATTACK AT DAWN"}
+                          rows={6}
+                          {...registerEncode("plainText")}
+                        />
+                        {encodeErrors.plainText && (
+                          <p className="text-red-500">
+                            {encodeErrors.plainText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="encodeKey">Key</Label>
+                        <Input
+                          id="encodeKey"
+                          type="text"
+                          placeholder="Enter key..."
+                          className="uppercase"
+                          defaultValue={"LEMON"}
+                          {...registerEncode("encodeKey")}
+                        />
+                        {encodeErrors.encodeKey && (
+                          <p className="text-red-500">
+                            {encodeErrors.encodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Encode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Decode Tab Content */}
+              <TabsContent value="decode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Decode Text</CardTitle>
+                    <CardDescription>
+                      Enter the cipher text and the key to decode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitDecode(onDecode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="cipherText">Cipher Text</Label>
+                        <Textarea
+                          id="cipherText"
+                          placeholder="Enter text to decode..."
+                          className="uppercase"
+                          defaultValue={"DQQDDIDQFBZE"}
+                          rows={6}
+                          {...registerDecode("cipherText")}
+                        />
+                        {decodeErrors.cipherText && (
+                          <p className="text-red-500">
+                            {decodeErrors.cipherText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="decodeKey">Key</Label>
+                        <Input
+                          id="decodeKey"
+                          type="text"
+                          placeholder="Enter key..."
+                          className="uppercase"
+                          defaultValue={"LEMON"}
+                          {...registerDecode("decodeKey")}
+                        />
+                        {decodeErrors.decodeKey && (
+                          <p className="text-red-500">
+                            {decodeErrors.decodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Decode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
-
-        <div className="flex items-center justify-center px-8 max-w-7xl">
-          <Tabs
-            defaultValue="encode"
-            className="w-full"
-            onValueChange={setActiveTab}
-          >
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="encode">Encode</TabsTrigger>
-              <TabsTrigger value="decode">Decode</TabsTrigger>
-            </TabsList>
-
-            {/* Encode Tab Content */}
-            <TabsContent value="encode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Encode Text</CardTitle>
-                  <CardDescription>
-                    Enter the plain text and the key to encode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitEncode(onEncode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="plainText">Plain Text</Label>
-                      <Textarea
-                        id="plainText"
-                        placeholder="Enter text to encode..."
-                        className="uppercase"
-                        defaultValue={"ATTACK AT DAWN"}
-                        rows={6}
-                        {...registerEncode("plainText")}
-                      />
-                      {encodeErrors.plainText && (
-                        <p className="text-red-500">
-                          {encodeErrors.plainText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="encodeKey">Key</Label>
-                      <Input
-                        id="encodeKey"
-                        type="text"
-                        placeholder="Enter key..."
-                        className="uppercase"
-                        defaultValue={"LEMON"}
-                        {...registerEncode("encodeKey")}
-                      />
-                      {encodeErrors.encodeKey && (
-                        <p className="text-red-500">
-                          {encodeErrors.encodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Encode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Decode Tab Content */}
-            <TabsContent value="decode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Decode Text</CardTitle>
-                  <CardDescription>
-                    Enter the cipher text and the key to decode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitDecode(onDecode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="cipherText">Cipher Text</Label>
-                      <Textarea
-                        id="cipherText"
-                        placeholder="Enter text to decode..."
-                        className="uppercase"
-                        defaultValue={"DQQDDIDQFBZE"}
-                        rows={6}
-                        {...registerDecode("cipherText")}
-                      />
-                      {decodeErrors.cipherText && (
-                        <p className="text-red-500">
-                          {decodeErrors.cipherText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="decodeKey">Key</Label>
-                      <Input
-                        id="decodeKey"
-                        type="text"
-                        placeholder="Enter key..."
-                        className="uppercase"
-                        defaultValue={"LEMON"}
-                        {...registerDecode("decodeKey")}
-                      />
-                      {decodeErrors.decodeKey && (
-                        <p className="text-red-500">
-                          {decodeErrors.decodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Decode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
+        <Footer />
       </section>
-      <Footer />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>

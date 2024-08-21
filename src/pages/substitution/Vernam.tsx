@@ -150,165 +150,169 @@ export const Vernam = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-7xl py-8 space-y-8 mx-auto">
-        <div className="container mx-auto">
-          <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            Vernam Cipher (One-Time Pad)
-          </h1>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Vernam Cipher, also known as the one-time pad, is a form of
-            symmetric-key encryption that is renowned for its theoretical
-            security. This cipher operates by combining each character of the
-            plaintext with a corresponding character from a key of the same
-            length using the XOR (exclusive OR) operation. This process
-            transforms the plaintext into ciphertext, which appears as random
-            data to anyone who intercepts it. For the Vernam Cipher to achieve
-            perfect secrecy, the key must be as long as the plaintext and must
-            be truly random, ensuring that each key is used only once.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Encoding with the Vernam Cipher involves the XOR operation between
-            each character of the plaintext and the key. The result of this XOR
-            operation is a ciphertext character. Since XOR is a reversible
-            operation, the same procedure is used to decode the ciphertext back
-            into the plaintext. This means that the decryption process is
-            identical to encryption: XORing the ciphertext with the same key
-            yields the original plaintext. This property makes the Vernam Cipher
-            an example of a cipher where encryption and decryption are
-            essentially the same process.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The primary challenge with the Vernam Cipher is the generation and
-            distribution of the key. Since the key must be as long as the
-            message and completely random, managing and securely distributing
-            such keys can be impractical for many real-world applications.
-            However, when used correctly, the Vernam Cipher provides an
-            unbreakable encryption method, as long as the key is kept secret and
-            used only once. This cipher’s security is mathematically proven,
-            making it a cornerstone in the study of cryptographic systems.
-          </p>
+      <section className="min-h-screen flex flex-col justify-between">
+        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+          <div className="container mx-auto">
+            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+              Vernam Cipher (One-Time Pad)
+            </h1>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              The Vernam Cipher, also known as the one-time pad, is a form of
+              symmetric-key encryption that is renowned for its theoretical
+              security. This cipher operates by combining each character of the
+              plaintext with a corresponding character from a key of the same
+              length using the XOR (exclusive OR) operation. This process
+              transforms the plaintext into ciphertext, which appears as random
+              data to anyone who intercepts it. For the Vernam Cipher to achieve
+              perfect secrecy, the key must be as long as the plaintext and must
+              be truly random, ensuring that each key is used only once.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              Encoding with the Vernam Cipher involves the XOR operation between
+              each character of the plaintext and the key. The result of this
+              XOR operation is a ciphertext character. Since XOR is a reversible
+              operation, the same procedure is used to decode the ciphertext
+              back into the plaintext. This means that the decryption process is
+              identical to encryption: XORing the ciphertext with the same key
+              yields the original plaintext. This property makes the Vernam
+              Cipher an example of a cipher where encryption and decryption are
+              essentially the same process.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              The primary challenge with the Vernam Cipher is the generation and
+              distribution of the key. Since the key must be as long as the
+              message and completely random, managing and securely distributing
+              such keys can be impractical for many real-world applications.
+              However, when used correctly, the Vernam Cipher provides an
+              unbreakable encryption method, as long as the key is kept secret
+              and used only once. This cipher’s security is mathematically
+              proven, making it a cornerstone in the study of cryptographic
+              systems.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center px-8 max-w-7xl">
+            <Tabs
+              defaultValue="encode"
+              className="w-full"
+              onValueChange={setActiveTab}
+            >
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="encode">Encode</TabsTrigger>
+                <TabsTrigger value="decode">Decode</TabsTrigger>
+              </TabsList>
+
+              {/* Encode Tab Content */}
+              <TabsContent value="encode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Encode Text</CardTitle>
+                    <CardDescription>
+                      Enter the plain text and the key to encode it. The key
+                      must be the same length as the plain text.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitEncode(onEncode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="plainText">Plain Text</Label>
+                        <Textarea
+                          id="plainText"
+                          placeholder="Enter text to encode..."
+                          className="uppercase"
+                          defaultValue={"ATTACKATDAWN"}
+                          rows={6}
+                          {...registerEncode("plainText")}
+                        />
+                        {encodeErrors.plainText && (
+                          <p className="text-red-500">
+                            {encodeErrors.plainText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="key">Key</Label>
+                        <Input
+                          id="key"
+                          type="text"
+                          placeholder="Enter key..."
+                          className="uppercase"
+                          defaultValue={"LEMONLEMONLE"}
+                          {...registerEncode("key")}
+                        />
+                        {encodeErrors.key && (
+                          <p className="text-red-500">
+                            {encodeErrors.key.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Encode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Decode Tab Content */}
+              <TabsContent value="decode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Decode Text</CardTitle>
+                    <CardDescription>
+                      Enter the cipher text and the key to decode it. The key
+                      must be the same length as the cipher text.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitDecode(onDecode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="cipherText">Cipher Text</Label>
+                        <Textarea
+                          id="cipherText"
+                          placeholder="Enter text to decode..."
+                          className="uppercase"
+                          defaultValue={"LXFOPVEFRNHR"}
+                          rows={6}
+                          {...registerDecode("cipherText")}
+                        />
+                        {decodeErrors.cipherText && (
+                          <p className="text-red-500">
+                            {decodeErrors.cipherText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="key">Key</Label>
+                        <Input
+                          id="key"
+                          type="text"
+                          placeholder="Enter key..."
+                          className="uppercase"
+                          defaultValue={"LEMONLEMONLE"}
+                          {...registerDecode("key")}
+                        />
+                        {decodeErrors.key && (
+                          <p className="text-red-500">
+                            {decodeErrors.key.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Decode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
 
-        <div className="flex items-center justify-center px-8 max-w-7xl">
-          <Tabs
-            defaultValue="encode"
-            className="w-full"
-            onValueChange={setActiveTab}
-          >
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="encode">Encode</TabsTrigger>
-              <TabsTrigger value="decode">Decode</TabsTrigger>
-            </TabsList>
-
-            {/* Encode Tab Content */}
-            <TabsContent value="encode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Encode Text</CardTitle>
-                  <CardDescription>
-                    Enter the plain text and the key to encode it. The key must
-                    be the same length as the plain text.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitEncode(onEncode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="plainText">Plain Text</Label>
-                      <Textarea
-                        id="plainText"
-                        placeholder="Enter text to encode..."
-                        className="uppercase"
-                        defaultValue={"ATTACKATDAWN"}
-                        rows={6}
-                        {...registerEncode("plainText")}
-                      />
-                      {encodeErrors.plainText && (
-                        <p className="text-red-500">
-                          {encodeErrors.plainText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="key">Key</Label>
-                      <Input
-                        id="key"
-                        type="text"
-                        placeholder="Enter key..."
-                        className="uppercase"
-                        defaultValue={"LEMONLEMONLE"}
-                        {...registerEncode("key")}
-                      />
-                      {encodeErrors.key && (
-                        <p className="text-red-500">
-                          {encodeErrors.key.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Encode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Decode Tab Content */}
-            <TabsContent value="decode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Decode Text</CardTitle>
-                  <CardDescription>
-                    Enter the cipher text and the key to decode it. The key must
-                    be the same length as the cipher text.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitDecode(onDecode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="cipherText">Cipher Text</Label>
-                      <Textarea
-                        id="cipherText"
-                        placeholder="Enter text to decode..."
-                        className="uppercase"
-                        defaultValue={"LXFOPVEFRNHR"}
-                        rows={6}
-                        {...registerDecode("cipherText")}
-                      />
-                      {decodeErrors.cipherText && (
-                        <p className="text-red-500">
-                          {decodeErrors.cipherText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="key">Key</Label>
-                      <Input
-                        id="key"
-                        type="text"
-                        placeholder="Enter key..."
-                        className="uppercase"
-                        defaultValue={"LEMONLEMONLE"}
-                        {...registerDecode("key")}
-                      />
-                      {decodeErrors.key && (
-                        <p className="text-red-500">
-                          {decodeErrors.key.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Decode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
+        <Footer />
       </section>
-      <Footer />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>

@@ -1,7 +1,13 @@
 import React from "react";
 import { Navbar } from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Link } from "react-router-dom";
 import Logo from "/lock.svg";
@@ -38,7 +44,7 @@ export const Home: React.FC = () => {
   return (
     <>
       <Navbar />
-      <section>
+      <section className="min-h-screen flex flex-col justify-between">
         <div className="max-w-7xl mx-auto py-8">
           <div className="text-center px-4">
             <h1 className="text-5xl font-extrabold text-neutral-900 dark:text-neutral-50">
@@ -50,8 +56,13 @@ export const Home: React.FC = () => {
             <div className="grid grid-cols-4 gap-8 md:grid-cols-8 lg:grid-cols-12">
               <div className="flex justify-center items-center lg:justify-start col-span-4 lg:col-span-7">
                 <p className="text-lg text-neutral-700 dark:text-neutral-200 leading-relaxed">
-                  This is a simple web application that allows you to encrypt and
-                  decrypt messages using various cryptographic algorithms. You can explore different types of ciphers, including substitution and transposition ciphers, as well as modern encryption techniques like symmetric and asymmetric encryption. Additionally, the application provides tools to generate and verify cryptographic hashes.
+                  This is a simple web application that allows you to encrypt
+                  and decrypt messages using various cryptographic algorithms.
+                  You can explore different types of ciphers, including
+                  substitution and transposition ciphers, as well as modern
+                  encryption techniques like symmetric and asymmetric
+                  encryption. Additionally, the application provides tools to
+                  generate and verify cryptographic hashes.
                 </p>
               </div>
               <div className="flex justify-center lg:justify-end col-span-4 lg:col-span-5">
@@ -71,15 +82,14 @@ export const Home: React.FC = () => {
                 className="rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
               >
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-2xl font-semibold">{card.title}</CardTitle>
+                  <CardTitle className="text-2xl font-semibold">
+                    {card.title}
+                  </CardTitle>
                   <CardDescription>{card.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="pt-4">
                   <Link to={card.link}>
-                    <Button
-                      size="sm"
-                      variant="default"
-                    >
+                    <Button size="sm" variant="default">
                       Explore
                     </Button>
                   </Link>
@@ -88,8 +98,9 @@ export const Home: React.FC = () => {
             ))}
           </div>
         </div>
+
+        <Footer />
       </section>
-      <Footer />
     </>
   );
 };

@@ -125,191 +125,198 @@ export const Monoalphabetic = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-7xl py-8 space-y-8 mx-auto">
-        <div className="container mx-auto">
-          <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            Monoalphabetic Cipher
-          </h1>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Monoalphabetic Cipher is a type of substitution cipher in which
-            each letter of the plaintext is replaced with a corresponding letter
-            from a fixed, scrambled version of the alphabet. Unlike the Caesar
-            Cipher, which shifts the alphabet uniformly by a fixed number of
-            positions, the Monoalphabetic Cipher allows any permutation of the
-            alphabet, leading to a significantly larger number of possible keys.
-            This makes it more resistant to brute-force attacks, but it remains
-            vulnerable to frequency analysis.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            To understand the Monoalphabetic Cipher, imagine the standard
-            alphabet as a key and a scrambled version of the alphabet as the
-            cipher key. For example, if the standard alphabet is
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" and the cipher key is
-            "QWERTYUIOPASDFGHJKLZXCVBNM", then the letter "A" in the plaintext
-            would be replaced by "Q", "B" by "W", "C" by "E", and so on. Each
-            letter in the plaintext is substituted with its corresponding letter
-            from the cipher key, resulting in the encrypted text.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Decryption with a Monoalphabetic Cipher is straightforward if the
-            cipher key is known. The process is simply reversed: the encrypted
-            text is substituted with the original letters from the standard
-            alphabet using the cipher key. Without the cipher key, however,
-            decrypting the message becomes much more challenging. Since there
-            are 26! (26 factorial) possible permutations of the alphabet, which
-            equals approximately 4x10<sup>26</sup> possible keys, the
-            brute-force approach is impractical.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            However, the Monoalphabetic Cipher's simplicity is also its
-            weakness. Because each letter in the plaintext is consistently
-            replaced by the same letter in the ciphertext, patterns in the text,
-            such as letter frequency, are preserved. This makes the cipher
-            vulnerable to frequency analysis, a method where the frequency of
-            letters in the ciphertext is compared to known frequency
-            distributions in the language of the plaintext. By analyzing the
-            most common letters, digraphs, and trigraphs in the ciphertext, an
-            attacker can often deduce the cipher key and decrypt the message
-            without knowing it directly.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            Historically, the Monoalphabetic Cipher was widely used before the
-            advent of more complex encryption techniques. It represents a
-            significant step in the evolution of cryptography, as it
-            demonstrates the power of substitution ciphers while also
-            highlighting their limitations. Despite its vulnerabilities, the
-            Monoalphabetic Cipher remains a valuable educational tool for
-            introducing concepts such as key permutation, encryption, and
-            decryption.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            In modern cryptography, the Monoalphabetic Cipher is largely
-            obsolete, having been replaced by more secure algorithms that avoid
-            the pitfalls of simple substitution. Nevertheless, it provides an
-            essential foundation for understanding the development of
-            cryptographic methods and the ongoing quest to secure communication
-            in an increasingly interconnected world.
-          </p>
+      <section className="min-h-screen flex flex-col justify-between">
+        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+          <div className="container mx-auto">
+            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+              Monoalphabetic Cipher
+            </h1>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              The Monoalphabetic Cipher is a type of substitution cipher in
+              which each letter of the plaintext is replaced with a
+              corresponding letter from a fixed, scrambled version of the
+              alphabet. Unlike the Caesar Cipher, which shifts the alphabet
+              uniformly by a fixed number of positions, the Monoalphabetic
+              Cipher allows any permutation of the alphabet, leading to a
+              significantly larger number of possible keys. This makes it more
+              resistant to brute-force attacks, but it remains vulnerable to
+              frequency analysis.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              To understand the Monoalphabetic Cipher, imagine the standard
+              alphabet as a key and a scrambled version of the alphabet as the
+              cipher key. For example, if the standard alphabet is
+              "ABCDEFGHIJKLMNOPQRSTUVWXYZ" and the cipher key is
+              "QWERTYUIOPASDFGHJKLZXCVBNM", then the letter "A" in the plaintext
+              would be replaced by "Q", "B" by "W", "C" by "E", and so on. Each
+              letter in the plaintext is substituted with its corresponding
+              letter from the cipher key, resulting in the encrypted text.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              Decryption with a Monoalphabetic Cipher is straightforward if the
+              cipher key is known. The process is simply reversed: the encrypted
+              text is substituted with the original letters from the standard
+              alphabet using the cipher key. Without the cipher key, however,
+              decrypting the message becomes much more challenging. Since there
+              are 26! (26 factorial) possible permutations of the alphabet,
+              which equals approximately 4x10<sup>26</sup> possible keys, the
+              brute-force approach is impractical.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              However, the Monoalphabetic Cipher's simplicity is also its
+              weakness. Because each letter in the plaintext is consistently
+              replaced by the same letter in the ciphertext, patterns in the
+              text, such as letter frequency, are preserved. This makes the
+              cipher vulnerable to frequency analysis, a method where the
+              frequency of letters in the ciphertext is compared to known
+              frequency distributions in the language of the plaintext. By
+              analyzing the most common letters, digraphs, and trigraphs in the
+              ciphertext, an attacker can often deduce the cipher key and
+              decrypt the message without knowing it directly.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              Historically, the Monoalphabetic Cipher was widely used before the
+              advent of more complex encryption techniques. It represents a
+              significant step in the evolution of cryptography, as it
+              demonstrates the power of substitution ciphers while also
+              highlighting their limitations. Despite its vulnerabilities, the
+              Monoalphabetic Cipher remains a valuable educational tool for
+              introducing concepts such as key permutation, encryption, and
+              decryption.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              In modern cryptography, the Monoalphabetic Cipher is largely
+              obsolete, having been replaced by more secure algorithms that
+              avoid the pitfalls of simple substitution. Nevertheless, it
+              provides an essential foundation for understanding the development
+              of cryptographic methods and the ongoing quest to secure
+              communication in an increasingly interconnected world.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center px-8 max-w-7xl">
+            <Tabs
+              defaultValue="encode"
+              className="w-full"
+              onValueChange={setActiveTab}
+            >
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="encode">Encode</TabsTrigger>
+                <TabsTrigger value="decode">Decode</TabsTrigger>
+              </TabsList>
+
+              {/* Encode Tab Content */}
+              <TabsContent value="encode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Encode Text</CardTitle>
+                    <CardDescription>
+                      Enter the plain text and the key to encode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitEncode(onEncode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="plainText">Plain Text</Label>
+                        <Textarea
+                          id="plainText"
+                          placeholder="Enter text to encode..."
+                          className="uppercase"
+                          defaultValue={"ATTACK AT DAWN"}
+                          rows={6}
+                          {...registerEncode("plainText")}
+                        />
+                        {encodeErrors.plainText && (
+                          <p className="text-red-500">
+                            {encodeErrors.plainText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="encodeKey">
+                          Key (26 unique letters)
+                        </Label>
+                        <Input
+                          id="encodeKey"
+                          type="text"
+                          placeholder="Enter 26-letter key..."
+                          className="uppercase"
+                          defaultValue={"BMORDIKQJGNSVPYWCTAHZUXFEL"}
+                          {...registerEncode("encodeKey")}
+                        />
+                        {encodeErrors.encodeKey && (
+                          <p className="text-red-500">
+                            {encodeErrors.encodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Encode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Decode Tab Content */}
+              <TabsContent value="decode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Decode Text</CardTitle>
+                    <CardDescription>
+                      Enter the cipher text and the key to decode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitDecode(onDecode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="encodedText">Cipher Text</Label>
+                        <Textarea
+                          id="encodedText"
+                          placeholder="Enter text to decode..."
+                          className="uppercase"
+                          defaultValue={"BHHBON BH RBXP"}
+                          rows={6}
+                          {...registerDecode("encodedText")}
+                        />
+                        {decodeErrors.encodedText && (
+                          <p className="text-red-500">
+                            {decodeErrors.encodedText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="decodeKey">
+                          Key (26 unique letters)
+                        </Label>
+                        <Input
+                          id="decodeKey"
+                          type="text"
+                          placeholder="Enter 26-letter key..."
+                          className="uppercase"
+                          defaultValue={"BMORDIKQJGNSVPYWCTAHZUXFEL"}
+                          {...registerDecode("decodeKey")}
+                        />
+                        {decodeErrors.decodeKey && (
+                          <p className="text-red-500">
+                            {decodeErrors.decodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Decode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
-
-        <div className="flex items-center justify-center px-8 max-w-7xl">
-          <Tabs
-            defaultValue="encode"
-            className="w-full"
-            onValueChange={setActiveTab}
-          >
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="encode">Encode</TabsTrigger>
-              <TabsTrigger value="decode">Decode</TabsTrigger>
-            </TabsList>
-
-            {/* Encode Tab Content */}
-            <TabsContent value="encode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Encode Text</CardTitle>
-                  <CardDescription>
-                    Enter the plain text and the key to encode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitEncode(onEncode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="plainText">Plain Text</Label>
-                      <Textarea
-                        id="plainText"
-                        placeholder="Enter text to encode..."
-                        className="uppercase"
-                        defaultValue={"ATTACK AT DAWN"}
-                        rows={6}
-                        {...registerEncode("plainText")}
-                      />
-                      {encodeErrors.plainText && (
-                        <p className="text-red-500">
-                          {encodeErrors.plainText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="encodeKey">Key (26 unique letters)</Label>
-                      <Input
-                        id="encodeKey"
-                        type="text"
-                        placeholder="Enter 26-letter key..."
-                        className="uppercase"
-                        defaultValue={"BMORDIKQJGNSVPYWCTAHZUXFEL"}
-                        {...registerEncode("encodeKey")}
-                      />
-                      {encodeErrors.encodeKey && (
-                        <p className="text-red-500">
-                          {encodeErrors.encodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Encode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Decode Tab Content */}
-            <TabsContent value="decode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Decode Text</CardTitle>
-                  <CardDescription>
-                    Enter the cipher text and the key to decode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitDecode(onDecode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="encodedText">Cipher Text</Label>
-                      <Textarea
-                        id="encodedText"
-                        placeholder="Enter text to decode..."
-                        className="uppercase"
-                        defaultValue={"BHHBON BH RBXP"}
-                        rows={6}
-                        {...registerDecode("encodedText")}
-                      />
-                      {decodeErrors.encodedText && (
-                        <p className="text-red-500">
-                          {decodeErrors.encodedText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="decodeKey">Key (26 unique letters)</Label>
-                      <Input
-                        id="decodeKey"
-                        type="text"
-                        placeholder="Enter 26-letter key..."
-                        className="uppercase"
-                        defaultValue={"BMORDIKQJGNSVPYWCTAHZUXFEL"}
-                        {...registerDecode("decodeKey")}
-                      />
-                      {decodeErrors.decodeKey && (
-                        <p className="text-red-500">
-                          {decodeErrors.decodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Decode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
+        <Footer />
       </section>
-      <Footer />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>

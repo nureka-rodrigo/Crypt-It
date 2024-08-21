@@ -173,150 +173,154 @@ export const AESCTR = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-7xl py-8 space-y-8 mx-auto">
-        <div className="container mx-auto">
-          <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            AES-CTR Cipher
-          </h1>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            The Advanced Encryption Standard in Counter mode (AES-CTR) is a
-            powerful and flexible encryption method used to secure data. Unlike
-            traditional block ciphers that operate on fixed-size blocks of data,
-            AES-CTR transforms AES into a stream cipher, allowing for more
-            efficient and flexible encryption of data of arbitrary length.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            In AES-CTR, a unique counter value is combined with a secret key to
-            produce a stream of pseudo-random data, which is then XORed with the
-            plaintext to produce the ciphertext. The same process, using the
-            same counter and key, can be reversed to decrypt the ciphertext back
-            into the original plaintext. The counter ensures that even identical
-            blocks of plaintext produce different ciphertexts, enhancing
-            security.
-          </p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
-            AES-CTR is widely used in various applications due to its speed and
-            simplicity. It does not require padding, and its parallelize nature
-            makes it suitable for high-performance scenarios. However, it's
-            crucial to manage the counter correctly, ensuring it is unique for
-            each encryption operation to maintain security.
-          </p>
+      <section className="min-h-screen flex flex-col justify-between">
+        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+          <div className="container mx-auto">
+            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+              AES-CTR Cipher
+            </h1>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              The Advanced Encryption Standard in Counter mode (AES-CTR) is a
+              powerful and flexible encryption method used to secure data.
+              Unlike traditional block ciphers that operate on fixed-size blocks
+              of data, AES-CTR transforms AES into a stream cipher, allowing for
+              more efficient and flexible encryption of data of arbitrary
+              length.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              In AES-CTR, a unique counter value is combined with a secret key
+              to produce a stream of pseudo-random data, which is then XORed
+              with the plaintext to produce the ciphertext. The same process,
+              using the same counter and key, can be reversed to decrypt the
+              ciphertext back into the original plaintext. The counter ensures
+              that even identical blocks of plaintext produce different
+              ciphertexts, enhancing security.
+            </p>
+            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+              AES-CTR is widely used in various applications due to its speed
+              and simplicity. It does not require padding, and its parallelize
+              nature makes it suitable for high-performance scenarios. However,
+              it's crucial to manage the counter correctly, ensuring it is
+              unique for each encryption operation to maintain security.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center px-8 max-w-7xl">
+            <Tabs
+              defaultValue="encode"
+              className="w-full"
+              onValueChange={setActiveTab}
+            >
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="encode">Encode</TabsTrigger>
+                <TabsTrigger value="decode">Decode</TabsTrigger>
+              </TabsList>
+
+              {/* Encode Tab Content */}
+              <TabsContent value="encode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Encode Text</CardTitle>
+                    <CardDescription>
+                      Enter the plain text and the key to encode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitEncode(onEncode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="plainText">Plain Text</Label>
+                        <Textarea
+                          id="plainText"
+                          rows={6}
+                          placeholder="Enter text to encode..."
+                          defaultValue="ATTACK AT DAWN"
+                          {...registerEncode("plainText")}
+                        />
+                        {encodeErrors.plainText && (
+                          <p className="text-red-500">
+                            {encodeErrors.plainText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="encodeKey">Key</Label>
+                        <Input
+                          id="encodeKey"
+                          type="text"
+                          placeholder="Enter 32-character key..."
+                          defaultValue="LEMONLEMONLEMONL"
+                          {...registerEncode("encodeKey")}
+                        />
+                        {encodeErrors.encodeKey && (
+                          <p className="text-red-500">
+                            {encodeErrors.encodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Encode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Decode Tab Content */}
+              <TabsContent value="decode">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Decode Text</CardTitle>
+                    <CardDescription>
+                      Enter the cipher text and the key to decode it.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form
+                      className="space-y-4"
+                      onSubmit={handleSubmitDecode(onDecode)}
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="encodedText">Cipher Text</Label>
+                        <Textarea
+                          id="encodedText"
+                          rows={6}
+                          placeholder="Enter text to decode..."
+                          defaultValue="o8JT/jwDxFb1q8fUwC0=::+qoUwTZdf7f9Oo++Un0Dxg=="
+                          {...registerDecode("encodedText")}
+                        />
+                        {decodeErrors.encodedText && (
+                          <p className="text-red-500">
+                            {decodeErrors.encodedText.message}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2 pb-2">
+                        <Label htmlFor="decodeKey">Key</Label>
+                        <Input
+                          id="decodeKey"
+                          type="text"
+                          placeholder="Enter 32-character key..."
+                          defaultValue="LEMONLEMONLEMONL"
+                          {...registerDecode("decodeKey")}
+                        />
+                        {decodeErrors.decodeKey && (
+                          <p className="text-red-500">
+                            {decodeErrors.decodeKey.message}
+                          </p>
+                        )}
+                      </div>
+                      <Button type="submit">Decode</Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
 
-        <div className="flex items-center justify-center px-8 max-w-7xl">
-          <Tabs
-            defaultValue="encode"
-            className="w-full"
-            onValueChange={setActiveTab}
-          >
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="encode">Encode</TabsTrigger>
-              <TabsTrigger value="decode">Decode</TabsTrigger>
-            </TabsList>
-
-            {/* Encode Tab Content */}
-            <TabsContent value="encode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Encode Text</CardTitle>
-                  <CardDescription>
-                    Enter the plain text and the key to encode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitEncode(onEncode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="plainText">Plain Text</Label>
-                      <Textarea
-                        id="plainText"
-                        rows={6}
-                        placeholder="Enter text to encode..."
-                        defaultValue="ATTACK AT DAWN"
-                        {...registerEncode("plainText")}
-                      />
-                      {encodeErrors.plainText && (
-                        <p className="text-red-500">
-                          {encodeErrors.plainText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="encodeKey">Key</Label>
-                      <Input
-                        id="encodeKey"
-                        type="text"
-                        placeholder="Enter 32-character key..."
-                        defaultValue="LEMONLEMONLEMONL"
-                        {...registerEncode("encodeKey")}
-                      />
-                      {encodeErrors.encodeKey && (
-                        <p className="text-red-500">
-                          {encodeErrors.encodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Encode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Decode Tab Content */}
-            <TabsContent value="decode">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Decode Text</CardTitle>
-                  <CardDescription>
-                    Enter the cipher text and the key to decode it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form
-                    className="space-y-4"
-                    onSubmit={handleSubmitDecode(onDecode)}
-                  >
-                    <div className="space-y-2">
-                      <Label htmlFor="encodedText">Cipher Text</Label>
-                      <Textarea
-                        id="encodedText"
-                        rows={6}
-                        placeholder="Enter text to decode..."
-                        defaultValue="o8JT/jwDxFb1q8fUwC0=::+qoUwTZdf7f9Oo++Un0Dxg=="
-                        {...registerDecode("encodedText")}
-                      />
-                      {decodeErrors.encodedText && (
-                        <p className="text-red-500">
-                          {decodeErrors.encodedText.message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2 pb-2">
-                      <Label htmlFor="decodeKey">Key</Label>
-                      <Input
-                        id="decodeKey"
-                        type="text"
-                        placeholder="Enter 32-character key..."
-                        defaultValue="LEMONLEMONLEMONL"
-                        {...registerDecode("decodeKey")}
-                      />
-                      {decodeErrors.decodeKey && (
-                        <p className="text-red-500">
-                          {decodeErrors.decodeKey.message}
-                        </p>
-                      )}
-                    </div>
-                    <Button type="submit">Decode</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
+        <Footer />
       </section>
-      <Footer />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
