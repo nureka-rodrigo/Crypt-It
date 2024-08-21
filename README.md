@@ -49,7 +49,7 @@ Follow these steps:
 3. Install the dependencies: `npm install`
 4. Start the application: `npm start`
 
-The application will start running on `http://localhost:3000`.
+The application will start running on `http://localhost:3000/Crypt-It/`.
 
 ## Contributing
 
