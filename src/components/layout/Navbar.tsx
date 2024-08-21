@@ -149,9 +149,11 @@ export const Navbar: React.FC = () => {
   return (
     <nav className="py-4 max-w-7xl mx-auto">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-neutral-950 dark:text-neutral-50 text-lg font-bold">
-          <img src={Logo} alt="Logo" className="w-8 h-auto dark:invert" />
-        </div>
+        <Link to="/">
+          <div className="text-neutral-950 dark:text-neutral-50 text-lg font-bold">
+            <img src={Logo} alt="Logo" className="w-8 h-auto dark:invert"/>
+          </div>
+        </Link>
         <NavigationMenu>
           <NavigationMenuList className="hidden lg:flex space-x-4">
             {navItems.map((item) => (
