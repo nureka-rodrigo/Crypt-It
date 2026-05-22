@@ -181,13 +181,13 @@ export const AESCBC = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               AES-CBC Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Advanced Encryption Standard in Cipher Block Chaining mode
               (AES-CBC) is a widely used encryption method that provides a high
               level of security. Unlike AES-CTR, which transforms AES into a
@@ -196,13 +196,13 @@ export const AESCBC = () => {
               before being encrypted, creating a strong dependency between
               blocks.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               In AES-CBC, an initialization vector (IV) is used in the first
               block to ensure that even identical plaintexts result in different
               ciphertexts, enhancing security. The IV must be unique for each
               encryption operation but does not need to be secret.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               AES-CBC is highly secure and is used in various applications, from
               securing communication channels to encrypting files. However, it
               is crucial to manage the IV correctly, as reusing an IV with the
@@ -210,7 +210,7 @@ export const AESCBC = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

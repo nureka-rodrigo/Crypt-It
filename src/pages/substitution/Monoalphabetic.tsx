@@ -125,13 +125,13 @@ export const Monoalphabetic = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               Monoalphabetic Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Monoalphabetic Cipher is a type of substitution cipher in
               which each letter of the plaintext is replaced with a
               corresponding letter from a fixed, scrambled version of the
@@ -142,7 +142,7 @@ export const Monoalphabetic = () => {
               resistant to brute-force attacks, but it remains vulnerable to
               frequency analysis.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               To understand the Monoalphabetic Cipher, imagine the standard
               alphabet as a key and a scrambled version of the alphabet as the
               cipher key. For example, if the standard alphabet is
@@ -152,7 +152,7 @@ export const Monoalphabetic = () => {
               letter in the plaintext is substituted with its corresponding
               letter from the cipher key, resulting in the encrypted text.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Decryption with a Monoalphabetic Cipher is straightforward if the
               cipher key is known. The process is simply reversed: the encrypted
               text is substituted with the original letters from the standard
@@ -162,7 +162,7 @@ export const Monoalphabetic = () => {
               which equals approximately 4x10<sup>26</sup> possible keys, the
               brute-force approach is impractical.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               However, the Monoalphabetic Cipher's simplicity is also its
               weakness. Because each letter in the plaintext is consistently
               replaced by the same letter in the ciphertext, patterns in the
@@ -174,7 +174,7 @@ export const Monoalphabetic = () => {
               ciphertext, an attacker can often deduce the cipher key and
               decrypt the message without knowing it directly.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Historically, the Monoalphabetic Cipher was widely used before the
               advent of more complex encryption techniques. It represents a
               significant step in the evolution of cryptography, as it
@@ -184,7 +184,7 @@ export const Monoalphabetic = () => {
               introducing concepts such as key permutation, encryption, and
               decryption.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               In modern cryptography, the Monoalphabetic Cipher is largely
               obsolete, having been replaced by more secure algorithms that
               avoid the pitfalls of simple substitution. Nevertheless, it
@@ -194,7 +194,7 @@ export const Monoalphabetic = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

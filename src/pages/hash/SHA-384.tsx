@@ -61,13 +61,13 @@ export const SHA384 = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               SHA-384 Hashing
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               SHA-384, or Secure Hash Algorithm 384-bit, is a member of the
               SHA-2 family of cryptographic hash functions. It is designed to
               generate a 384-bit (or 48-byte) hash value from input data of any
@@ -76,7 +76,7 @@ export const SHA384 = () => {
               commonly used in applications requiring higher levels of data
               integrity and security.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Hash functions like SHA-384 are designed to be one-way functions,
               meaning that once data is hashed, it cannot be feasibly reversed
               or decrypted to recover the original input. This one-way property
@@ -84,7 +84,7 @@ export const SHA384 = () => {
               making it ideal for tasks such as data verification, digital
               signatures, and secure information storage.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               SHA-384 processes input data in blocks and applies a series of
               mathematical transformations to produce the hash value. Unlike
               SHA-256, which generates a 256-bit hash, SHA-384 produces a longer
@@ -92,7 +92,7 @@ export const SHA384 = () => {
               types of attacks. This makes SHA-384 particularly useful in
               environments where enhanced security measures are required.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               This component allows you to hash input text using the SHA-384
               algorithm. By entering your text into the provided input field,
               you can generate and view its SHA-384 hash value. This
@@ -104,7 +104,7 @@ export const SHA384 = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>Generate Hash</CardTitle>

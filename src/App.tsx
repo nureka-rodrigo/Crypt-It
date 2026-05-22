@@ -20,12 +20,15 @@ import { NotFound } from "@/pages/error/NotFound.tsx";
 
 function App() {
   return (
-    <div className="bg-neutral-50 dark:bg-neutral-950 pattern">
+    <div className="pattern bg-neutral-50 dark:bg-neutral-950">
       <Routes>
         <Route path="/" element={<Home />} />
 
         <Route path="/substitution/caesar" element={<Caesar />} />
-        <Route path="/substitution/monoalphabetic" element={<Monoalphabetic />} />
+        <Route
+          path="/substitution/monoalphabetic"
+          element={<Monoalphabetic />}
+        />
         <Route path="/substitution/playfair" element={<Playfair />} />
         <Route path="/substitution/vigenere" element={<Vigenere />} />
         <Route path="/substitution/vernam" element={<Vernam />} />

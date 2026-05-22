@@ -61,13 +61,13 @@ export const SHA1 = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               SHA-1 Hashing
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               SHA-1, short for Secure Hash Algorithm 1, is a cryptographic hash
               function designed to produce a 160-bit hash value from an input of
               any size. Though it was widely used in the past, SHA-1 is now
@@ -77,7 +77,7 @@ export const SHA1 = () => {
               original data, making it suitable for various security
               applications.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Unlike encryption algorithms, which can be reversed to retrieve
               the original data, hash functions like SHA-1 are designed to be
               one-way functions. This means that once data is hashed using
@@ -86,7 +86,7 @@ export const SHA1 = () => {
               vulnerabilities have led to its gradual phase-out in favor of more
               secure alternatives.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               SHA-1 works by processing input data in blocks and applying a
               series of complex mathematical transformations to produce the
               final hash value. It was commonly used in digital signatures,
@@ -95,7 +95,7 @@ export const SHA1 = () => {
               produce the same hash value, SHA-1 is no longer recommended for
               security-critical applications.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               This component allows you to hash input text using the SHA-1
               algorithm. By entering the desired text into the provided input
               field, you can generate and view its SHA-1 hash value. While it's
@@ -106,7 +106,7 @@ export const SHA1 = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>Generate Hash</CardTitle>

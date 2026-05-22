@@ -61,13 +61,13 @@ export const SHA512 = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               SHA-512 Hashing
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               SHA-512, short for Secure Hash Algorithm 512-bit, is a
               cryptographic hash function that produces a 512-bit (or 64-byte)
               hash value from input data of any size. As a member of the SHA-2
@@ -76,7 +76,7 @@ export const SHA512 = () => {
               a robust mechanism for ensuring data integrity and authenticity in
               various security applications.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Hash functions like SHA-512 are one-way functions, meaning that
               once data is hashed using SHA-512, it cannot be feasibly reversed
               or decrypted to retrieve the original input. This characteristic
@@ -86,7 +86,7 @@ export const SHA512 = () => {
               resistance to collision attacks compared to shorter hash
               functions.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               SHA-512 processes input data in blocks, applying a series of
               complex mathematical operations to generate the final hash value.
               Its larger hash size results in a longer, more secure hash, making
@@ -95,7 +95,7 @@ export const SHA512 = () => {
               cryptographic systems and applications due to its strong security
               properties and robustness.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               This component enables you to hash input text using the SHA-512
               algorithm. By entering the text into the provided input field, you
               can generate and view its SHA-512 hash value. This functionality
@@ -106,7 +106,7 @@ export const SHA512 = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>Generate Hash</CardTitle>

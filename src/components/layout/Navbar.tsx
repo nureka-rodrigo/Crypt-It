@@ -24,31 +24,36 @@ const navItems = [
       {
         title: "Caesar Cipher",
         href: "/substitution/caesar",
-        description: "A simple substitution cipher that shifts letters by a fixed amount.",
+        description:
+          "A simple substitution cipher that shifts letters by a fixed amount.",
         label: "Caesar Cipher",
       },
       {
         title: "Monoalphabetic Cipher",
         href: "/substitution/monoalphabetic",
-        description: "A monoalphabetic cipher using a single substitution alphabet.",
+        description:
+          "A monoalphabetic cipher using a single substitution alphabet.",
         label: "Monoalphabetic Cipher",
       },
       {
         title: "Playfair Cipher",
         href: "/substitution/playfair",
-        description: "A monoalphabetic cipher that encrypts pairs of letters in a 5x5 grid.",
+        description:
+          "A monoalphabetic cipher that encrypts pairs of letters in a 5x5 grid.",
         label: "Playfair Cipher",
       },
       {
         title: "Vigenère Cipher",
         href: "/substitution/vigenere",
-        description: "A polyalphabetic cipher using a keyword to shift letters.",
+        description:
+          "A polyalphabetic cipher using a keyword to shift letters.",
         label: "Vigenère Cipher",
       },
       {
         title: "Vernam Cipher (One-Time Pad)",
         href: "/substitution/vernam",
-        description: "A polyalphabetic cipher that XORs plaintext with a random key.",
+        description:
+          "A polyalphabetic cipher that XORs plaintext with a random key.",
         label: "Vernam Cipher",
       },
     ],
@@ -60,13 +65,15 @@ const navItems = [
       {
         title: "Rail Fence Cipher",
         href: "/transposition/rail-fence",
-        description: "A transposition cipher that writes text in a zigzag pattern.",
+        description:
+          "A transposition cipher that writes text in a zigzag pattern.",
         label: "Rail Fence Cipher",
       },
       {
         title: "Columnar Transposition",
         href: "/transposition/columnar",
-        description: "A transposition cipher that arranges text into columns and reads them in a different order.",
+        description:
+          "A transposition cipher that arranges text into columns and reads them in a different order.",
         label: "Columnar Transposition",
       },
     ],
@@ -78,19 +85,22 @@ const navItems = [
       {
         title: "AES-CTR",
         href: "/symmetric/aes-ctr",
-        description: "A symmetric encryption algorithm that turns a block cipher into a stream cipher.",
+        description:
+          "A symmetric encryption algorithm that turns a block cipher into a stream cipher.",
         label: "AES-CTR",
       },
       {
         title: "AES-CBC",
         href: "/symmetric/aes-cbc",
-        description: "A symmetric encryption algorithm that provides confidentiality by chaining blocks.",
+        description:
+          "A symmetric encryption algorithm that provides confidentiality by chaining blocks.",
         label: "AES-CBC",
       },
       {
         title: "AES-GCM",
         href: "/symmetric/aes-gcm",
-        description: "A symmetric encryption algorithm that provides both confidentiality and data integrity.",
+        description:
+          "A symmetric encryption algorithm that provides both confidentiality and data integrity.",
         label: "AES-GCM",
       },
     ],
@@ -102,7 +112,8 @@ const navItems = [
       {
         title: "RSA-OAEP",
         href: "/asymmetric/rsa-oaep",
-        description: "An asymmetric encryption algorithm that encrypts data using public and private keys.",
+        description:
+          "An asymmetric encryption algorithm that encrypts data using public and private keys.",
         label: "RSA-OAEP",
       },
     ],
@@ -114,25 +125,29 @@ const navItems = [
       {
         title: "SHA1",
         href: "/hash/sha-1",
-        description: "A cryptographic hash function that produces a 160-bit hash value.",
+        description:
+          "A cryptographic hash function that produces a 160-bit hash value.",
         label: "SHA1",
       },
       {
         title: "SHA256",
         href: "/hash/sha-256",
-        description: "A cryptographic hash function that produces a 256-bit hash value.",
+        description:
+          "A cryptographic hash function that produces a 256-bit hash value.",
         label: "SHA256",
       },
       {
         title: "SHA384",
         href: "/hash/sha-384",
-        description: "A cryptographic hash function that produces a 384-bit hash value.",
+        description:
+          "A cryptographic hash function that produces a 384-bit hash value.",
         label: "SHA384",
       },
       {
         title: "SHA512",
         href: "/hash/sha-512",
-        description: "A cryptographic hash function that produces a 512-bit hash value.",
+        description:
+          "A cryptographic hash function that produces a 512-bit hash value.",
         label: "SHA512",
       },
     ],
@@ -147,15 +162,15 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="py-4 max-w-7xl mx-auto">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="mx-auto max-w-7xl py-4">
+      <div className="container mx-auto flex items-center justify-between">
         <Link to="/">
-          <div className="text-neutral-950 dark:text-neutral-50 text-lg font-bold">
-            <img src={Logo} alt="Logo" className="w-8 h-auto dark:invert" />
+          <div className="text-lg font-bold text-neutral-950 dark:text-neutral-50">
+            <img src={Logo} alt="Logo" className="h-auto w-8 dark:invert" />
           </div>
         </Link>
         <NavigationMenu>
-          <NavigationMenuList className="hidden lg:flex space-x-4">
+          <NavigationMenuList className="hidden space-x-4 lg:flex">
             {navItems.map((item) => (
               <NavigationMenuItem key={item.href}>
                 {item.subItems ? (
@@ -189,11 +204,11 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center space-x-4">
           <ThemeButton />
           {/* Mobile Menu Button */}
-          <button onClick={toggleMobileMenu} className="lg:hidden text-white">
+          <button onClick={toggleMobileMenu} className="text-white lg:hidden">
             {isMobileMenuOpen ? (
-              <IoMdClose className="w-6 h-6 text-neutral-950 dark:text-neutral-50" />
+              <IoMdClose className="h-6 w-6 text-neutral-950 dark:text-neutral-50" />
             ) : (
-              <HiOutlineMenuAlt3 className="w-6 h-6 text-neutral-950 dark:text-neutral-50" />
+              <HiOutlineMenuAlt3 className="h-6 w-6 text-neutral-950 dark:text-neutral-50" />
             )}
           </button>
         </div>
@@ -206,7 +221,7 @@ export const Navbar: React.FC = () => {
               <li key={item.href}>
                 <Link
                   to={item.href}
-                  className="font-semibold text-neutral-950 dark:text-neutral-50 hover:text-white"
+                  className="font-semibold text-neutral-950 hover:text-white dark:text-neutral-50"
                 >
                   {item.label}
                 </Link>
@@ -216,7 +231,7 @@ export const Navbar: React.FC = () => {
                       <li key={subItem.href}>
                         <Link
                           to={subItem.href}
-                          className="text-neutral-950 dark:text-neutral-50 hover:text-neutral-50"
+                          className="text-neutral-950 hover:text-neutral-50 dark:text-neutral-50"
                         >
                           {subItem.label}
                         </Link>
@@ -244,13 +259,13 @@ const ListItem = React.forwardRef<
           to={props.href ?? "#"}
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
             className
           )}
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
             {children}
           </p>
         </Link>

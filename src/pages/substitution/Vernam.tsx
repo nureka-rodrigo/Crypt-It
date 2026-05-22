@@ -150,13 +150,13 @@ export const Vernam = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               Vernam Cipher (One-Time Pad)
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Vernam Cipher, also known as the one-time pad, is a form of
               symmetric-key encryption that is renowned for its theoretical
               security. This cipher operates by combining each character of the
@@ -167,7 +167,7 @@ export const Vernam = () => {
               perfect secrecy, the key must be as long as the plaintext and must
               be truly random, ensuring that each key is used only once.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Encoding with the Vernam Cipher involves the XOR operation between
               each character of the plaintext and the key. The result of this
               XOR operation is a ciphertext character. Since XOR is a reversible
@@ -178,7 +178,7 @@ export const Vernam = () => {
               Cipher an example of a cipher where encryption and decryption are
               essentially the same process.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The primary challenge with the Vernam Cipher is the generation and
               distribution of the key. Since the key must be as long as the
               message and completely random, managing and securely distributing
@@ -191,7 +191,7 @@ export const Vernam = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

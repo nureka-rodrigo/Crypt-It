@@ -247,16 +247,16 @@ export const Columnar = () => {
     if (columnarMatrix.length === 0) return null;
     return (
       <div className="pb-4">
-        <h2 className="font-semibold text-sm text-neutral-950 dark:text-neutral-50 mb-4">
+        <h2 className="mb-4 text-sm font-semibold text-neutral-950 dark:text-neutral-50">
           Columnar Matrix
         </h2>
-        <div className="grid mt-2">
+        <div className="mt-2 grid">
           {columnarMatrix.map((row, rowIndex) => (
             <div key={rowIndex} className="flex">
               {row.map((char, colIndex) => (
                 <div
                   key={colIndex}
-                  className="p-3 md:p-4 min-h-12 min-w-12 md:min-h-16 md:min-w-16 border border-neutral-300 dark:border-neutral-700 text-neutral-950 dark:text-neutral-50 flex items-center justify-center font-mono text-lg"
+                  className="flex min-h-12 min-w-12 items-center justify-center border border-neutral-300 p-3 font-mono text-lg text-neutral-950 dark:border-neutral-700 dark:text-neutral-50 md:min-h-16 md:min-w-16 md:p-4"
                 >
                   {char}
                 </div>
@@ -271,13 +271,13 @@ export const Columnar = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               Columnar Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Columnar Cipher is a classical transposition cipher that
               transforms plaintext into ciphertext by rearranging the characters
               based on a keyword or numerical key. Unlike substitution ciphers
@@ -286,7 +286,7 @@ export const Columnar = () => {
               this cipher lies in the key used to determine the order of the
               columns during encryption and decryption processes.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               To encode a message using the Columnar Cipher, you first organize
               the plaintext into a grid or matrix with a number of columns equal
               to the length of the key. Each column of this matrix is filled
@@ -297,7 +297,7 @@ export const Columnar = () => {
               the sequence of the numbers provided, i.e., third column first,
               then first column, and so on.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Decoding the message involves reversing this process. You first
               reconstruct the matrix using the same key, ensuring that the
               columns are ordered according to the key. After filling the matrix
@@ -306,7 +306,7 @@ export const Columnar = () => {
               procedure restores the original message by adhering to the
               columnar order dictated by the key.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Columnar Cipher's strength lies in its ability to obscure the
               plaintext through columnar transposition, making it harder to
               decipher without knowledge of the key. However, it is essential to
@@ -318,7 +318,7 @@ export const Columnar = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

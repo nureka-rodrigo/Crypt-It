@@ -193,27 +193,27 @@ export const RSAOAEP = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               RSA-OAEP Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               RSA-OAEP (Optimal Asymmetric Encryption Padding) is a widely used
               public-key encryption scheme that combines the RSA algorithm with
               OAEP padding to enhance security. RSA-OAEP allows for secure
               encryption and decryption of data using a pair of keys: a public
               key for encryption and a private key for decryption.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               In RSA-OAEP, the plaintext message is padded with random data
               before encryption, making it more resistant to certain types of
               attacks. The encrypted message can only be decrypted by the
               corresponding private key, ensuring the confidentiality of the
               data.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               RSA-OAEP's padding mechanism is crucial for enhancing security. By
               padding the message with random data, it becomes more difficult
               for attackers to perform cryptographic analysis and gain insights
@@ -222,7 +222,7 @@ export const RSAOAEP = () => {
               vulnerable to certain types of attacks, such as chosen ciphertext
               attacks.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               One of the key strengths of RSA-OAEP is its ability to secure
               sensitive information, making it a popular choice in various
               applications, including secure communications, digital signatures,
@@ -231,7 +231,7 @@ export const RSAOAEP = () => {
               networks or when stored data needs to be protected against
               unauthorized access.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Despite its strengths, RSA-OAEP is not without limitations. Due to
               the nature of the RSA algorithm, the size of the data that can be
               encrypted is limited by the key size. Therefore, RSA-OAEP is often
@@ -239,7 +239,7 @@ export const RSAOAEP = () => {
               encryption algorithms like AES, rather than large data files
               directly.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Another consideration is performance. RSA-OAEP, being an
               asymmetric encryption method, is computationally intensive
               compared to symmetric encryption algorithms. As a result, it is
@@ -247,7 +247,7 @@ export const RSAOAEP = () => {
               used to securely exchange a symmetric key, which is then used to
               encrypt and decrypt the actual data.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               In practice, RSA-OAEP is implemented in many modern cryptographic
               protocols, including TLS (Transport Layer Security), which secures
               internet communications. Its robust security features make it an
@@ -256,7 +256,7 @@ export const RSAOAEP = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

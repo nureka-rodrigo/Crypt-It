@@ -23,8 +23,8 @@ This project aims to provide a simple and intuitive interface for cryptographic 
   - `RSA-OAEP`: An asymmetric encryption algorithm that encrypts data using public and private keys.
 - **Hash Functions:**: Hash functions map data of arbitrary size to fixed-size values.
   - `SHA-1`: A cryptographic hash function that produces a 160-bit hash value.
-  - `SHA-256`: A cryptographic hash function that produces a 256-bit hash value. 
-  - `SHA-384`: A cryptographic hash function that produces a 384-bit hash value. 
+  - `SHA-256`: A cryptographic hash function that produces a 256-bit hash value.
+  - `SHA-384`: A cryptographic hash function that produces a 384-bit hash value.
   - `SHA-512`: A cryptographic hash function that produces a 512-bit hash value.
 
 ## Technologies Used

@@ -195,14 +195,14 @@ export const Playfair = () => {
     if (playfairMatrix.length === 0) return null;
     return (
       <div className="pb-4">
-        <h2 className="font-semibold text-sm text-neutral-950 dark:text-neutral-50 mb-4">
+        <h2 className="mb-4 text-sm font-semibold text-neutral-950 dark:text-neutral-50">
           Playfair Matrix
         </h2>
-        <div className="grid grid-cols-5 gap-2 mt-2">
+        <div className="mt-2 grid grid-cols-5 gap-2">
           {playfairMatrix.map((char, index) => (
             <div
               key={index}
-              className="p-4 border border-neutral-300 dark:border-neutral-700 text-neutral-950 dark:text-neutral-50 flex items-center justify-center font-mono text-lg"
+              className="flex items-center justify-center border border-neutral-300 p-4 font-mono text-lg text-neutral-950 dark:border-neutral-700 dark:text-neutral-50"
             >
               {char}
             </div>
@@ -215,13 +215,13 @@ export const Playfair = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               Playfair Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Playfair Cipher is a digraph substitution cipher, which means
               that it encrypts pairs of letters (bigrams) rather than individual
               letters. Developed by Charles Wheatstone in 1854 and named after
@@ -229,13 +229,13 @@ export const Playfair = () => {
               substitution ciphers by reducing the frequency of letter
               repetition, which makes it more resistant to frequency analysis.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               To use the Playfair Cipher, you first need to prepare a 5x5 matrix
               of letters based on a keyword. This matrix excludes duplicate
               letters and often combines 'I' and 'J' into a single letter to fit
               the 25-letter constraint.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Once the matrix is prepared, the encryption process begins by
               splitting the plaintext into digraphs (pairs of letters). If there
               are duplicate letters within a pair, they are separated by adding
@@ -243,11 +243,11 @@ export const Playfair = () => {
               is padded with an extra letter. For example, "HELLO WORLD" becomes
               "HE LX LO WO RL DX" for encoding.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Each pair of letters is then encrypted according to the following
               rules:
             </p>
-            <ul className="list-disc pl-6 mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <ul className="mt-4 list-disc pl-6 text-justify text-neutral-700 dark:text-neutral-300">
               <li>
                 <strong>Same Row:</strong> If both letters are in the same row,
                 each letter is replaced by the letter immediately to its right.
@@ -266,12 +266,12 @@ export const Playfair = () => {
                 column of the other letter of the pair.
               </li>
             </ul>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Decryption with the Playfair Cipher is a straightforward reversal
               of the encryption process. The digraphs are decrypted using the
               same rules but in reverse.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               While the Playfair Cipher improves upon simple substitution
               ciphers by encrypting pairs of letters and reducing the frequency
               of letter repetition, it is still vulnerable to more advanced
@@ -283,7 +283,7 @@ export const Playfair = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

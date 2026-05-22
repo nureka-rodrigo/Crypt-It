@@ -119,13 +119,13 @@ export const Caesar: React.FC = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               Caesar Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Caesar Cipher, named after the renowned Roman general Julius
               Caesar, is one of the earliest and most straightforward methods of
               encryption. It is a type of substitution cipher, where each letter
@@ -134,7 +134,7 @@ export const Caesar: React.FC = () => {
               modern cryptography and is still a popular teaching tool in
               understanding the basics of encryption.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The concept is easy to grasp: imagine the alphabet as a circle
               where after 'Z', it loops back to 'A'. The Caesar Cipher operates
               by shifting the position of each letter in the plaintext by a
@@ -143,7 +143,7 @@ export const Caesar: React.FC = () => {
               and so forth. This shift applies uniformly across the entire
               message.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               To decrypt the message, the process is simply reversed. If the
               recipient knows the key (which is the number of positions each
               letter was shifted), they can shift the letters back to their
@@ -153,14 +153,14 @@ export const Caesar: React.FC = () => {
               alphabet), the Caesar Cipher is easily broken with modern
               computational power.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Historically, Julius Caesar used this cipher with a shift of three
               to protect his military communications. Although the Caesar Cipher
               is no longer considered secure for serious purposes, it remains a
               fundamental example of encryption techniques and is often the
               first cipher taught to students studying cryptography.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Caesar Cipher’s simplicity is both its strength and its
               weakness. It is an excellent example to introduce the concepts of
               encryption and decryption, demonstrating how information can be
@@ -171,7 +171,7 @@ export const Caesar: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

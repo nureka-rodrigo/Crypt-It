@@ -140,13 +140,13 @@ export const Vigenere = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               Vigenère Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Vigenère Cipher, named after the French diplomat Blaise de
               Vigenère, is a method of encrypting text by using a series of
               different Caesar ciphers based on the letters of a keyword. Unlike
@@ -155,7 +155,7 @@ export const Vigenere = () => {
               letter in the plaintext is determined by the corresponding letter
               of the keyword.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               To understand how the Vigenère cipher works, imagine the alphabet
               written out in a 26x26 grid, where each row is a Caesar cipher
               with a different shift value, starting from 0 for 'A' up to 25 for
@@ -167,7 +167,7 @@ export const Vigenere = () => {
               it is repeated as many times as necessary to match the length of
               the plaintext.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               For example, if the plaintext is "ATTACKATDAWN" and the keyword is
               "LEMON", the first letter 'A' would be shifted by the position of
               'L' (which is 11 positions down the alphabet), 'T' would be
@@ -176,7 +176,7 @@ export const Vigenere = () => {
               of letters that is much more resistant to frequency analysis
               compared to the Caesar cipher.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Decrypting the Vigenère cipher involves reversing the process. If
               the recipient knows the keyword, they can apply the reverse shifts
               to the ciphertext, using the corresponding Caesar cipher for each
@@ -185,7 +185,7 @@ export const Vigenere = () => {
               challenging than breaking a Caesar cipher, particularly when
               longer and more complex keywords are used.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Vigenère cipher was once considered virtually unbreakable,
               earning it the nickname "le chiffre indéchiffrable" (French for
               "the indecipherable cipher"). It was not until the 19th century
@@ -195,7 +195,7 @@ export const Vigenere = () => {
               This breakthrough marked the beginning of the decline in the
               cipher's practical use for secure communications.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Despite its historical significance, the Vigenère cipher is no
               longer considered secure for modern applications. However, it
               remains an important educational tool in the study of
@@ -207,7 +207,7 @@ export const Vigenere = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

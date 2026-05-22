@@ -173,13 +173,13 @@ export const AESCTR = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               AES-CTR Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Advanced Encryption Standard in Counter mode (AES-CTR) is a
               powerful and flexible encryption method used to secure data.
               Unlike traditional block ciphers that operate on fixed-size blocks
@@ -187,7 +187,7 @@ export const AESCTR = () => {
               more efficient and flexible encryption of data of arbitrary
               length.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               In AES-CTR, a unique counter value is combined with a secret key
               to produce a stream of pseudo-random data, which is then XORed
               with the plaintext to produce the ciphertext. The same process,
@@ -196,7 +196,7 @@ export const AESCTR = () => {
               that even identical blocks of plaintext produce different
               ciphertexts, enhancing security.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               AES-CTR is widely used in various applications due to its speed
               and simplicity. It does not require padding, and its parallelize
               nature makes it suitable for high-performance scenarios. However,
@@ -205,7 +205,7 @@ export const AESCTR = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

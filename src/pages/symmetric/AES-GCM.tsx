@@ -171,13 +171,13 @@ export const AESGCM = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               AES-GCM Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Advanced Encryption Standard in Galois/Counter Mode (AES-GCM)
               is a highly secure and efficient encryption method that combines
               the AES block cipher with Galois field multiplication for message
@@ -185,14 +185,14 @@ export const AESGCM = () => {
               applications due to its strong security guarantees and
               performance.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               In AES-GCM, the encryption and authentication processes are
               combined into a single operation, which ensures data
               confidentiality and integrity. The mode generates a unique
               authentication tag for each message, providing additional security
               against tampering.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               AES-GCM is highly efficient and can be parallelized, making it
               suitable for high-performance applications such as secure
               communications and data storage. The initialization vector (IV)
@@ -201,7 +201,7 @@ export const AESGCM = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"

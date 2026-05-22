@@ -170,13 +170,13 @@ export const RailFence: React.FC = () => {
   return (
     <>
       <Navbar />
-      <section className="min-h-screen flex flex-col justify-between">
-        <div className="max-w-7xl py-8 space-y-8 mx-auto">
+      <section className="flex min-h-screen flex-col justify-between">
+        <div className="mx-auto max-w-7xl space-y-8 py-8">
           <div className="container mx-auto">
             <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
               Rail Fence Cipher
             </h1>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               The Rail Fence Cipher is a classic transposition cipher that
               encrypts messages by rearranging characters in a zigzag pattern.
               Its name derives from its resemblance to a fence with horizontal
@@ -185,7 +185,7 @@ export const RailFence: React.FC = () => {
               number of "rails" or lines, then reading the text off each rail
               line by line to produce the ciphertext.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               To encode a message using the Rail Fence Cipher, begin by writing
               the plaintext diagonally downwards across the number of rails
               specified. When the bottom rail is reached, the direction
@@ -195,7 +195,7 @@ export const RailFence: React.FC = () => {
               obtained by reading the characters from each rail sequentially and
               concatenating them to form the final encrypted message.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               Decoding a message encrypted with the Rail Fence Cipher involves
               reconstructing the zigzag pattern. Start by filling in the
               characters from the ciphertext into their respective rail lines
@@ -203,7 +203,7 @@ export const RailFence: React.FC = () => {
               rails are completely filled, read the message in the same zigzag
               manner to retrieve the original plaintext.
             </p>
-            <p className="mt-4 text-neutral-700 dark:text-neutral-300 text-justify">
+            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
               While the Rail Fence Cipher provides a basic level of encryption
               and serves as an excellent educational tool for understanding
               transposition ciphers, it is relatively simple and vulnerable to
@@ -213,7 +213,7 @@ export const RailFence: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center px-8 max-w-7xl">
+          <div className="flex max-w-7xl items-center justify-center px-8">
             <Tabs
               defaultValue="encode"
               className="w-full"
