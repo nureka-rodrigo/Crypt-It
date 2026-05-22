@@ -24,37 +24,27 @@ const navItems = [
       {
         title: "Caesar Cipher",
         href: "/substitution/caesar",
-        description:
-          "A simple substitution cipher that shifts letters by a fixed amount.",
-        label: "Caesar Cipher",
+        description: "Shifts every letter by a fixed number of positions.",
       },
       {
-        title: "Monoalphabetic Cipher",
+        title: "Monoalphabetic",
         href: "/substitution/monoalphabetic",
-        description:
-          "A monoalphabetic cipher using a single substitution alphabet.",
-        label: "Monoalphabetic Cipher",
+        description: "Maps each letter to exactly one other letter.",
       },
       {
         title: "Playfair Cipher",
         href: "/substitution/playfair",
-        description:
-          "A monoalphabetic cipher that encrypts pairs of letters in a 5x5 grid.",
-        label: "Playfair Cipher",
+        description: "Encrypts digraphs using a 5×5 keyword matrix.",
       },
       {
         title: "Vigenère Cipher",
         href: "/substitution/vigenere",
-        description:
-          "A polyalphabetic cipher using a keyword to shift letters.",
-        label: "Vigenère Cipher",
+        description: "Polyalphabetic substitution keyed by a repeating word.",
       },
       {
-        title: "Vernam Cipher (One-Time Pad)",
+        title: "Vernam Cipher",
         href: "/substitution/vernam",
-        description:
-          "A polyalphabetic cipher that XORs plaintext with a random key.",
-        label: "Vernam Cipher",
+        description: "XOR-based one-time pad — theoretically unbreakable.",
       },
     ],
   },
@@ -63,18 +53,14 @@ const navItems = [
     href: "/transposition",
     subItems: [
       {
-        title: "Rail Fence Cipher",
+        title: "Rail Fence",
         href: "/transposition/rail-fence",
-        description:
-          "A transposition cipher that writes text in a zigzag pattern.",
-        label: "Rail Fence Cipher",
+        description: "Writes text in a zigzag across multiple rails.",
       },
       {
-        title: "Columnar Transposition",
+        title: "Columnar",
         href: "/transposition/columnar",
-        description:
-          "A transposition cipher that arranges text into columns and reads them in a different order.",
-        label: "Columnar Transposition",
+        description: "Reorders columns according to a numeric key.",
       },
     ],
   },
@@ -85,23 +71,17 @@ const navItems = [
       {
         title: "AES-CTR",
         href: "/symmetric/aes-ctr",
-        description:
-          "A symmetric encryption algorithm that turns a block cipher into a stream cipher.",
-        label: "AES-CTR",
+        description: "Turns AES into a stream cipher via a counter.",
       },
       {
         title: "AES-CBC",
         href: "/symmetric/aes-cbc",
-        description:
-          "A symmetric encryption algorithm that provides confidentiality by chaining blocks.",
-        label: "AES-CBC",
+        description: "Each block is XORed with the previous ciphertext block.",
       },
       {
         title: "AES-GCM",
         href: "/symmetric/aes-gcm",
-        description:
-          "A symmetric encryption algorithm that provides both confidentiality and data integrity.",
-        label: "AES-GCM",
+        description: "Authenticated encryption — confidentiality + integrity.",
       },
     ],
   },
@@ -112,9 +92,7 @@ const navItems = [
       {
         title: "RSA-OAEP",
         href: "/asymmetric/rsa-oaep",
-        description:
-          "An asymmetric encryption algorithm that encrypts data using public and private keys.",
-        label: "RSA-OAEP",
+        description: "Public-key encryption with optimal asymmetric padding.",
       },
     ],
   },
@@ -123,32 +101,24 @@ const navItems = [
     href: "/hash-functions",
     subItems: [
       {
-        title: "SHA1",
+        title: "SHA-1",
         href: "/hash/sha-1",
-        description:
-          "A cryptographic hash function that produces a 160-bit hash value.",
-        label: "SHA1",
+        description: "160-bit hash — deprecated, included for education.",
       },
       {
-        title: "SHA256",
+        title: "SHA-256",
         href: "/hash/sha-256",
-        description:
-          "A cryptographic hash function that produces a 256-bit hash value.",
-        label: "SHA256",
+        description: "256-bit hash from the SHA-2 family.",
       },
       {
-        title: "SHA384",
+        title: "SHA-384",
         href: "/hash/sha-384",
-        description:
-          "A cryptographic hash function that produces a 384-bit hash value.",
-        label: "SHA384",
+        description: "384-bit truncation of SHA-512.",
       },
       {
-        title: "SHA512",
+        title: "SHA-512",
         href: "/hash/sha-512",
-        description:
-          "A cryptographic hash function that produces a 512-bit hash value.",
-        label: "SHA512",
+        description: "512-bit hash — maximum SHA-2 output length.",
       },
     ],
   },
@@ -157,34 +127,38 @@ const navItems = [
 export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
-    <nav className="mx-auto max-w-7xl py-4">
-      <div className="container mx-auto flex items-center justify-between">
-        <Link to="/">
-          <div className="text-lg font-bold text-neutral-950 dark:text-neutral-50">
-            <img src={Logo} alt="Logo" className="h-auto w-8 dark:invert" />
-          </div>
+    <header className="sticky top-0 z-40 w-full border-b border-stone-200 bg-stone-50/95 backdrop-blur-sm dark:border-stone-800 dark:bg-stone-950/95">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
+        {/* Logo */}
+        <Link to="/" className="group flex items-center gap-2.5">
+          <img
+            src={Logo}
+            alt="Logo"
+            className="h-5 w-5 opacity-80 transition-opacity group-hover:opacity-100 dark:invert"
+          />
+          <span className="font-mono text-sm font-bold uppercase tracking-[0.2em] text-stone-900 dark:text-stone-50">
+            Crypt-It
+          </span>
         </Link>
-        <NavigationMenu>
-          <NavigationMenuList className="hidden space-x-4 lg:flex">
+
+        {/* Desktop Navigation */}
+        <NavigationMenu className="hidden lg:flex">
+          <NavigationMenuList className="space-x-1">
             {navItems.map((item) => (
               <NavigationMenuItem key={item.href}>
                 {item.subItems ? (
                   <>
                     <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                        {item.subItems.map((subItem) => (
+                      <ul className="grid gap-1 p-3 md:w-[380px] md:grid-cols-2 lg:w-[460px]">
+                        {item.subItems.map((sub) => (
                           <ListItem
-                            key={subItem.title}
-                            title={subItem.title}
-                            href={subItem.href}
+                            key={sub.title}
+                            title={sub.title}
+                            href={sub.href}
                           >
-                            {subItem.description}
+                            {sub.description}
                           </ListItem>
                         ))}
                       </ul>
@@ -201,50 +175,58 @@ export const Navbar: React.FC = () => {
             ))}
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="flex items-center space-x-4">
+
+        {/* Right controls */}
+        <div className="flex items-center gap-1">
           <ThemeButton />
-          {/* Mobile Menu Button */}
-          <button onClick={toggleMobileMenu} className="text-white lg:hidden">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="ml-1 lg:hidden"
+            aria-label="Toggle menu"
+          >
             {isMobileMenuOpen ? (
-              <IoMdClose className="h-6 w-6 text-neutral-950 dark:text-neutral-50" />
+              <IoMdClose className="h-5 w-5 text-stone-700 dark:text-stone-300" />
             ) : (
-              <HiOutlineMenuAlt3 className="h-6 w-6 text-neutral-950 dark:text-neutral-50" />
+              <HiOutlineMenuAlt3 className="h-5 w-5 text-stone-700 dark:text-stone-300" />
             )}
           </button>
         </div>
       </div>
-      {/* Mobile Menu */}
+
+      {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden">
-          <ul className="flex flex-col space-y-4 p-8">
+        <div className="border-t border-stone-200 bg-stone-50 dark:border-stone-800 dark:bg-stone-950 lg:hidden">
+          <nav className="mx-auto max-w-7xl px-6 py-4">
             {navItems.map((item) => (
-              <li key={item.href}>
+              <div key={item.href} className="py-2.5">
                 <Link
                   to={item.href}
-                  className="font-semibold text-neutral-950 hover:text-white dark:text-neutral-50"
+                  className="text-sm font-semibold text-stone-900 dark:text-stone-50"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
                 {item.subItems && (
-                  <ul className="flex flex-col space-y-2 pl-4 pt-2">
-                    {item.subItems.map((subItem) => (
-                      <li key={subItem.href}>
+                  <ul className="ml-4 mt-1.5 space-y-1.5">
+                    {item.subItems.map((sub) => (
+                      <li key={sub.href}>
                         <Link
-                          to={subItem.href}
-                          className="text-neutral-950 hover:text-neutral-50 dark:text-neutral-50"
+                          to={sub.href}
+                          className="text-sm text-stone-500 transition-colors hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-50"
+                          onClick={() => setIsMobileMenuOpen(false)}
                         >
-                          {subItem.label}
+                          {sub.title}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 )}
-              </li>
+              </div>
             ))}
-          </ul>
+          </nav>
         </div>
       )}
-    </nav>
+    </header>
   );
 };
 
@@ -259,13 +241,15 @@ const ListItem = React.forwardRef<
           to={props.href ?? "#"}
           ref={ref}
           className={cn(
-            "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-stone-100 focus:bg-stone-100 dark:hover:bg-stone-800 dark:focus:bg-stone-800",
             className
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+          <div className="text-sm font-medium leading-none text-stone-900 dark:text-stone-50">
+            {title}
+          </div>
+          <p className="line-clamp-2 text-xs leading-snug text-stone-500 dark:text-stone-400">
             {children}
           </p>
         </Link>

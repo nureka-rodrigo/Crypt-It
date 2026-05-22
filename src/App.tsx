@@ -20,7 +20,7 @@ import { NotFound } from "@/pages/error/NotFound.tsx";
 
 function App() {
   return (
-    <div className="pattern bg-neutral-50 dark:bg-neutral-950">
+    <div>
       <Routes>
         <Route path="/" element={<Home />} />
 

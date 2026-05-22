@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { Navbar } from "@/components/layout/Navbar.tsx";
-import Footer from "@/components/layout/Footer.tsx";
+import { CipherPageLayout } from "@/components/layout/CipherPageLayout.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
   Card,
@@ -179,153 +178,133 @@ export const AESCBC = () => {
   }, [activeTab]);
 
   return (
-    <>
-      <Navbar />
-      <section className="flex min-h-screen flex-col justify-between">
-        <div className="mx-auto max-w-7xl space-y-8 py-8">
-          <div className="container mx-auto">
-            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-              AES-CBC Cipher
-            </h1>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              The Advanced Encryption Standard in Cipher Block Chaining mode
-              (AES-CBC) is a widely used encryption method that provides a high
-              level of security. Unlike AES-CTR, which transforms AES into a
-              stream cipher, AES-CBC operates on fixed-size blocks of data. Each
-              block of plaintext is XORed with the previous ciphertext block
-              before being encrypted, creating a strong dependency between
-              blocks.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              In AES-CBC, an initialization vector (IV) is used in the first
-              block to ensure that even identical plaintexts result in different
-              ciphertexts, enhancing security. The IV must be unique for each
-              encryption operation but does not need to be secret.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              AES-CBC is highly secure and is used in various applications, from
-              securing communication channels to encrypting files. However, it
-              is crucial to manage the IV correctly, as reusing an IV with the
-              same key can compromise security.
-            </p>
-          </div>
+    <CipherPageLayout
+      category="Symmetric"
+      categoryHref="/symmetric/aes-cbc"
+      title="AES-CBC"
+      description={
+        <>
+          <p>
+            Cipher Block Chaining (CBC) XORs each plaintext block with the
+            previous ciphertext block before encrypting it. The first block
+            uses a randomly generated Initialization Vector (IV). This
+            chaining means identical plaintext blocks produce different
+            ciphertext depending on what came before.
+          </p>
+          <p>
+            CBC provides confidentiality but not integrity — an attacker who
+            flips a bit in a ciphertext block will predictably corrupt the
+            next decrypted block. For authenticated encryption, prefer
+            AES-GCM. The IV is prepended to the ciphertext and required for
+            decryption.
+          </p>
+        </>
+      }
+    >
+      <Tabs defaultValue="encode" className="w-full" onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="encode">Encode</TabsTrigger>
+          <TabsTrigger value="decode">Decode</TabsTrigger>
+        </TabsList>
 
-          <div className="flex max-w-7xl items-center justify-center px-8">
-            <Tabs
-              defaultValue="encode"
-              className="w-full"
-              onValueChange={setActiveTab}
-            >
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="encode">Encode</TabsTrigger>
-                <TabsTrigger value="decode">Decode</TabsTrigger>
-              </TabsList>
+        <TabsContent value="encode">
+          <Card>
+            <CardHeader>
+              <CardTitle>Encode Text</CardTitle>
+              <CardDescription>
+                Enter the plain text and the key to encode it.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form
+                className="space-y-4"
+                onSubmit={handleSubmitEncode(onEncode)}
+              >
+                <div className="space-y-2">
+                  <Label htmlFor="plainText">Plain Text</Label>
+                  <Textarea
+                    id="plainText"
+                    rows={6}
+                    placeholder="Enter text to encode..."
+                    defaultValue="ATTACK AT DAWN"
+                    {...registerEncode("plainText")}
+                  />
+                  {encodeErrors.plainText && (
+                    <p className="text-red-500">
+                      {encodeErrors.plainText.message}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2 pb-2">
+                  <Label htmlFor="encodeKey">Key</Label>
+                  <Input
+                    id="encodeKey"
+                    type="text"
+                    placeholder="Enter 32-character key..."
+                    defaultValue="LEMONLEMONLEMONL"
+                    {...registerEncode("encodeKey")}
+                  />
+                  {encodeErrors.encodeKey && (
+                    <p className="text-red-500">
+                      {encodeErrors.encodeKey.message}
+                    </p>
+                  )}
+                </div>
+                <Button type="submit">Encode</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-              {/* Encode Tab Content */}
-              <TabsContent value="encode">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Encode Text</CardTitle>
-                    <CardDescription>
-                      Enter the plain text and the key to encode it.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form
-                      className="space-y-4"
-                      onSubmit={handleSubmitEncode(onEncode)}
-                    >
-                      <div className="space-y-2">
-                        <Label htmlFor="plainText">Plain Text</Label>
-                        <Textarea
-                          id="plainText"
-                          rows={6}
-                          placeholder="Enter text to encode..."
-                          defaultValue="ATTACK AT DAWN"
-                          {...registerEncode("plainText")}
-                        />
-                        {encodeErrors.plainText && (
-                          <p className="text-red-500">
-                            {encodeErrors.plainText.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2 pb-2">
-                        <Label htmlFor="encodeKey">Key</Label>
-                        <Input
-                          id="encodeKey"
-                          type="text"
-                          placeholder="Enter 32-character key..."
-                          defaultValue="LEMONLEMONLEMONL"
-                          {...registerEncode("encodeKey")}
-                        />
-                        {encodeErrors.encodeKey && (
-                          <p className="text-red-500">
-                            {encodeErrors.encodeKey.message}
-                          </p>
-                        )}
-                      </div>
-                      <Button type="submit">Encode</Button>
-                    </form>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              {/* Decode Tab Content */}
-              <TabsContent value="decode">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Decode Text</CardTitle>
-                    <CardDescription>
-                      Enter the cipher text and the key to decode it.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form
-                      className="space-y-4"
-                      onSubmit={handleSubmitDecode(onDecode)}
-                    >
-                      <div className="space-y-2">
-                        <Label htmlFor="encodedText">Cipher Text</Label>
-                        <Textarea
-                          id="encodedText"
-                          rows={6}
-                          placeholder="Enter text to decode..."
-                          defaultValue="XQ9YRUF3xH7DvX5sSs2X+Q==::00CvrFxWdalotuAjg8ceig=="
-                          {...registerDecode("encodedText")}
-                        />
-                        {decodeErrors.encodedText && (
-                          <p className="text-red-500">
-                            {decodeErrors.encodedText.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2 pb-2">
-                        <Label htmlFor="decodeKey">Key</Label>
-                        <Input
-                          id="decodeKey"
-                          type="text"
-                          placeholder="Enter 32-character key..."
-                          defaultValue="LEMONLEMONLEMONL"
-                          {...registerDecode("decodeKey")}
-                        />
-                        {decodeErrors.decodeKey && (
-                          <p className="text-red-500">
-                            {decodeErrors.decodeKey.message}
-                          </p>
-                        )}
-                      </div>
-                      <Button type="submit">Decode</Button>
-                    </form>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </div>
-
-        <Footer />
-      </section>
+        <TabsContent value="decode">
+          <Card>
+            <CardHeader>
+              <CardTitle>Decode Text</CardTitle>
+              <CardDescription>
+                Enter the cipher text and the key to decode it.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form
+                className="space-y-4"
+                onSubmit={handleSubmitDecode(onDecode)}
+              >
+                <div className="space-y-2">
+                  <Label htmlFor="encodedText">Cipher Text</Label>
+                  <Textarea
+                    id="encodedText"
+                    rows={6}
+                    placeholder="Enter text to decode..."
+                    defaultValue="XQ9YRUF3xH7DvX5sSs2X+Q==::00CvrFxWdalotuAjg8ceig=="
+                    {...registerDecode("encodedText")}
+                  />
+                  {decodeErrors.encodedText && (
+                    <p className="text-red-500">
+                      {decodeErrors.encodedText.message}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2 pb-2">
+                  <Label htmlFor="decodeKey">Key</Label>
+                  <Input
+                    id="decodeKey"
+                    type="text"
+                    placeholder="Enter 32-character key..."
+                    defaultValue="LEMONLEMONLEMONL"
+                    {...registerDecode("decodeKey")}
+                  />
+                  {decodeErrors.decodeKey && (
+                    <p className="text-red-500">
+                      {decodeErrors.decodeKey.message}
+                    </p>
+                  )}
+                </div>
+                <Button type="submit">Decode</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
@@ -345,6 +324,6 @@ export const AESCBC = () => {
           </DialogDescription>
         </DialogContent>
       </Dialog>
-    </>
+    </CipherPageLayout>
   );
 };

@@ -1,18 +1,22 @@
 import { z } from "zod";
-import { Navbar } from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import { Button } from "@/components/ui/button";
+import { CipherPageLayout } from "@/components/layout/CipherPageLayout.tsx";
+import { Button } from "@/components/ui/button.tsx";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/components/ui/card.tsx";
+import { Input } from "@/components/ui/input.tsx";
+import { Label } from "@/components/ui/label.tsx";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs.tsx";
+import { Textarea } from "@/components/ui/textarea.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import React, { useEffect, useState } from "react";
@@ -21,7 +25,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog.tsx";
 import { toast } from "sonner";
 
 const encodeSchema = z.object({
@@ -168,168 +172,133 @@ export const RailFence: React.FC = () => {
   }, [activeTab]);
 
   return (
-    <>
-      <Navbar />
-      <section className="flex min-h-screen flex-col justify-between">
-        <div className="mx-auto max-w-7xl space-y-8 py-8">
-          <div className="container mx-auto">
-            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-              Rail Fence Cipher
-            </h1>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              The Rail Fence Cipher is a classic transposition cipher that
-              encrypts messages by rearranging characters in a zigzag pattern.
-              Its name derives from its resemblance to a fence with horizontal
-              rails when the plaintext is written out. The encryption process
-              involves writing the message diagonally down across a specified
-              number of "rails" or lines, then reading the text off each rail
-              line by line to produce the ciphertext.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              To encode a message using the Rail Fence Cipher, begin by writing
-              the plaintext diagonally downwards across the number of rails
-              specified. When the bottom rail is reached, the direction
-              reverses, and you move diagonally upwards until you reach the top
-              rail. This zigzag pattern is continued until the entire plaintext
-              is written. After completing the pattern, the ciphertext is
-              obtained by reading the characters from each rail sequentially and
-              concatenating them to form the final encrypted message.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              Decoding a message encrypted with the Rail Fence Cipher involves
-              reconstructing the zigzag pattern. Start by filling in the
-              characters from the ciphertext into their respective rail lines
-              according to the original pattern used during encoding. Once the
-              rails are completely filled, read the message in the same zigzag
-              manner to retrieve the original plaintext.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              While the Rail Fence Cipher provides a basic level of encryption
-              and serves as an excellent educational tool for understanding
-              transposition ciphers, it is relatively simple and vulnerable to
-              frequency analysis and other cryptographic attacks. As such, it is
-              more suitable for introductory learning and simple use cases
-              rather than for serious or high-security applications.
-            </p>
-          </div>
+    <CipherPageLayout
+      category="Transposition"
+      categoryHref="/transposition/rail-fence"
+      title="Rail Fence Cipher"
+      description={
+        <>
+          <p>
+            The Rail Fence cipher writes plaintext diagonally across a set of
+            "rails" in a zigzag pattern, then reads each rail left-to-right to
+            produce the ciphertext. With 3 rails, the first, middle, and last
+            characters follow separate wave-like paths down the grid.
+          </p>
+          <p>
+            It is a pure transposition — no character is substituted, only
+            repositioned. The number of rails is the key. Decryption reconstructs
+            the zigzag structure, determines how many characters fall on each
+            rail, and reads them back in the original diagonal order.
+          </p>
+        </>
+      }
+    >
+      <Tabs
+        defaultValue="encode"
+        className="w-full"
+        onValueChange={setActiveTab}
+      >
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="encode">Encode</TabsTrigger>
+          <TabsTrigger value="decode">Decode</TabsTrigger>
+        </TabsList>
 
-          <div className="flex max-w-7xl items-center justify-center px-8">
-            <Tabs
-              defaultValue="encode"
-              className="w-full"
-              onValueChange={setActiveTab}
-            >
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="encode">Encode</TabsTrigger>
-                <TabsTrigger value="decode">Decode</TabsTrigger>
-              </TabsList>
+        {/* Encode Tab Content */}
+        <TabsContent value="encode">
+          <Card>
+            <CardHeader>
+              <CardTitle>Encode Text</CardTitle>
+              <CardDescription>
+                Enter the plain text and the number of rails to encode it.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form
+                className="space-y-4"
+                onSubmit={handleSubmitEncode(onEncode)}
+              >
+                <div className="space-y-2">
+                  <Label htmlFor="plainText">Plain Text</Label>
+                  <Textarea
+                    id="plainText"
+                    placeholder="Enter text to encode..."
+                    defaultValue="ATTACK AT DAWN"
+                    rows={6}
+                    {...registerEncode("plainText")}
+                  />
+                  {encodeErrors.plainText && (
+                    <p className="text-red-500">
+                      {encodeErrors.plainText.message}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2 pb-2">
+                  <Label htmlFor="rails">Number of Rails</Label>
+                  <Input
+                    id="rails"
+                    type="number"
+                    placeholder="Enter number of rails..."
+                    defaultValue={3}
+                    {...registerEncode("rails")}
+                  />
+                  {encodeErrors.rails && (
+                    <p className="text-red-500">{encodeErrors.rails.message}</p>
+                  )}
+                </div>
+                <Button type="submit">Encode</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-              {/* Encode Tab Content */}
-              <TabsContent value="encode">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Encode Text</CardTitle>
-                    <CardDescription>
-                      Enter the plain text and the number of rails to encode it.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form
-                      className="space-y-4"
-                      onSubmit={handleSubmitEncode(onEncode)}
-                    >
-                      <div className="space-y-2">
-                        <Label htmlFor="plainText">Plain Text</Label>
-                        <Textarea
-                          id="plainText"
-                          placeholder="Enter text to encode..."
-                          defaultValue="ATTACK AT DAWN"
-                          rows={6}
-                          {...registerEncode("plainText")}
-                        />
-                        {encodeErrors.plainText && (
-                          <p className="text-red-500">
-                            {encodeErrors.plainText.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2 pb-2">
-                        <Label htmlFor="rails">Number of Rails</Label>
-                        <Input
-                          id="rails"
-                          type="number"
-                          placeholder="Enter number of rails..."
-                          defaultValue={3}
-                          {...registerEncode("rails")}
-                        />
-                        {encodeErrors.rails && (
-                          <p className="text-red-500">
-                            {encodeErrors.rails.message}
-                          </p>
-                        )}
-                      </div>
-                      <Button type="submit">Encode</Button>
-                    </form>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              {/* Decode Tab Content */}
-              <TabsContent value="decode">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Decode Text</CardTitle>
-                    <CardDescription>
-                      Enter the cipher text and the number of rails to decode
-                      it.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form
-                      className="space-y-4"
-                      onSubmit={handleSubmitDecode(onDecode)}
-                    >
-                      <div className="space-y-2">
-                        <Label htmlFor="encodedText">Cipher Text</Label>
-                        <Textarea
-                          id="encodedText"
-                          placeholder="Enter text to decode..."
-                          defaultValue="ACTWTAKA ANT D"
-                          rows={6}
-                          {...registerDecode("encodedText")}
-                        />
-                        {decodeErrors.encodedText && (
-                          <p className="text-red-500">
-                            {decodeErrors.encodedText.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2 pb-2">
-                        <Label htmlFor="rails">Number of Rails</Label>
-                        <Input
-                          id="rails"
-                          type="number"
-                          placeholder="Enter number of rails to..."
-                          defaultValue={3}
-                          {...registerDecode("rails")}
-                        />
-                        {decodeErrors.rails && (
-                          <p className="text-red-500">
-                            {decodeErrors.rails.message}
-                          </p>
-                        )}
-                      </div>
-                      <Button type="submit">Decode</Button>
-                    </form>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </div>
-
-        <Footer />
-      </section>
+        {/* Decode Tab Content */}
+        <TabsContent value="decode">
+          <Card>
+            <CardHeader>
+              <CardTitle>Decode Text</CardTitle>
+              <CardDescription>
+                Enter the cipher text and the number of rails to decode it.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form
+                className="space-y-4"
+                onSubmit={handleSubmitDecode(onDecode)}
+              >
+                <div className="space-y-2">
+                  <Label htmlFor="encodedText">Cipher Text</Label>
+                  <Textarea
+                    id="encodedText"
+                    placeholder="Enter text to decode..."
+                    defaultValue="ACTWTAKA ANT D"
+                    rows={6}
+                    {...registerDecode("encodedText")}
+                  />
+                  {decodeErrors.encodedText && (
+                    <p className="text-red-500">
+                      {decodeErrors.encodedText.message}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2 pb-2">
+                  <Label htmlFor="rails">Number of Rails</Label>
+                  <Input
+                    id="rails"
+                    type="number"
+                    placeholder="Enter number of rails to..."
+                    defaultValue={3}
+                    {...registerDecode("rails")}
+                  />
+                  {decodeErrors.rails && (
+                    <p className="text-red-500">{decodeErrors.rails.message}</p>
+                  )}
+                </div>
+                <Button type="submit">Decode</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
@@ -349,6 +318,6 @@ export const RailFence: React.FC = () => {
           </DialogDescription>
         </DialogContent>
       </Dialog>
-    </>
+    </CipherPageLayout>
   );
 };

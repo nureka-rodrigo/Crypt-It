@@ -1,24 +1,20 @@
 import React from "react";
-import { IoHeart } from "@react-icons/all-files/io5/IoHeart";
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="mt-auto">
-      <div className="mx-auto flex w-full max-w-screen-xl items-center justify-center p-4">
-        <span className="inline-flex items-center text-sm text-gray-900 dark:text-gray-100">
-          Made with&nbsp;
-          <IoHeart
-            className="text-lg text-neutral-950 dark:text-gray-100"
-            aria-label="Heart Icon"
-          />
-          &nbsp;by&nbsp;
-        </span>
-        <Link to={"https://github.com/nureka-rodrigo"} target="_blank">
-          <span className="text-center text-sm font-extrabold text-neutral-950 hover:underline dark:text-neutral-50">
+    <footer className="border-t border-stone-200 dark:border-stone-800">
+      <div className="mx-auto flex max-w-7xl items-center justify-center px-6 py-6">
+        <p className="text-sm text-stone-400 dark:text-stone-500">
+          Made with <span className="text-amber-500">♥</span> by{" "}
+          <Link
+            to="https://github.com/nureka-rodrigo"
+            target="_blank"
+            className="font-medium text-stone-600 transition-colors hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-50"
+          >
             Nureka Rodrigo
-          </span>
-        </Link>
+          </Link>
+        </p>
       </div>
     </footer>
   );

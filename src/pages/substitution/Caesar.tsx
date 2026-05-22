@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { Navbar } from "@/components/layout/Navbar.tsx";
-import Footer from "@/components/layout/Footer.tsx";
+import { CipherPageLayout } from "@/components/layout/CipherPageLayout.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
   Card,
@@ -117,177 +116,135 @@ export const Caesar: React.FC = () => {
   }, [activeTab]);
 
   return (
-    <>
-      <Navbar />
-      <section className="flex min-h-screen flex-col justify-between">
-        <div className="mx-auto max-w-7xl space-y-8 py-8">
-          <div className="container mx-auto">
-            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-              Caesar Cipher
-            </h1>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              The Caesar Cipher, named after the renowned Roman general Julius
-              Caesar, is one of the earliest and most straightforward methods of
-              encryption. It is a type of substitution cipher, where each letter
-              in the plaintext is shifted a fixed number of places down or up
-              the alphabet. This method, though simple, laid the foundation for
-              modern cryptography and is still a popular teaching tool in
-              understanding the basics of encryption.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              The concept is easy to grasp: imagine the alphabet as a circle
-              where after 'Z', it loops back to 'A'. The Caesar Cipher operates
-              by shifting the position of each letter in the plaintext by a
-              fixed number, known as the 'shift' or 'key'. For example, with a
-              shift of 3, the letter 'A' would be replaced by 'D', 'B' by 'E',
-              and so forth. This shift applies uniformly across the entire
-              message.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              To decrypt the message, the process is simply reversed. If the
-              recipient knows the key (which is the number of positions each
-              letter was shifted), they can shift the letters back to their
-              original positions. Without the key, decrypting the message
-              becomes a trial-and-error process, though due to the limited
-              number of possible shifts (25 possible shifts for the English
-              alphabet), the Caesar Cipher is easily broken with modern
-              computational power.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              Historically, Julius Caesar used this cipher with a shift of three
-              to protect his military communications. Although the Caesar Cipher
-              is no longer considered secure for serious purposes, it remains a
-              fundamental example of encryption techniques and is often the
-              first cipher taught to students studying cryptography.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              The Caesar Cipher’s simplicity is both its strength and its
-              weakness. It is an excellent example to introduce the concepts of
-              encryption and decryption, demonstrating how information can be
-              obfuscated from unintended recipients. However, its predictability
-              and vulnerability to frequency analysis make it unsuitable for
-              modern-day encryption needs, which require much more complex
-              algorithms to secure data effectively.
-            </p>
-          </div>
+    <CipherPageLayout
+      category="Substitution"
+      categoryHref="/substitution/caesar"
+      title="Caesar Cipher"
+      description={
+        <>
+          <p>
+            The Caesar Cipher shifts every letter in the plaintext by a fixed
+            number of positions in the alphabet. With a shift of 3, 'A' becomes
+            'D', 'B' becomes 'E', and so on — wrapping around at 'Z'. The shift
+            value is both the key and the sole parameter.
+          </p>
+          <p>
+            Decryption simply reverses the shift. Despite its historical
+            significance — Julius Caesar reportedly used a shift of three for
+            military dispatches — the cipher is trivially broken today. With only
+            25 possible keys, an attacker can try all of them by hand.
+          </p>
+        </>
+      }
+    >
+      <Tabs
+        defaultValue="encode"
+        className="w-full"
+        onValueChange={setActiveTab}
+      >
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="encode">Encode</TabsTrigger>
+          <TabsTrigger value="decode">Decode</TabsTrigger>
+        </TabsList>
 
-          <div className="flex max-w-7xl items-center justify-center px-8">
-            <Tabs
-              defaultValue="encode"
-              className="w-full"
-              onValueChange={setActiveTab}
-            >
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="encode">Encode</TabsTrigger>
-                <TabsTrigger value="decode">Decode</TabsTrigger>
-              </TabsList>
+        {/* Encode Tab Content */}
+        <TabsContent value="encode">
+          <Card>
+            <CardHeader>
+              <CardTitle>Encode Text</CardTitle>
+              <CardDescription>
+                Enter the plain text and the shift value to encode it.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form
+                className="space-y-4"
+                onSubmit={handleSubmitEncode(onEncode)}
+              >
+                <div className="space-y-2">
+                  <Label htmlFor="plainText">Plain Text</Label>
+                  <Textarea
+                    id="plainText"
+                    placeholder="Enter text to encode..."
+                    className="uppercase"
+                    defaultValue={"ATTACK AT DAWN"}
+                    rows={6}
+                    {...registerEncode("plainText")}
+                  />
+                  {encodeErrors.plainText && (
+                    <p className="text-red-500">
+                      {encodeErrors.plainText.message}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2 pb-2">
+                  <Label htmlFor="encodeShift">Shift Value</Label>
+                  <Input
+                    id="encodeShift"
+                    type="number"
+                    placeholder="Enter shift value..."
+                    defaultValue={1}
+                    {...registerEncode("shift")}
+                  />
+                  {encodeErrors.shift && (
+                    <p className="text-red-500">{encodeErrors.shift.message}</p>
+                  )}
+                </div>
+                <Button type="submit">Encode</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-              {/* Encode Tab Content */}
-              <TabsContent value="encode">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Encode Text</CardTitle>
-                    <CardDescription>
-                      Enter the plain text and the shift value to encode it.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form
-                      className="space-y-4"
-                      onSubmit={handleSubmitEncode(onEncode)}
-                    >
-                      <div className="space-y-2">
-                        <Label htmlFor="plainText">Plain Text</Label>
-                        <Textarea
-                          id="plainText"
-                          placeholder="Enter text to encode..."
-                          className="uppercase"
-                          defaultValue={"ATTACK AT DAWN"}
-                          rows={6}
-                          {...registerEncode("plainText")}
-                        />
-                        {encodeErrors.plainText && (
-                          <p className="text-red-500">
-                            {encodeErrors.plainText.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2 pb-2">
-                        <Label htmlFor="encodeShift">Shift Value</Label>
-                        <Input
-                          id="encodeShift"
-                          type="number"
-                          placeholder="Enter shift value..."
-                          defaultValue={1}
-                          {...registerEncode("shift")}
-                        />
-                        {encodeErrors.shift && (
-                          <p className="text-red-500">
-                            {encodeErrors.shift.message}
-                          </p>
-                        )}
-                      </div>
-                      <Button type="submit">Encode</Button>
-                    </form>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              {/* Decode Tab Content */}
-              <TabsContent value="decode">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Decode Text</CardTitle>
-                    <CardDescription>
-                      Enter the cipher text and the shift value to decode it.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form
-                      className="space-y-4"
-                      onSubmit={handleSubmitDecode(onDecode)}
-                    >
-                      <div className="space-y-2">
-                        <Label htmlFor="encodedText">Cipher Text</Label>
-                        <Textarea
-                          id="encodedText"
-                          placeholder="Enter text to decode..."
-                          className="uppercase"
-                          defaultValue={"BUUBDL BU EBXO"}
-                          rows={6}
-                          {...registerDecode("encodedText")}
-                        />
-                        {decodeErrors.encodedText && (
-                          <p className="text-red-500">
-                            {decodeErrors.encodedText.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2 pb-2">
-                        <Label htmlFor="decodeShift">Shift Value</Label>
-                        <Input
-                          id="decodeShift"
-                          type="number"
-                          placeholder="Enter shift value..."
-                          defaultValue={1}
-                          {...registerDecode("shift")}
-                        />
-                        {decodeErrors.shift && (
-                          <p className="text-red-500">
-                            {decodeErrors.shift.message}
-                          </p>
-                        )}
-                      </div>
-                      <Button type="submit">Decode</Button>
-                    </form>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </div>
-        <Footer />
-      </section>
+        {/* Decode Tab Content */}
+        <TabsContent value="decode">
+          <Card>
+            <CardHeader>
+              <CardTitle>Decode Text</CardTitle>
+              <CardDescription>
+                Enter the cipher text and the shift value to decode it.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form
+                className="space-y-4"
+                onSubmit={handleSubmitDecode(onDecode)}
+              >
+                <div className="space-y-2">
+                  <Label htmlFor="encodedText">Cipher Text</Label>
+                  <Textarea
+                    id="encodedText"
+                    placeholder="Enter text to decode..."
+                    className="uppercase"
+                    defaultValue={"BUUBDL BU EBXO"}
+                    rows={6}
+                    {...registerDecode("encodedText")}
+                  />
+                  {decodeErrors.encodedText && (
+                    <p className="text-red-500">
+                      {decodeErrors.encodedText.message}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2 pb-2">
+                  <Label htmlFor="decodeShift">Shift Value</Label>
+                  <Input
+                    id="decodeShift"
+                    type="number"
+                    placeholder="Enter shift value..."
+                    defaultValue={1}
+                    {...registerDecode("shift")}
+                  />
+                  {decodeErrors.shift && (
+                    <p className="text-red-500">{decodeErrors.shift.message}</p>
+                  )}
+                </div>
+                <Button type="submit">Decode</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
@@ -307,6 +264,6 @@ export const Caesar: React.FC = () => {
           </DialogDescription>
         </DialogContent>
       </Dialog>
-    </>
+    </CipherPageLayout>
   );
 };

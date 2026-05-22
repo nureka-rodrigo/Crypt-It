@@ -1,47 +1,48 @@
 import React from "react";
 import { Navbar } from "@/components/layout/Navbar.tsx";
 import Footer from "@/components/layout/Footer.tsx";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card.tsx";
-import { Button } from "@/components/ui/button.tsx";
 import { Link } from "react-router-dom";
-import Logo from "/lock.svg";
 
-const cardData = [
+const categories = [
   {
+    number: "01",
     title: "Substitution Ciphers",
     description:
-      "Substitution ciphers replace plaintext characters with other characters.",
-    link: "/substitution/caesar",
+      "Replace each plaintext character with another according to a fixed substitution rule.",
+    algorithms: ["Caesar", "Monoalphabetic", "Playfair", "Vigenère", "Vernam"],
+    href: "/substitution/caesar",
   },
   {
+    number: "02",
     title: "Transposition Ciphers",
     description:
-      "Transposition ciphers rearrange the order of plaintext characters.",
-    link: "/transposition/rail-fence",
+      "Rearrange the positions of characters without altering the characters themselves.",
+    algorithms: ["Rail Fence", "Columnar"],
+    href: "/transposition/rail-fence",
   },
   {
+    number: "03",
     title: "Symmetric Encryption",
     description:
-      "Symmetric encryption uses the same key for both encryption and decryption.",
-    link: "/symmetric/aes-ctr",
+      "Use a single shared secret key for both encryption and decryption.",
+    algorithms: ["AES-CTR", "AES-CBC", "AES-GCM"],
+    href: "/symmetric/aes-ctr",
   },
   {
+    number: "04",
     title: "Asymmetric Encryption",
     description:
-      "Asymmetric encryption uses a pair of public and private keys.",
-    link: "/asymmetric/rsa-oaep",
+      "Encrypt with a public key; only the corresponding private key can decrypt.",
+    algorithms: ["RSA-OAEP"],
+    href: "/asymmetric/rsa-oaep",
   },
   {
+    number: "05",
     title: "Hash Functions",
     description:
-      "Hash functions map data of arbitrary size to fixed-size values.",
-    link: "/hash/sha-1",
+      "Produce a fixed-length fingerprint of arbitrary data — one-way and deterministic.",
+    algorithms: ["SHA-1", "SHA-256", "SHA-384", "SHA-512"],
+    href: "/hash/sha-256",
   },
 ];
 
@@ -49,63 +50,70 @@ export const Home: React.FC = () => {
   return (
     <>
       <Navbar />
-      <section className="flex min-h-screen flex-col justify-between">
-        <div className="mx-auto max-w-7xl py-8">
-          <div className="px-4 text-center">
-            <h1 className="text-5xl font-extrabold text-neutral-900 dark:text-neutral-50">
-              Welcome to Crypt-It!
+      <main className="min-h-screen">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          {/* Hero */}
+          <div className="border-b border-stone-200 pb-16 pt-20 dark:border-stone-800">
+            <p className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-amber-500">
+              Educational Cryptography Tool
+            </p>
+            <h1 className="max-w-2xl text-5xl font-bold leading-[1.1] tracking-tight text-stone-900 dark:text-stone-50 lg:text-6xl">
+              Cryptography,
+              <br />
+              demystified.
             </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-stone-500 dark:text-stone-400">
+              Interactive implementations of 19 classical and modern algorithms
+              — from Caesar to RSA. Understand how each cipher works, hands-on.
+            </p>
           </div>
 
-          <div className="container m-auto py-12">
-            <div className="grid grid-cols-4 gap-8 md:grid-cols-8 lg:grid-cols-12">
-              <div className="col-span-4 flex items-center justify-center lg:col-span-7 lg:justify-start">
-                <p className="text-lg leading-relaxed text-neutral-700 dark:text-neutral-200">
-                  This is a simple web application that allows you to encrypt
-                  and decrypt messages using various cryptographic algorithms.
-                  You can explore different types of ciphers, including
-                  substitution and transposition ciphers, as well as modern
-                  encryption techniques like symmetric and asymmetric
-                  encryption. Additionally, the application provides tools to
-                  generate and verify cryptographic hashes.
-                </p>
-              </div>
-              <div className="col-span-4 flex justify-center lg:col-span-5 lg:justify-end">
-                <img
-                  src={Logo}
-                  alt="Lock"
-                  className="h-auto w-full transform transition-transform duration-300 hover:scale-105"
-                />
-              </div>
+          {/* Algorithm index */}
+          <div className="py-12">
+            <p className="mb-8 font-mono text-xs uppercase tracking-[0.2em] text-stone-400 dark:text-stone-600">
+              19 Algorithms — 5 Categories
+            </p>
+
+            <div className="divide-y divide-stone-200 dark:divide-stone-800">
+              {categories.map((cat) => (
+                <div
+                  key={cat.number}
+                  className="group flex items-start gap-8 py-8 lg:gap-12"
+                >
+                  <span className="w-6 shrink-0 pt-0.5 font-mono text-sm text-stone-300 dark:text-stone-700">
+                    {cat.number}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <h2 className="mb-1 text-xl font-semibold text-stone-900 dark:text-stone-50">
+                      {cat.title}
+                    </h2>
+                    <p className="mb-4 text-sm text-stone-500 dark:text-stone-400">
+                      {cat.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {cat.algorithms.map((algo) => (
+                        <span
+                          key={algo}
+                          className="inline-block rounded-sm bg-stone-100 px-2.5 py-1 font-mono text-xs text-stone-600 dark:bg-stone-800 dark:text-stone-400"
+                        >
+                          {algo}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <Link
+                    to={cat.href}
+                    className="shrink-0 pt-0.5 text-sm font-medium text-amber-500 transition-colors hover:text-amber-400 dark:text-amber-400 dark:hover:text-amber-300"
+                  >
+                    Explore →
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
-
-          <div className="grid grid-cols-1 gap-8 px-8 sm:grid-cols-2 lg:grid-cols-3">
-            {cardData.map((card, index) => (
-              <Card
-                key={index}
-                className="transform rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
-              >
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-2xl font-semibold">
-                    {card.title}
-                  </CardTitle>
-                  <CardDescription>{card.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="pt-4">
-                  <Link to={card.link}>
-                    <Button size="sm" variant="default">
-                      Explore
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
         </div>
-
-        <Footer />
-      </section>
+      </main>
+      <Footer />
     </>
   );
 };

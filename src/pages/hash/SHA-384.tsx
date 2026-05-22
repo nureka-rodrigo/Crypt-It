@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Navbar } from "@/components/layout/Navbar.tsx";
-import Footer from "@/components/layout/Footer.tsx";
+import { CipherPageLayout } from "@/components/layout/CipherPageLayout.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
   Card,
@@ -59,85 +58,56 @@ export const SHA384 = () => {
   };
 
   return (
-    <>
-      <Navbar />
-      <section className="flex min-h-screen flex-col justify-between">
-        <div className="mx-auto max-w-7xl space-y-8 py-8">
-          <div className="container mx-auto">
-            <h1 className="flex justify-center text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-              SHA-384 Hashing
-            </h1>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              SHA-384, or Secure Hash Algorithm 384-bit, is a member of the
-              SHA-2 family of cryptographic hash functions. It is designed to
-              generate a 384-bit (or 48-byte) hash value from input data of any
-              size. As an upgrade from SHA-1, SHA-384 offers enhanced security
-              and is less susceptible to collision and pre-image attacks. It is
-              commonly used in applications requiring higher levels of data
-              integrity and security.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              Hash functions like SHA-384 are designed to be one-way functions,
-              meaning that once data is hashed, it cannot be feasibly reversed
-              or decrypted to recover the original input. This one-way property
-              ensures that the hash value uniquely represents the input data,
-              making it ideal for tasks such as data verification, digital
-              signatures, and secure information storage.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              SHA-384 processes input data in blocks and applies a series of
-              mathematical transformations to produce the hash value. Unlike
-              SHA-256, which generates a 256-bit hash, SHA-384 produces a longer
-              hash value, providing a higher level of security against certain
-              types of attacks. This makes SHA-384 particularly useful in
-              environments where enhanced security measures are required.
-            </p>
-            <p className="mt-4 text-justify text-neutral-700 dark:text-neutral-300">
-              This component allows you to hash input text using the SHA-384
-              algorithm. By entering your text into the provided input field,
-              you can generate and view its SHA-384 hash value. This
-              functionality is beneficial for tasks such as ensuring data
-              integrity, verifying the authenticity of information, or exploring
-              the characteristics of SHA-384 hashing. Discover how SHA-384
-              enhances data security and observe the impact of different inputs
-              on the resulting hash value.
-            </p>
-          </div>
-
-          <div className="flex max-w-7xl items-center justify-center px-8">
-            <Card className="w-full">
-              <CardHeader>
-                <CardTitle>Generate Hash</CardTitle>
-                <CardDescription>
-                  Enter the text to generate its SHA-384 hash.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-4" onSubmit={handleSubmit(onHash)}>
-                  <div className="space-y-2">
-                    <Label htmlFor="inputText">Input Text</Label>
-                    <Textarea
-                      id="inputText"
-                      rows={6}
-                      placeholder="Enter text to hash..."
-                      defaultValue="ATTACK AT DAWN"
-                      {...register("inputText", {
-                        required: "Input text is required",
-                      })}
-                    />
-                    {errors.inputText && (
-                      <p className="text-red-500">{errors.inputText.message}</p>
-                    )}
-                  </div>
-                  <Button type="submit">Generate Hash</Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        <Footer />
-      </section>
+    <CipherPageLayout
+      category="Hash"
+      categoryHref="/hash/sha-384"
+      title="SHA-384 Hashing"
+      description={
+        <>
+          <p>
+            SHA-384 is a variant of SHA-512 that initializes with different
+            constants and truncates its output to 384 bits (96 hex characters). It
+            processes data in 1024-bit blocks using 64-bit word operations and 80
+            compression rounds — the same structure as SHA-512, just with a
+            shorter output.
+          </p>
+          <p>
+            On 64-bit systems, SHA-384 and SHA-512 are often faster than SHA-256
+            for long messages because they process twice as many bytes per block.
+            SHA-384 is commonly used in TLS cipher suites and HMAC constructions
+            where a larger digest than SHA-256 is needed.
+          </p>
+        </>
+      }
+    >
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Generate Hash</CardTitle>
+          <CardDescription>
+            Enter the text to generate its SHA-384 hash.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form className="space-y-4" onSubmit={handleSubmit(onHash)}>
+            <div className="space-y-2">
+              <Label htmlFor="inputText">Input Text</Label>
+              <Textarea
+                id="inputText"
+                rows={6}
+                placeholder="Enter text to hash..."
+                defaultValue="ATTACK AT DAWN"
+                {...register("inputText", {
+                  required: "Input text is required",
+                })}
+              />
+              {errors.inputText && (
+                <p className="text-red-500">{errors.inputText.message}</p>
+              )}
+            </div>
+            <Button type="submit">Generate Hash</Button>
+          </form>
+        </CardContent>
+      </Card>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
@@ -152,6 +122,6 @@ export const SHA384 = () => {
           </DialogDescription>
         </DialogContent>
       </Dialog>
-    </>
+    </CipherPageLayout>
   );
 };
